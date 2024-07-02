@@ -1,0 +1,316 @@
+:root {
+    --game-window-width: 1366px;
+    --game-window-height: 768px;
+    --border-radius: 30px;
+    --start-menu-bg-color: rgba(0, 0, 0, 0.15);
+    --btn-bg-color: rgb(252, 238, 33);
+    --btn-bg-hover-color: rgb(83, 26, 130);
+    --btn-font-color: rgb(27, 20, 100);
+    --btn-font-hover-color: rgb(255, 255, 255);
+    --font-bowelby-one: 'Bowlby One';
+    --font-satisfy: 'Satisfy';
+    --headline-font-color: rgb(254, 222, 87);
+}
+
+body {
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    font-family: var(--font-satisfy);
+}
+
+.d-none {
+    display: none !important;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../img/3. Background/Layers/5. Water/D2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.headline_style {
+    text-shadow: 2px 2px 0 black, 2px -2px 0 black, -2px 2px 0 black, -2px -2px 0 black, 2px 0px 0 black, 0px 4px 0 black, -2px 0px 0 black, 0px -2px 0 black;
+    color: var(--headline-font-color);
+}
+
+.headline {
+    font-size: 80px;
+    font-weight: bold;
+    margin-bottom: -60px;
+    z-index: 3;
+}
+
+canvas {
+    width: var(--game-window-width);
+    height: var(--game-window-height);
+    margin: 16px;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.25);
+}
+
+.start_menu {
+    width: var(--game-window-width);
+    height: var(--game-window-height);
+    position: absolute;
+    margin-bottom: -55px;
+    border-radius: var(--border-radius);
+    background-image: url('../img/3. Background/Legacy/Dark/1.png');
+    background-size: contain;
+}
+
+.position_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.first_row {
+    height: 100%;
+    width: 35%;
+    border-radius: 30px 0 0 30px;
+}
+
+.second_row {
+    height: 100%;
+    width: 65%;
+    border-radius: 0 30px 30px 0;
+}
+
+nav {
+    height: calc(100% - 80px);
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    margin-top: 8px;
+    background-color: var(--start-menu-bg-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.start_content {
+    height: calc(100% - 80px);
+    width: calc(100% - 80px);
+    margin-top: 8px;
+    background-color: var(--start-menu-bg-color);
+    border-radius: var(--border-radius);
+}
+
+.row_headline {
+    font-size: 60px;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.menu_btn {
+    width: 300px;
+    height: 80px;
+    margin-bottom: 16px;
+}
+
+.btn_style {
+    background-color: var(--btn-bg-color);
+    border: 6px solid white;
+    border-radius: 24px;
+    font-family: var(--font-bowelby-one);
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--btn-font-color);
+}
+
+.btn_style:hover {
+    background-color: var(--btn-bg-hover-color);
+    color: var(--btn-font-hover-color);
+    cursor: pointer;
+}
+
+.board {
+    margin-left: 48px;
+    height: calc(100% - 80px);
+    width: calc(100% - 80px);
+}
+
+.leader_board_content {
+    display: flex;
+    width: 100%;
+    height: 85%;
+    gap: 32px;
+}
+
+.leader_board_row {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+}
+
+.leader_board_place {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.leader_board_place_player_row {
+    width: 40%;
+    display: flex;
+}
+
+.leader_board_place_score_row {
+    width: 60%;
+    display: flex;
+    justify-content: end;
+}
+
+.leader_board_place_text_style {
+    color: var(--headline-font-color);
+    text-shadow: 2px 2px 0 black, 1px -1px 0 black, -1px 2px 0 black, -1px -1px 0 black, 2px 0px 0 black, 0px 1px 0 black, -1px 0px 0 black, 0px -1px 0 black;
+    letter-spacing: 2px;
+}
+
+.place_number {
+    font-size: 32px;
+    font-family: var(--font-bowelby-one);
+}
+
+.player_id {
+    font-size: 32px;
+    font-family: var(--font-bowelby-one);
+    margin-left: 16px;
+}
+
+.score {
+    font-size: 32px;
+    font-family: var(--font-bowelby-one);
+    margin-right: 4px;
+}
+
+.total_pt {
+    font-size: 32px;
+    font-family: var(--font-satisfy);
+}
+
+.game_options {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.game_options_content {
+    width: 100%;
+}
+
+.game_option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.game_option_text {
+    font-size: 32px;
+    font-family: var(--font-bowelby-one);
+    margin-right: 120px;
+    width: 236px;
+}
+
+input[type="radio"] {
+    width: 30px;
+    height: 30px;
+    margin-right: 24px;
+    margin-left: 24px;
+    
+}
+
+input[type="radio"]:hover {
+    cursor: pointer;
+}
+
+.options_btn {
+    width: 200px;
+    height: 80px;
+    margin-right: 8px;
+}
+
+.game_instructions_content {
+    height: 100%;
+    width: 100%;
+}
+
+.game_instructions_row {
+    height: 45%;
+    display: flex;
+    align-items: center;
+}
+
+.instructions_headline_container {
+    width: 50%;
+}
+
+.instructions_headline {
+    width: 300px;
+}
+
+.instructions_headline_2 {
+    width: 180px;
+}
+
+.instructions_container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.second_arrow_row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.arrows_container {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--btn-bg-color);
+    border: 6px solid white;
+    border-radius: 20px;
+    font-family: var(--font-bowelby-one);
+    font-size: 36px;
+    color: var(--btn-font-color);
+}
+
+.arrows {
+    width: 65%;
+    height: 65%;
+}
+
+.space_container {
+    width: 360px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    background-color: var(--btn-bg-color);
+    border: 6px solid white;
+    border-radius: 20px;
+    font-family: var(--font-bowelby-one);
+    font-size: 36px;
+    color: var(--btn-font-color);
+}
