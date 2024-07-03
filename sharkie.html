@@ -22,7 +22,7 @@
                     <button class="menu_btn btn_style">START</button>
                     <button class="menu_btn btn_style" onclick="showGameOptions()">OPTIONS</button>
                     <button class="menu_btn btn_style" onclick="showGameInstructions()">INSTRUCTIONS</button>
-                    <button class="menu_btn btn_style">IMPRESSUM</button>
+                    <button class="menu_btn btn_style" onclick="showGameImpressum()">IMPRESSUM</button>
                 </nav>
             </div>
             <div id="secondRow" class="second_row position_center">
@@ -97,9 +97,9 @@
                                     <div class="second_arrow_row">
                                         <div class="arrows_container">
                                             <svg class="arrows" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-                                            preserveAspectRatio="xMidYMid meet" transform="rotate(-90)">
-                                            <polygon points="50,10 90,90 10,90" style="fill:rgb(27, 20, 100);" />
-                                        </svg>
+                                                preserveAspectRatio="xMidYMid meet" transform="rotate(-90)">
+                                                <polygon points="50,10 90,90 10,90" style="fill:rgb(27, 20, 100);" />
+                                            </svg>
                                         </div>
                                         <div class="arrows_container">
                                             <svg class="arrows" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
@@ -118,7 +118,8 @@
                             </div>
                             <div class="game_instructions_row">
                                 <div class="instructions_headline_container">
-                                    <img src="./img/6.Botones/Tittles/Attack tittle.png" class="instructions_headline_2">
+                                    <img src="./img/6.Botones/Tittles/Attack tittle.png"
+                                        class="instructions_headline_2">
                                 </div>
                                 <div class="instructions_container">
                                     <div class="arrows_container">D</div>
@@ -127,6 +128,27 @@
                             </div>
                             <button class="options_btn btn_style" onclick="hideGameInstructions()">BACK</button>
                         </div>
+                    </div>
+
+                    <div id="impressum" class="board game_options d-none">
+                        <div class="row_headline headline_style">Impressum</div>
+                        <div class="impressum_content">
+                            <p>Angaben gemäß § 5 TMG</p>
+                            <p>Csaba Miska <br>
+                                Wieselweg 9C<br>
+                                55442 Stromberg <br>
+                            </p>
+                            <p>Vertreten durch:<br>
+                                Csaba Miska<br>
+                            </p>
+                            <p>Kontakt:<br>
+                                Telefon: +49-15204171284<br>
+                                E-Mail: <a href='mailto:miskacs90@gmail.com'>miskacs90@gmail.com</a></p>
+                            Impressum vom <a href="https://www.impressum-generator.de">Impressum Generator</a><br> der
+                            <a href="https://www.kanzlei-hasselbach.de/standorte/frankfurt/" rel="nofollow">Kanzlei
+                                Hasselbach, Frankfurt</a>
+                        </div>
+                        <button class="options_btn btn_style" onclick="hideGameImpressum()">BACK</button>
                     </div>
                 </div>
             </div>

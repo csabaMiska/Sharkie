@@ -314,3 +314,20 @@ input[type="radio"]:hover {
     font-size: 36px;
     color: var(--btn-font-color);
 }
+
+.impressum_content {
+    color: white;
+    font-size: 16px;
+    font-family: var(--font-bowelby-one);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.impressum_content a {
+    text-decoration: none;
+    color: var(--headline-font-color);
+}
+
+.impressum_content a:hover {
+    border-bottom: 1px solid var(--headline-font-color);
+}
