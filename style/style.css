@@ -1,6 +1,6 @@
 :root {
-    --game-window-width: 1366px;
-    --game-window-height: 768px;
+    --game-window-width: 1920px;
+    --game-window-height: 1080px;
     --border-radius: 30px;
     --start-menu-bg-color: rgba(0, 0, 0, 0.15);
     --btn-bg-color: rgb(252, 238, 33);
@@ -48,10 +48,8 @@ main {
 }
 
 canvas {
-    width: var(--game-window-width);
-    height: var(--game-window-height);
     margin: 16px;
-    background-color: transparent;
+    background-color: black;
     border-radius: var(--border-radius);
     box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.25);
 }
@@ -216,14 +214,14 @@ nav {
 .game_option {
     display: flex;
     align-items: center;
-    margin-bottom: 80px;
+    margin-bottom: 170px;
 }
 
 .game_option_text {
-    font-size: 32px;
+    font-size: 40px;
     font-family: var(--font-bowelby-one);
     margin-right: 120px;
-    width: 236px;
+    width: 450px;
 }
 
 input[type="radio"] {
@@ -317,9 +315,9 @@ input[type="radio"]:hover {
 
 .impressum_content {
     color: white;
-    font-size: 16px;
+    font-size: 24px;
     font-family: var(--font-bowelby-one);
-    margin-bottom: 16px;
+    margin-bottom: 156px;
     letter-spacing: 1px;
 }
 

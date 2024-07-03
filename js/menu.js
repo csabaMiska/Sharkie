@@ -1,3 +1,4 @@
+let startMenu = document.getElementById('startMenu');
 let leaderBoard = document.getElementById('leaderBoard');
 let gameOptions = document.getElementById('gameOptions');
 let gameInstructions = document.getElementById('gameInstructions');
@@ -37,4 +38,8 @@ function showGameImpressum() {
 function hideGameImpressum() {
     leaderBoard.classList.remove('d-none');
     impressum.classList.add('d-none');
+}
+
+function hideStartMenu() {
+    startMenu.classList.add('d-none');
 }

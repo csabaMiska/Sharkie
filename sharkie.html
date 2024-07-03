@@ -9,17 +9,27 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/fonts.css">
     <link rel="icon" href="img/4. Marcadores/1. Coins/1.png">
+
+    <script src="classes/drawable-object.class.js"></script>
+    <script src="classes/movable-object.class.js"></script>
+    <script src="classes/level.class.js"></script>
+    <script src="classes/background-object.class.js"></script>
+    <script src="classes/shark.class.js"></script>
+    <script src="classes/puffer-fish.class.js"></script>
+    <script src="classes/world.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
 </head>
 
 <body onload="init()">
     <main>
         <div class="headline headline_style">Sharkie</div>
-        <canvas></canvas>
-        <div class="start_menu position_center">
+        <canvas id="canvas" width="1920px" height="1080px"></canvas>
+        <div id="startMenu" class="start_menu position_center">
             <div id="firstRow" class="first_row position_center">
                 <nav>
                     <div class="row_headline headline_style">Menu</div>
-                    <button class="menu_btn btn_style">START</button>
+                    <button class="menu_btn btn_style" onclick="startGame()">START</button>
                     <button class="menu_btn btn_style" onclick="showGameOptions()">OPTIONS</button>
                     <button class="menu_btn btn_style" onclick="showGameInstructions()">INSTRUCTIONS</button>
                     <button class="menu_btn btn_style" onclick="showGameImpressum()">IMPRESSUM</button>
@@ -155,8 +165,6 @@
         </div>
     </main>
 
-
-    <script src="js/game.js"></script>
     <script src="js/menu.js"></script>
 </body>
 
