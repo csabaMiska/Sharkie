@@ -12,10 +12,31 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.swimming();
     }
 
     setWorld() {
         this.shark.world = this;
+    }
+
+    swimming() {
+        setInterval(() => {
+            this.checkCollisions();
+        }, 200);
+    }
+
+    checkCollisions() {
+        this.level.pufferFishes.forEach((pufferFish) => {
+            if(this.shark.isColliding(pufferFish)) {
+                this.shark.hit();
+            }
+        });
+
+        this.level.jellyFishes.forEach((jellyFish) => {
+            if(this.shark.isColliding(jellyFish)) {
+                this.shark.hit();
+            }
+        });
     }
 
     draw() {
@@ -25,7 +46,8 @@ class World {
         
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addToMap(this.shark);
-        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.pufferFishes);
+        this.addObjectsToMap(this.level.jellyFishes);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -50,6 +72,7 @@ class World {
         }
 
         mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             mo.x = mo.x * -1;

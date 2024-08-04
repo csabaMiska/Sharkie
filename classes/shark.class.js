@@ -5,6 +5,7 @@ class Shark extends MovableObject {
     height = 450;
     speed = 20;
     world;
+    characterIsDead = false;
 
     IMAGES_IDLE = [
         'img/1.Sharkie/1.IDLE/1.png',
@@ -50,12 +51,46 @@ class Shark extends MovableObject {
         'img/1.Sharkie/3.Swim/5.png',
         'img/1.Sharkie/3.Swim/6.png'
     ];
+    IMAGES_SLAP = [
+        'img/1.Sharkie/4.Attack/Fin slap/1.png',
+        'img/1.Sharkie/4.Attack/Fin slap/2.png',
+        'img/1.Sharkie/4.Attack/Fin slap/3.png',
+        'img/1.Sharkie/4.Attack/Fin slap/4.png',
+        'img/1.Sharkie/4.Attack/Fin slap/5.png',
+        'img/1.Sharkie/4.Attack/Fin slap/6.png',
+        'img/1.Sharkie/4.Attack/Fin slap/7.png',
+        'img/1.Sharkie/4.Attack/Fin slap/8.png'
+    ];
+    IMAGES_HURT = [
+        'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/5.png',
+    ];
+    IMAGES_DEAD = [
+        'img/1.Sharkie/6.dead/1.Poisoned/1.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/2.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/3.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/4.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/5.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/6.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/7.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/8.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/9.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/10.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/11.png',
+        'img/1.Sharkie/6.dead/1.Poisoned/12.png'
+    ];
 
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png');
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_SLAP);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 
@@ -70,35 +105,38 @@ class Shark extends MovableObject {
 
         setInterval(() => {
             this.playIdle();
-            
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
-                this.playAnimation(this.IMAGES_SWIMMING);
-            }
+            this.playSwimm();
+            this.sharkHurt();
+            this.sharkPoisoned();
         }, 120);
+
+        setInterval(() => {
+            this.playFinSlap();
+        }, 80)
     }
 
     moveRight() {
-        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x) {
+        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x  && !this.characterIsDead) {
             this.x += this.speed;
             this.otherDirection = false;
         }
     }
 
     moveLeft() {
-        if (this.world.keyboard.LEFT && this.x > 0) {
+        if (this.world.keyboard.LEFT && this.x > 0  && !this.characterIsDead) {
             this.x -= this.speed;
             this.otherDirection = true;
         }
     }
 
     moveUp() {
-        if (this.world.keyboard.UP && this.y > -200) {
+        if (this.world.keyboard.UP && this.y > -200  && !this.characterIsDead) {
             this.y -= this.speed;
         }
     }
 
     moveDown() {
-        if (this.world.keyboard.DOWN && this.y < 720) {
+        if (this.world.keyboard.DOWN && this.y < 720  && !this.characterIsDead) {
             this.y += this.speed;
         }
     }
@@ -110,7 +148,39 @@ class Shark extends MovableObject {
     }
 
     playIdle() {
-        this.playAnimation(this.IMAGES_IDLE);
+        if (!this.characterIsDead) {
+            this.playAnimation(this.IMAGES_IDLE);
+        }  
     }
-    
+
+    playSwimm() {
+        if (this.world.keyboard.RIGHT && this.world.keyboard.LEFT && this.world.keyboard.UP && this.world.keyboard.DOWN && !this.characterIsDead) {
+            this.playAnimation(this.IMAGES_SWIMMING);
+        }
+    }
+
+    playFinSlap() {
+        if (this.world.keyboard.SPACE && !this.characterIsDead) {
+            this.playAnimation(this.IMAGES_SLAP);
+        }
+    }
+
+    sharkHurt() {
+        if (this.isHurt() && !this.characterIsDead) {
+            this.playAnimation(this.IMAGES_HURT);
+        }
+    }
+
+    sharkPoisoned() {
+        if (this.isDead() && !this.characterIsDead) {
+            this.playAnimation(this.IMAGES_DEAD);
+            setTimeout(() => {
+                this.characterIsDead = true
+                this.loadImage('img/1.Sharkie/6.dead/1.Poisoned/12.png');
+                setInterval(() => {
+                    this.y -= 1;
+                }, 1000 / 60)
+            }, 300)
+        }
+    }
 }

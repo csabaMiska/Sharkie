@@ -1,11 +1,13 @@
 class Level {
-    enemies;
+    pufferFishes;
+    jellyFishes;
     backgroundObjects;
     level_end_x;
     final_battle_x;
 
-    constructor(enemies, backgroundObjects, level_end_x, final_battle_x) {
-        this.enemies = enemies;
+    constructor(pufferFishes, jellyFishes, backgroundObjects, level_end_x, final_battle_x) {
+        this.pufferFishes = pufferFishes;
+        this.jellyFishes = jellyFishes;
         this.backgroundObjects = backgroundObjects;
         this.level_end_x = level_end_x;
         this.final_battle_x = final_battle_x;
