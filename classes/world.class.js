@@ -48,6 +48,7 @@ class World {
         this.addToMap(this.shark);
         this.addObjectsToMap(this.level.pufferFishes);
         this.addObjectsToMap(this.level.jellyFishes);
+        this.addObjectsToMap(this.level.endBoss);
 
         this.ctx.translate(-this.camera_x, 0);
 

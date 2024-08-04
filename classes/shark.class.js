@@ -180,7 +180,7 @@ class Shark extends MovableObject {
                 setInterval(() => {
                     this.y -= 1;
                 }, 1000 / 60)
-            }, 300)
+            }, 400)
         }
     }
 }

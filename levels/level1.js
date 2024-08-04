@@ -14,6 +14,9 @@ const level1 = new Level(
         new JellyFish()
     ],
     [
+        new EndBoss()
+    ],
+    [
         new BackgroundObjects('img/3. Background/Layers/5. Water/D2.png', -1920, 0),
         new BackgroundObjects('img/3. Background/Layers/4.Fondo 2/D2.png', -1920, 0),
         new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D2.png', -1920, 0),
