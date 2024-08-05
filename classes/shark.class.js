@@ -6,6 +6,7 @@ class Shark extends MovableObject {
     speed = 20;
     world;
     characterIsDead = false;
+    energy = 100;
 
     IMAGES_IDLE = [
         'img/1.Sharkie/1.IDLE/1.png',
@@ -154,8 +155,10 @@ class Shark extends MovableObject {
     }
 
     playSwimm() {
-        if (this.world.keyboard.RIGHT && this.world.keyboard.LEFT && this.world.keyboard.UP && this.world.keyboard.DOWN && !this.characterIsDead) {
-            this.playAnimation(this.IMAGES_SWIMMING);
+        if (!this.characterIsDead) {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
+                this.playAnimation(this.IMAGES_SWIMMING);
+            }
         }
     }
 

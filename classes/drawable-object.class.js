@@ -5,6 +5,7 @@ class DrawableObject {
     width;
     img;
     imgCache = {};
+    coinsNumber;
 
     loadImage(path) {
         this.img = new Image();
@@ -31,5 +32,9 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+    }
+
+    showCounter(ctx) {
+        ctx.fillText(this.coinsNumber, this.x, this.y)
     }
 }

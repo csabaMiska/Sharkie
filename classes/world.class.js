@@ -5,6 +5,9 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
+    statusBar = new StatusBar();
+    poisonBar = new PoisonBar();
+    coinBar = new CoinBar();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -27,14 +30,16 @@ class World {
 
     checkCollisions() {
         this.level.pufferFishes.forEach((pufferFish) => {
-            if(this.shark.isColliding(pufferFish)) {
+            if (this.shark.isColliding(pufferFish)) {
                 this.shark.hit();
+                this.statusBar.setPercentage(this.shark.energy);
             }
         });
 
         this.level.jellyFishes.forEach((jellyFish) => {
-            if(this.shark.isColliding(jellyFish)) {
+            if (this.shark.isColliding(jellyFish)) {
                 this.shark.hit();
+                this.statusBar.setPercentage(this.shark.energy);
             }
         });
     }
@@ -43,11 +48,20 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-        
+
         this.addObjectsToMap(this.level.backgroundObjects);
+
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.addToMap(this.poisonBar);
+        this.addToMap(this.coinBar);
+        this.ctx.translate(this.camera_x, 0);
+
         this.addToMap(this.shark);
         this.addObjectsToMap(this.level.pufferFishes);
         this.addObjectsToMap(this.level.jellyFishes);
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.poisons);
         this.addObjectsToMap(this.level.endBoss);
 
         this.ctx.translate(-this.camera_x, 0);

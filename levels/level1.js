@@ -17,6 +17,23 @@ const level1 = new Level(
         new EndBoss()
     ],
     [
+        new Coin(650, 600),
+        new Coin(750, 600),
+        new Coin(850, 600),
+        new Coin(950, 600),
+        new Coin(1050, 600),
+        new Coin(1150, 600)
+    ],
+    [
+        new Poison(),
+        new Poison(),
+        new Poison(),
+        new Poison(),
+        new Poison(),
+        new Poison(),
+        new Poison()
+    ],
+    [
         new BackgroundObjects('img/3. Background/Layers/5. Water/D2.png', -1920, 0),
         new BackgroundObjects('img/3. Background/Layers/4.Fondo 2/D2.png', -1920, 0),
         new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D2.png', -1920, 0),
