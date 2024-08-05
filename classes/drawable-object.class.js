@@ -5,7 +5,6 @@ class DrawableObject {
     width;
     img;
     imgCache = {};
-    coinsNumber;
 
     loadImage(path) {
         this.img = new Image();

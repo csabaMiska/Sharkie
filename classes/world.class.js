@@ -8,6 +8,7 @@ class World {
     statusBar = new StatusBar();
     poisonBar = new PoisonBar();
     coinBar = new CoinBar();
+    counters = new MovableObject();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -55,6 +56,11 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.poisonBar);
         this.addToMap(this.coinBar);
+        this.ctx.font = "50px Bowlby One";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("X " + this.counters.coinsNumber, 1700, 84);
+        this.ctx.fillText("X " + this.counters.poisonsNumber, 1300, 84);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.shark);

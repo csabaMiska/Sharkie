@@ -6,6 +6,8 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     speedY = 0;
     acceleration = 1;
+    poisonsNumber = 100;
+    coinsNumber = 200;
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
