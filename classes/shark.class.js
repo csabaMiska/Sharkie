@@ -5,7 +5,6 @@ class Shark extends MovableObject {
     height = 450;
     speed = 20;
     world;
-    characterIsDead = false;
     energy = 100;
 
     IMAGES_IDLE = [

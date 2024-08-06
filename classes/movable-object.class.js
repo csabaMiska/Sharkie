@@ -2,12 +2,13 @@ class MovableObject extends DrawableObject {
     speed;
     currentImage = 0;
     otherDirection = false;
+    characterIsDead = false;
     energy;
     lastHit = 0;
     speedY = 0;
     acceleration = 1;
-    poisonsNumber = 100;
-    coinsNumber = 200;
+    poisonsNumber = 0;
+    coinsNumber = 0;
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -65,5 +66,11 @@ class MovableObject extends DrawableObject {
 
     isDead() {
         return this.energy == 0;
+    }
+
+    earnCoins() {
+        if (!this.characterIsDead) {
+            this.coinsNumber += 1;
+        }
     }
 }

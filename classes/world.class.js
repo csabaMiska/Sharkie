@@ -43,6 +43,15 @@ class World {
                 this.statusBar.setPercentage(this.shark.energy);
             }
         });
+
+        this.level.coins = this.level.coins.filter((coin) => {
+            if (this.shark.isColliding(coin)) {
+                this.counters.earnCoins();
+                this.ctx.clearRect(coin.x, coin.y, coin.width, coin.height);
+                return false;
+            }
+            return true;
+        });
     }
 
     draw() {
