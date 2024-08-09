@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     currentImage = 0;
     otherDirection = false;
     characterIsDead = false;
-    energy;
+    energy = 100;
     lastHit = 0;
     speedY = 0;
     acceleration = 1;
@@ -68,9 +68,15 @@ class MovableObject extends DrawableObject {
         return this.energy == 0;
     }
 
-    earnCoins() {
-        if (!this.characterIsDead) {
-            this.coinsNumber += 1;
-        }
+    deleteObject(ctx, object) {
+        ctx.clearRect(object.x, object.y, object.width, object.height);
+    }
+
+    collectCoins() {
+        this.coinsNumber += 1;
+    }
+
+    collectPoison() {
+        this.poisonsNumber += 1;
     }
 }

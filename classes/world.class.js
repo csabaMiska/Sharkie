@@ -46,9 +46,22 @@ class World {
 
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.shark.isColliding(coin)) {
-                this.counters.earnCoins();
-                this.ctx.clearRect(coin.x, coin.y, coin.width, coin.height);
-                return false;
+                if (!this.shark.characterIsDead) {
+                    this.counters.collectCoins();
+                    this.counters.deleteObject(this.ctx, coin);
+                    return false;
+                }
+            }
+            return true;
+        });
+
+        this.level.poisons = this.level.poisons.filter((poison) => {
+            if (this.shark.isColliding(poison)) {
+                if (!this.shark.characterIsDead) {
+                    this.counters.collectPoison();
+                    this.counters.deleteObject(this.ctx, poison);
+                    return false;
+                }
             }
             return true;
         });
@@ -65,7 +78,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.poisonBar);
         this.addToMap(this.coinBar);
-        this.ctx.font = "50px Bowlby One";
+        this.ctx.font = "40px Bowlby One";
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "white";
         this.ctx.fillText("X " + this.counters.coinsNumber, 1700, 84);

@@ -32,8 +32,4 @@ class DrawableObject {
             ctx.stroke();
         }
     }
-
-    showCounter(ctx) {
-        ctx.fillText(this.coinsNumber, this.x, this.y)
-    }
 }

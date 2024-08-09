@@ -5,7 +5,6 @@ class Shark extends MovableObject {
     height = 450;
     speed = 20;
     world;
-    energy = 100;
 
     IMAGES_IDLE = [
         'img/1.Sharkie/1.IDLE/1.png',
@@ -85,6 +84,7 @@ class Shark extends MovableObject {
 
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png');
+        this.characterIsDead = false;
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
@@ -177,7 +177,7 @@ class Shark extends MovableObject {
         if (this.isDead() && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_DEAD);
             setTimeout(() => {
-                this.characterIsDead = true
+                this.characterIsDead = true;
                 this.loadImage('img/1.Sharkie/6.dead/1.Poisoned/12.png');
                 setInterval(() => {
                     this.y -= 1;
