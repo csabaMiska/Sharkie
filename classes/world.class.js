@@ -9,6 +9,7 @@ class World {
     poisonBar = new PoisonBar();
     coinBar = new CoinBar();
     counters = new MovableObject();
+    throwableObject = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -26,6 +27,7 @@ class World {
     swimming() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkThrowableObjects();
         }, 200);
     }
 
@@ -67,6 +69,16 @@ class World {
         });
     }
 
+    checkThrowableObjects() {
+        if (this.keyboard.D && this.counters.poisonsNumber > 0) {
+            if (!this.shark.characterIsDead) {
+            let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240);
+            this.throwableObject.push(bubble);
+            this.counters.poisonsNumber -= 1;
+            }
+        }
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -91,6 +103,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.poisons);
         this.addObjectsToMap(this.level.endBoss);
+        this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);
 
