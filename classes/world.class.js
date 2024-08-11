@@ -8,7 +8,7 @@ class World {
     statusBar = new StatusBar();
     poisonBar = new PoisonBar();
     coinBar = new CoinBar();
-    counters = new MovableObject();
+    movableObject = new MovableObject();
     throwableObject = [];
 
     constructor(canvas, keyboard) {
@@ -41,6 +41,13 @@ class World {
 
         this.level.jellyFishes.forEach((jellyFish) => {
             if (this.shark.isColliding(jellyFish)) {
+                this.shark.shock();
+                this.statusBar.setPercentage(this.shark.energy);
+            }
+        });
+
+        this.level.endBoss.forEach((endBoss) => {
+            if (this.shark.isColliding(endBoss)) {
                 this.shark.hit();
                 this.statusBar.setPercentage(this.shark.energy);
             }
@@ -49,8 +56,8 @@ class World {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.shark.isColliding(coin)) {
                 if (!this.shark.characterIsDead) {
-                    this.counters.collectCoins();
-                    this.counters.deleteObject(this.ctx, coin);
+                    this.movableObject.collectCoins();
+                    this.movableObject.deleteObject(this.ctx, coin);
                     return false;
                 }
             }
@@ -60,8 +67,8 @@ class World {
         this.level.poisons = this.level.poisons.filter((poison) => {
             if (this.shark.isColliding(poison)) {
                 if (!this.shark.characterIsDead) {
-                    this.counters.collectPoison();
-                    this.counters.deleteObject(this.ctx, poison);
+                    this.movableObject.collectPoison();
+                    this.movableObject.deleteObject(this.ctx, poison);
                     return false;
                 }
             }
@@ -70,11 +77,17 @@ class World {
     }
 
     checkThrowableObjects() {
-        if (this.keyboard.D && this.counters.poisonsNumber > 0) {
+        if (this.keyboard.D && this.movableObject.poisonsNumber > 0) {
             if (!this.shark.characterIsDead) {
-            let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240);
-            this.throwableObject.push(bubble);
-            this.counters.poisonsNumber -= 1;
+                if (!this.shark.otherDirection) {
+                    let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
+                    this.throwableObject.push(bubble);
+                    this.movableObject.poisonsNumber -= 1;
+                } else {
+                    let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y +  240, this.shark.otherDirection);
+                    this.throwableObject.push(bubble);
+                    this.movableObject.poisonsNumber -= 1;
+                }
             }
         }
     }
@@ -93,8 +106,8 @@ class World {
         this.ctx.font = "40px Bowlby One";
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("X " + this.counters.coinsNumber, 1700, 84);
-        this.ctx.fillText("X " + this.counters.poisonsNumber, 1300, 84);
+        this.ctx.fillText("X " + this.movableObject.coinsNumber, 1700, 84);
+        this.ctx.fillText("X " + this.movableObject.poisonsNumber, 1300, 84);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.shark);

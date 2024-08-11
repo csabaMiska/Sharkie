@@ -3,7 +3,7 @@ class Shark extends MovableObject {
     y = 240;
     width = 450;
     height = 450;
-    speed = 20;
+    speed = 16;
     world;
 
     offset = {
@@ -74,7 +74,12 @@ class Shark extends MovableObject {
         'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/5.png',
     ];
-    IMAGES_DEAD = [
+    IMAGES_SHOCK = [
+        'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
+    ];
+    IMAGES_POISONED = [
         'img/1.Sharkie/6.dead/1.Poisoned/1.png',
         'img/1.Sharkie/6.dead/1.Poisoned/2.png',
         'img/1.Sharkie/6.dead/1.Poisoned/3.png',
@@ -88,6 +93,18 @@ class Shark extends MovableObject {
         'img/1.Sharkie/6.dead/1.Poisoned/11.png',
         'img/1.Sharkie/6.dead/1.Poisoned/12.png'
     ];
+    IMAGES_ELEKTRO_SHOCK = [
+        'img/1.Sharkie/6.dead/2.Electro_shock/1.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/2.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/3.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/4.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/5.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/6.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/7.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/8.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/9.png',
+        'img/1.Sharkie/6.dead/2.Electro_shock/10.png'
+    ];
 
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png');
@@ -97,7 +114,9 @@ class Shark extends MovableObject {
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_SLAP);
         this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_SHOCK);
+        this.loadImages(this.IMAGES_POISONED);
+        this.loadImages(this.IMAGES_ELEKTRO_SHOCK);
         this.animate();
     }
 
@@ -114,7 +133,9 @@ class Shark extends MovableObject {
             this.playIdle();
             this.playSwimm();
             this.sharkHurt();
+            this.sharkShock();
             this.sharkPoisoned();
+            this.sharkElektroShocked();
         }, 120);
 
         setInterval(() => {
@@ -137,7 +158,7 @@ class Shark extends MovableObject {
     }
 
     moveUp() {
-        if (this.world.keyboard.UP && this.y > -200  && !this.characterIsDead) {
+        if (this.world.keyboard.UP && this.y > -100  && !this.characterIsDead) {
             this.y -= this.speed;
         }
     }
@@ -175,14 +196,20 @@ class Shark extends MovableObject {
     }
 
     sharkHurt() {
-        if (this.isHurt() && !this.characterIsDead) {
+        if (this.isPoisoned() && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_HURT);
+        }
+    }
+
+    sharkShock() {
+        if (this.isShocked() && !this.characterIsDead) {
+            this.playAnimation(this.IMAGES_SHOCK);
         }
     }
 
     sharkPoisoned() {
         if (this.isDead() && !this.characterIsDead) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.playAnimation(this.IMAGES_POISONED);
             setTimeout(() => {
                 this.characterIsDead = true;
                 this.loadImage('img/1.Sharkie/6.dead/1.Poisoned/12.png');
@@ -190,6 +217,17 @@ class Shark extends MovableObject {
                     this.y -= 1;
                 }, 1000 / 60)
             }, 400)
+        }
+    }
+
+    sharkElektroShocked() {
+        if (this.isElektroShocked() && !this.characterIsDead) {
+            this.playAnimation(this.IMAGES_ELEKTRO_SHOCK);
+            setTimeout(() => {
+                this.characterIsDead = true;
+                this.loadImage('img/1.Sharkie/6.dead/2.Electro_shock/10.png');
+                this.applyGravity();
+            }, 380)
         }
     }
 }

@@ -5,20 +5,29 @@ class ThrowableObject extends MovableObject {
         left: 4,
         right: 4
     }
+    bubbleDirection;
 
-    constructor(x, y) {
+    constructor(x, y, bubbleDirection) {
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
         this.x = x;
         this.y = y;
         this.width = 80;
         this.height = 80;
-        this.trow();
+        this.bubbleDirection = bubbleDirection;
+        this.throw();
     }
 
-    trow() {
-        this.speed = 30;
-        setInterval(() => {
-            this.x += 10;
-        }, 1000 / 60);
+    throw() {
+        this.speed = 16;
+        if (!this.bubbleDirection) {
+            setInterval(() => {
+                this.x += this.speed;
+            }, 1000 / 60);
+        } else {
+            setInterval(() => {
+                this.x -= this.speed;
+            }, 1000 / 60);
+        }
+        
     }
 }

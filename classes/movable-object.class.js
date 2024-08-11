@@ -2,12 +2,16 @@ class MovableObject extends DrawableObject {
     speed;
     currentImage = 0;
     otherDirection = false;
+    characterIsPoisoned = false;
+    characterIsElektrShocked = false;
     characterIsDead = false;
+    damage;
     energy = 100;
     lastHit = 0;
+    lastShock = 0;
     speedY = 0;
     acceleration = 1;
-    poisonsNumber = 0;
+    poisonsNumber = 100;
     coinsNumber = 0;
     offset = {
         top: 0,
@@ -46,7 +50,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 700;
+        return this.y < 500;
     }
 
     isColliding(mo) {
@@ -65,13 +69,35 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    isHurt() {
+    shock() {
+        this.energy -= 20;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastShock = new Date().getTime();
+        }
+    }
+
+    isPoisoned() {
         let timePassed = new Date().getTime() - this.lastHit;
         return timePassed < 700;
     }
 
+    isShocked() {
+        let timePassed = new Date().getTime() - this.lastShock;
+        return timePassed < 700;
+    }
+
     isDead() {
-        return this.energy == 0;
+        if (this.energy == 0 && this.isPoisoned()) {
+            return this.characterIsPoisoned = true;
+        }
+    }
+
+    isElektroShocked() {
+        if (this.energy == 0 && this.isShocked()) {
+            return this.characterIsElektrShocked = true;
+        }
     }
 
     deleteObject(ctx, object) {
