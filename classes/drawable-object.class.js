@@ -24,11 +24,17 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Shark || this instanceof PufferFish || this instanceof JellyFish) {
+        if (this instanceof ThrowableObject) {
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'white';
-            ctx.rect(this.x, this.y, this.width, this.height);
+      
+            const frameX = this.x + this.offset.left;
+            const frameY = this.y + this.offset.top;
+            const frameWidth = this.width - this.offset.left - this.offset.right;
+            const frameHeight = this.height - this.offset.top - this.offset.bottom;
+
+            ctx.rect(frameX, frameY, frameWidth, frameHeight);
             ctx.stroke();
         }
     }

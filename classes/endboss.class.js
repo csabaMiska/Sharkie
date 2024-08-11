@@ -5,6 +5,13 @@ class EndBoss extends MovableObject {
     y = 100;
     speed = 14;
 
+    offset = {
+        top: 310,
+        bottom: 140,
+        left: 48,
+        right: 56
+    }
+
     IMAGES_SWIMMING = [
         'img/2.Enemy/3 Final Enemy/2.floating/1.png',
         'img/2.Enemy/3 Final Enemy/2.floating/2.png',

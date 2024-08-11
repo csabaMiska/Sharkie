@@ -6,6 +6,13 @@ class Shark extends MovableObject {
     speed = 20;
     world;
 
+    offset = {
+        top: 240,
+        bottom: 100,
+        left: 100,
+        right: 100
+    }
+
     IMAGES_IDLE = [
         'img/1.Sharkie/1.IDLE/1.png',
         'img/1.Sharkie/1.IDLE/2.png',

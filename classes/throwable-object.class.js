@@ -1,4 +1,10 @@
 class ThrowableObject extends MovableObject {
+    offset = {
+        top: 4,
+        bottom: 4,
+        left: 4,
+        right: 4
+    }
 
     constructor(x, y) {
         super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
@@ -11,7 +17,6 @@ class ThrowableObject extends MovableObject {
 
     trow() {
         this.speed = 30;
-        //this.applyGravity();
         setInterval(() => {
             this.x += 10;
         }, 1000 / 60);

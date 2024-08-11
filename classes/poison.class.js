@@ -10,6 +10,13 @@ class Poison extends MovableObject {
         'img/4. Marcadores/Posión/Animada/8.png'
     ];
 
+    offset = {
+        top: 56,
+        bottom: 8,
+        left: 24,
+        right: 24
+    }
+
     constructor() {
         super().loadImage('img/4. Marcadores/Posión/Animada/1.png');
         this.x = 700 + Math.random() * 1920;

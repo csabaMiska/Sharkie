@@ -9,6 +9,13 @@ class JellyFish extends MovableObject {
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 4.png'
     ];
 
+    offset = {
+        top: 36,
+        bottom: 44,
+        left: 32,
+        right: 32
+    }
+
     constructor() {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
         this.x = 900 + Math.random() * 3200;
