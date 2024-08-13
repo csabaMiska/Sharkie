@@ -1,5 +1,6 @@
 class World {
     shark = new Shark();
+    pufferFish = new PufferFish();
     level = level1;
     canvas;
     ctx;
@@ -9,7 +10,7 @@ class World {
     poisonBar = new PoisonBar();
     coinBar = new CoinBar();
     movableObject = new MovableObject();
-    throwableObject = [];
+    throwableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,6 +29,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
+            this.checkBubbleAttack();
         }, 200);
     }
 
@@ -81,15 +83,45 @@ class World {
             if (!this.shark.characterIsDead) {
                 if (!this.shark.otherDirection) {
                     let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
-                    this.throwableObject.push(bubble);
+                    this.throwableObjects.push(bubble);
                     this.movableObject.poisonsNumber -= 1;
                 } else {
-                    let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y +  240, this.shark.otherDirection);
-                    this.throwableObject.push(bubble);
+                    let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y + 240, this.shark.otherDirection);
+                    this.throwableObjects.push(bubble);
                     this.movableObject.poisonsNumber -= 1;
                 }
             }
         }
+    }
+
+    checkBubbleAttack() {
+        this.throwableObjects = this.throwableObjects.filter((bubble) => {
+            let hasCollided = false;
+    
+            this.level.pufferFishes = this.level.pufferFishes.filter((pufferFish) => {
+                if (bubble.isColliding(pufferFish)) {
+                    this.movableObject.deleteObject(this.ctx, pufferFish);
+                    hasCollided = true; 
+                    return false; 
+                }
+                return true;
+            });
+
+            this.level.jellyFishes = this.level.jellyFishes.filter((jellyFish) => {
+                if (bubble.isColliding(jellyFish)) {
+                    this.movableObject.deleteObject(this.ctx, jellyFish);
+                    hasCollided = true; 
+                    return false; 
+                }
+                return true;
+            });
+    
+            if (hasCollided) {
+                this.movableObject.deleteObject(this.ctx, bubble);
+                return false;
+            }
+            return true;
+        });
     }
 
     draw() {
@@ -116,7 +148,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.poisons);
         this.addObjectsToMap(this.level.endBoss);
-        this.addObjectsToMap(this.throwableObject);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
