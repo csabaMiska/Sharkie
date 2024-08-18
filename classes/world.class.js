@@ -1,6 +1,5 @@
 class World {
     shark = new Shark();
-    pufferFish = new PufferFish();
     level = level1;
     canvas;
     ctx;
@@ -19,6 +18,7 @@ class World {
         this.draw();
         this.setWorld();
         this.swimming();
+        this.attack()
     }
 
     setWorld() {
@@ -29,8 +29,14 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowableObjects();
+        }, 300);
+    }
+
+    attack() {
+        setInterval(() => {
             this.checkBubbleAttack();
-        }, 200);
+            this.checkFinSlap();
+        }, 100);
     }
 
     checkCollisions() {
@@ -97,31 +103,36 @@ class World {
     checkBubbleAttack() {
         this.throwableObjects = this.throwableObjects.filter((bubble) => {
             let hasCollided = false;
-    
-            this.level.pufferFishes = this.level.pufferFishes.filter((pufferFish) => {
-                if (bubble.isColliding(pufferFish)) {
-                    this.movableObject.deleteObject(this.ctx, pufferFish);
-                    hasCollided = true; 
-                    return false; 
-                }
-                return true;
-            });
 
             this.level.jellyFishes = this.level.jellyFishes.filter((jellyFish) => {
                 if (bubble.isColliding(jellyFish)) {
                     this.movableObject.deleteObject(this.ctx, jellyFish);
-                    hasCollided = true; 
-                    return false; 
+                    hasCollided = true;
+                    return false;
                 }
                 return true;
             });
-    
+
             if (hasCollided) {
                 this.movableObject.deleteObject(this.ctx, bubble);
                 return false;
             }
             return true;
         });
+    }
+
+    checkFinSlap() {
+        if (this.keyboard.SPACE) {
+            if (!this.shark.characterIsDead) {
+                this.level.pufferFishes = this.level.pufferFishes.filter((pufferFish) => {
+                    if (this.shark.isColliding(pufferFish)) {
+                        this.movableObject.deleteObject(this.ctx, pufferFish);
+                        return false;
+                    }
+                    return true;
+                });
+            }
+        }
     }
 
     draw() {
@@ -166,18 +177,26 @@ class World {
 
     addToMap(mo) {
         if (mo.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(mo.width, 0, 0);
-            this.ctx.scale(-1, 1);
-            mo.x = mo.x * -1;
+            this.flipImage(mo);
         }
 
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
-            mo.x = mo.x * -1;
-            this.ctx.restore();
+            this.flipImageBack(mo);
         }
+    }
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
     }
 }

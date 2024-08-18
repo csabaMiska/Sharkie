@@ -24,7 +24,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject || this instanceof Shark || this instanceof PufferFish) {
             ctx.beginPath();
             ctx.lineWidth = '2';
             ctx.strokeStyle = 'white';
