@@ -38,4 +38,8 @@ class DrawableObject {
             ctx.stroke();
         }
     }
+
+    deleteObject(ctx, object) {
+        ctx.clearRect(object.x, object.y, object.width, object.height);
+    }
 }

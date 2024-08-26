@@ -7,7 +7,9 @@ class World {
     camera_x = 0;
     statusBar = new StatusBar();
     poisonBar = new PoisonBar();
+    poisonCounter = new PoisonCounter();
     coinBar = new CoinBar();
+    coinCounter = new CoinCounter();
     movableObject = new MovableObject();
     throwableObjects = [];
 
@@ -30,7 +32,7 @@ class World {
             setInterval(() => {
                 this.checkCollisions();
                 this.checkThrowableObjects();
-            }, 300);
+            }, 200);
         }
     }
 
@@ -81,7 +83,7 @@ class World {
     collosionWithCoins() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.shark.isColliding(coin)) {
-                this.movableObject.collectCoins();
+                this.coinCounter.collectCoins();
                 this.movableObject.deleteObject(this.ctx, coin);
                 return false;
             }
@@ -92,7 +94,7 @@ class World {
     collosionWithPoisons() {
         this.level.poisons = this.level.poisons.filter((poison) => {
             if (this.shark.isColliding(poison)) {
-                this.movableObject.collectPoison();
+                this.poisonCounter.collectPoison();
                 this.movableObject.deleteObject(this.ctx, poison);
                 return false;
             }
@@ -130,7 +132,7 @@ class World {
 
     
     checkThrowableObjects() {
-        if (this.keyboard.D && this.movableObject.poisonsNumber > 0) {
+        if (this.keyboard.D && this.poisonCounter.poisonsNumber > 0) {
             if (!this.shark.otherDirection) {
                 let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
                 this.createBubble(bubble);
@@ -143,7 +145,7 @@ class World {
 
     createBubble(bubble) {
         this.throwableObjects.push(bubble);
-        this.movableObject.poisonsNumber -= 1;
+        this.poisonCounter.poisonsNumber -= 1;
     }
 
     checkBubbleAttack() {
@@ -181,8 +183,8 @@ class World {
         this.ctx.font = "40px Bowlby One";
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("X " + this.movableObject.coinsNumber, 1700, 84);
-        this.ctx.fillText("X " + this.movableObject.poisonsNumber, 1300, 84);
+        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1700, 84);
+        this.ctx.fillText("X " + this.poisonCounter.poisonsNumber, 1300, 84);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.shark);

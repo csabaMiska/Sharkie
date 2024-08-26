@@ -4,15 +4,13 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     characterIsPoisoned = false;
     characterIsElektrShocked = false;
-    pufferFishIsDead = false;
     damage;
     energy;
     lastHit = 0;
     lastShock = 0;
     speedY = 0;
     acceleration = 1;
-    poisonsNumber = 0;
-    coinsNumber = 0;
+
     offset = {
         top: 0,
         bottom: 0,
@@ -100,17 +98,5 @@ class MovableObject extends DrawableObject {
         if (this.energy == 0 && this.isShocked()) {
             return this.characterIsElektrShocked = true;
         }
-    }
-
-    deleteObject(ctx, object) {
-        ctx.clearRect(object.x, object.y, object.width, object.height);
-    }
-
-    collectCoins() {
-        this.coinsNumber += 1;
-    }
-
-    collectPoison() {
-        this.poisonsNumber += 1;
     }
 }

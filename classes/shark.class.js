@@ -68,6 +68,15 @@ class Shark extends MovableObject {
         'img/1.Sharkie/4.Attack/Fin slap/7.png',
         'img/1.Sharkie/4.Attack/Fin slap/8.png'
     ];
+    IMAGES_BUBBLE_TRAP = [
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/7.png'
+    ];
     IMAGES_HURT = [
         'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
@@ -114,6 +123,7 @@ class Shark extends MovableObject {
         this.loadImages(this.IMAGES_LONG_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_SLAP);
+        this.loadImages(this.IMAGES_BUBBLE_TRAP);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_SHOCK);
         this.loadImages(this.IMAGES_POISONED);
@@ -141,6 +151,7 @@ class Shark extends MovableObject {
 
         setInterval(() => {
             this.playFinSlap();
+            this.playBubbleAttack();
         }, 80)
     }
 
@@ -193,6 +204,14 @@ class Shark extends MovableObject {
     playFinSlap() {
         if (this.world.keyboard.SPACE && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_SLAP);
+        }
+    }
+
+    playBubbleAttack() {
+        if (!this.characterIsDead) {
+            if (this.world.keyboard.D && this.world.poisonCounter.poisonsNumber > 0) {
+                this.playAnimation(this.IMAGES_BUBBLE_TRAP);
+            }
         }
     }
 
