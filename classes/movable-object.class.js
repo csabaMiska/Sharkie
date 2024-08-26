@@ -30,10 +30,8 @@ class MovableObject extends DrawableObject {
     }
 
     swimmUp(speed) {
-        setInterval(() => {
-            this.y -= speed;
-            this.x -= 2;
-        }, 1000 / 60)
+        this.y -= speed;
+        this.x -= 2;
     }
 
     applyGravity() {

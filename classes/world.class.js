@@ -64,7 +64,7 @@ class World {
 
     collosionWithJellyFish() {
         this.level.jellyFishes.forEach((jellyFish) => {
-            if (this.shark.isColliding(jellyFish)) {
+            if (this.shark.isColliding(jellyFish) && !jellyFish.jellyFishIsDead) {
                 this.shark.shock();
                 this.statusBar.setPercentage(this.shark.energy);
             }
@@ -116,7 +116,7 @@ class World {
     finSlap(pufferFish) {
         setTimeout(() => {
             this.removePufferFish(pufferFish);
-            this.createNewPoison(pufferFish);   
+            this.createNewPoison(pufferFish);
         }, 1100);
     }
 
@@ -130,7 +130,7 @@ class World {
         this.movableObject.deleteObject(this.ctx, pufferFish);
     }
 
-    
+
     checkThrowableObjects() {
         if (this.keyboard.D && this.poisonCounter.poisonsNumber > 0) {
             if (!this.shark.otherDirection) {
@@ -150,23 +150,39 @@ class World {
 
     checkBubbleAttack() {
         this.throwableObjects = this.throwableObjects.filter((bubble) => {
-            let hasCollided = false;
+            let bubbleIsCollided = false;
 
-            this.level.jellyFishes = this.level.jellyFishes.filter((jellyFish) => {
-                if (bubble.isColliding(jellyFish)) {
-                    this.movableObject.deleteObject(this.ctx, jellyFish);
-                    hasCollided = true;
-                    return false;
+            this.level.jellyFishes.forEach((jellyFish) => {
+                if (bubble.isColliding(jellyFish) && !jellyFish.jellyFishIsDead) {
+                    jellyFish.jellyFishIsDead = true;
+                    bubbleIsCollided = true;
+                    this.bubbleAttack(jellyFish);
                 }
-                return true;
             });
 
-            if (hasCollided) {
+            if (bubbleIsCollided) {
                 this.movableObject.deleteObject(this.ctx, bubble);
                 return false;
             }
             return true;
         });
+    }
+
+    bubbleAttack(jellyFish) {
+        setTimeout(() => {
+            this.removeJellyFish(jellyFish);
+            this.createNewCoin(jellyFish);
+        }, 600);
+    }
+
+    createNewCoin(jellyFish) {
+        let coin = new Coin(jellyFish.x + 70, jellyFish.y + 100);
+        this.level.coins.push(coin);
+    }
+
+    removeJellyFish(jellyFish) {
+        this.level.jellyFishes = this.level.jellyFishes.filter(fish => fish !== jellyFish);
+        this.movableObject.deleteObject(this.ctx, jellyFish);
     }
 
     draw() {

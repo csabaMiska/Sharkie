@@ -52,11 +52,8 @@ class PufferFish extends MovableObject {
     animate() {
         setInterval(() => {
             this.playSwimmAnimation();
-        }, 140)
-
-        setInterval(() => {
             this.playDeadAnimation();
-        }, 140);
+        }, 140)
     }
 
     swimm() {
