@@ -4,14 +4,14 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     characterIsPoisoned = false;
     characterIsElektrShocked = false;
-    characterIsDead = false;
+    pufferFishIsDead = false;
     damage;
-    energy = 100;
+    energy;
     lastHit = 0;
     lastShock = 0;
     speedY = 0;
     acceleration = 1;
-    poisonsNumber = 100;
+    poisonsNumber = 0;
     coinsNumber = 0;
     offset = {
         top: 0,
@@ -28,9 +28,7 @@ class MovableObject extends DrawableObject {
     }
 
     swimmLeft(speed) {
-        setInterval(() => {
-            this.x -= speed;
-        }, 1000 / 60)
+        this.x -= speed;
     }
 
     swimmUp(speed) {
@@ -50,7 +48,11 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 500;
+        if (this.characterIsElektrShocked) {
+            return this.y < 500;
+        } else {
+            return this.y < 700 + Math.random() * 200;
+        }
     }
 
     isColliding(mo) {

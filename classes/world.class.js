@@ -26,78 +26,124 @@ class World {
     }
 
     swimming() {
-        setInterval(() => {
-            this.checkCollisions();
-            this.checkThrowableObjects();
-        }, 300);
+        if (!this.shark.characterIsDead) {
+            setInterval(() => {
+                this.checkCollisions();
+                this.checkThrowableObjects();
+            }, 300);
+        }
     }
 
     attack() {
-        setInterval(() => {
-            this.checkBubbleAttack();
-            this.checkFinSlap();
-        }, 100);
+        if (!this.shark.characterIsDead) {
+            setInterval(() => {
+                this.checkBubbleAttack();
+                this.checkFinSlap();
+            }, 1000 / 60);
+        }
     }
 
     checkCollisions() {
+        this.collosionWithPufferFish();
+        this.collosionWithJellyFish();
+        this.collosionWithEndBoss();
+        this.collosionWithCoins();
+        this.collosionWithPoisons();
+    }
+
+    collosionWithPufferFish() {
         this.level.pufferFishes.forEach((pufferFish) => {
-            if (this.shark.isColliding(pufferFish)) {
+            if (this.shark.isColliding(pufferFish) && !pufferFish.pufferFishIsDead) {
                 this.shark.hit();
                 this.statusBar.setPercentage(this.shark.energy);
             }
         });
+    }
 
+    collosionWithJellyFish() {
         this.level.jellyFishes.forEach((jellyFish) => {
             if (this.shark.isColliding(jellyFish)) {
                 this.shark.shock();
                 this.statusBar.setPercentage(this.shark.energy);
             }
         });
+    }
 
+    collosionWithEndBoss() {
         this.level.endBoss.forEach((endBoss) => {
             if (this.shark.isColliding(endBoss)) {
                 this.shark.hit();
                 this.statusBar.setPercentage(this.shark.energy);
             }
         });
+    }
 
+    collosionWithCoins() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.shark.isColliding(coin)) {
-                if (!this.shark.characterIsDead) {
-                    this.movableObject.collectCoins();
-                    this.movableObject.deleteObject(this.ctx, coin);
-                    return false;
-                }
-            }
-            return true;
-        });
-
-        this.level.poisons = this.level.poisons.filter((poison) => {
-            if (this.shark.isColliding(poison)) {
-                if (!this.shark.characterIsDead) {
-                    this.movableObject.collectPoison();
-                    this.movableObject.deleteObject(this.ctx, poison);
-                    return false;
-                }
+                this.movableObject.collectCoins();
+                this.movableObject.deleteObject(this.ctx, coin);
+                return false;
             }
             return true;
         });
     }
 
+    collosionWithPoisons() {
+        this.level.poisons = this.level.poisons.filter((poison) => {
+            if (this.shark.isColliding(poison)) {
+                this.movableObject.collectPoison();
+                this.movableObject.deleteObject(this.ctx, poison);
+                return false;
+            }
+            return true;
+        });
+    }
+
+    checkFinSlap() {
+        if (this.keyboard.SPACE) {
+            this.level.pufferFishes.forEach((pufferFish) => {
+                if (this.shark.isColliding(pufferFish) && !pufferFish.pufferFishIsDead) {
+                    pufferFish.pufferFishIsDead = true;
+                    this.finSlap(pufferFish);
+                }
+            });
+        }
+    }
+
+    finSlap(pufferFish) {
+        setTimeout(() => {
+            this.removePufferFish(pufferFish);
+            this.createNewPoison(pufferFish);   
+        }, 1100);
+    }
+
+    createNewPoison(pufferFish) {
+        let poison = new Poison(pufferFish.x, pufferFish.y);
+        this.level.poisons.push(poison);
+    }
+
+    removePufferFish(pufferFish) {
+        this.level.pufferFishes = this.level.pufferFishes.filter(fish => fish !== pufferFish);
+        this.movableObject.deleteObject(this.ctx, pufferFish);
+    }
+
+    
     checkThrowableObjects() {
         if (this.keyboard.D && this.movableObject.poisonsNumber > 0) {
-            if (!this.shark.characterIsDead) {
-                if (!this.shark.otherDirection) {
-                    let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
-                    this.throwableObjects.push(bubble);
-                    this.movableObject.poisonsNumber -= 1;
-                } else {
-                    let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y + 240, this.shark.otherDirection);
-                    this.throwableObjects.push(bubble);
-                    this.movableObject.poisonsNumber -= 1;
-                }
+            if (!this.shark.otherDirection) {
+                let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
+                this.createBubble(bubble);
+            } else {
+                let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y + 240, this.shark.otherDirection);
+                this.createBubble(bubble);
             }
         }
+    }
+
+    createBubble(bubble) {
+        this.throwableObjects.push(bubble);
+        this.movableObject.poisonsNumber -= 1;
     }
 
     checkBubbleAttack() {
@@ -119,20 +165,6 @@ class World {
             }
             return true;
         });
-    }
-
-    checkFinSlap() {
-        if (this.keyboard.SPACE) {
-            if (!this.shark.characterIsDead) {
-                this.level.pufferFishes = this.level.pufferFishes.filter((pufferFish) => {
-                    if (this.shark.isColliding(pufferFish)) {
-                        this.movableObject.deleteObject(this.ctx, pufferFish);
-                        return false;
-                    }
-                    return true;
-                });
-            }
-        }
     }
 
     draw() {

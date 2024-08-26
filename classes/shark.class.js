@@ -3,7 +3,8 @@ class Shark extends MovableObject {
     y = 240;
     width = 450;
     height = 450;
-    speed = 16;
+    speed = 12;
+    energy = 100;
     world;
 
     offset = {
