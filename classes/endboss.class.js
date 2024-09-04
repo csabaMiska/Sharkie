@@ -1,9 +1,12 @@
 class EndBoss extends MovableObject {
     height = 640;
     width = 640;
-    x = 2800;
-    y = 100;
+    x = 2880;
+    y = 120;
     speed = 14;
+    energy = 100;
+    playInroduce = true;
+    endBossIsDead = false;
 
     offset = {
         top: 310,
@@ -12,6 +15,18 @@ class EndBoss extends MovableObject {
         right: 56
     }
 
+    IMAGES_INTRODUCE = [
+        'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/3.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/4.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/5.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/6.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/7.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/8.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
+        'img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
+    ];
     IMAGES_SWIMMING = [
         'img/2.Enemy/3 Final Enemy/2.floating/1.png',
         'img/2.Enemy/3 Final Enemy/2.floating/2.png',
@@ -27,16 +42,69 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/2.floating/12.png',
         'img/2.Enemy/3 Final Enemy/2.floating/13.png'
     ];
-    
+    IMAGES_DAMAGE = [
+        'img/2.Enemy/3 Final Enemy/Hurt/1.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        'img/2.Enemy/3 Final Enemy/Hurt/4.png'
+    ];
+    IMAGES_DEAD = [
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
+        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
+    ];
+
     constructor() {
-        super().loadImage('img/2.Enemy/3 Final Enemy/2.floating/1.png');
+        super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
+        this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_DAMAGE);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            this.playAnimation(this.IMAGES_SWIMMING);
+            this.playIntroduceAnimation();
+            this.playSwimmAnimation();
+            this.playDamageAnimation();
+            this.playDeadAnimation();
         }, 140)
+    }
+
+    playIntroduceAnimation() {
+        if (this.playInroduce) {
+            this.playAnimation(this.IMAGES_INTRODUCE);
+            setTimeout(() => {
+                this.playInroduce = false;   
+            }, 1000);
+        }
+    }
+
+    playSwimmAnimation() {
+        if (!this.endBossIsDead && !this.playInroduce) {
+            this.playAnimation(this.IMAGES_SWIMMING);   
+        }
+    }
+
+    playDamageAnimation() {
+        if (this.isPoisoned() && !this.endBossIsDead) {
+            this.playAnimation(this.IMAGES_DAMAGE);
+        }
+    }
+
+    playDeadAnimation() {
+        if (this.isDead() && !this.endBossIsDead) {
+            this.playAnimation(this.IMAGES_DEAD);
+            setTimeout(() => {
+                this.endBossIsDead = true;
+                this.loadImage('img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png');
+                setInterval(() => {
+                    this.y -= 1;
+                }, 1000 / 60)
+            }, 400)
+        }
     }
 }

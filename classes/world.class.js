@@ -12,6 +12,7 @@ class World {
     coinCounter = new CoinCounter();
     movableObject = new MovableObject();
     throwableObjects = [];
+    finalBattleStarted = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -41,6 +42,7 @@ class World {
             setInterval(() => {
                 this.checkBubbleAttack();
                 this.checkFinSlap();
+                this.createFinalBattle();
             }, 1000 / 60);
         }
     }
@@ -73,7 +75,7 @@ class World {
 
     collosionWithEndBoss() {
         this.level.endBoss.forEach((endBoss) => {
-            if (this.shark.isColliding(endBoss)) {
+            if (this.shark.isColliding(endBoss) && !endBoss.endBossIsDead) {
                 this.shark.hit();
                 this.statusBar.setPercentage(this.shark.energy);
             }
@@ -160,6 +162,14 @@ class World {
                 }
             });
 
+            this.level.endBoss.forEach((endBoss) => {
+                if (bubble.isColliding(endBoss) && !endBoss.endBossIsDead) {
+                    bubbleIsCollided = true;
+                    endBoss.hit();
+                    console.log("endboss getroffen" + endBoss.energy);
+                }
+            });
+
             if (bubbleIsCollided) {
                 this.movableObject.deleteObject(this.ctx, bubble);
                 return false;
@@ -183,6 +193,14 @@ class World {
     removeJellyFish(jellyFish) {
         this.level.jellyFishes = this.level.jellyFishes.filter(fish => fish !== jellyFish);
         this.movableObject.deleteObject(this.ctx, jellyFish);
+    }
+
+    createFinalBattle() {
+        if (!this.finalBattleStarted && this.shark.x >= this.level.final_battle_x) {
+            let finalEnemy = new EndBoss();
+            this.level.endBoss.push(finalEnemy);
+            this.finalBattleStarted = true;
+        }
     }
 
     draw() {
