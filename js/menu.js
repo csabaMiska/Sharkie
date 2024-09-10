@@ -3,6 +3,8 @@ let leaderBoard = document.getElementById('leaderBoard');
 let gameOptions = document.getElementById('gameOptions');
 let gameInstructions = document.getElementById('gameInstructions');
 let impressum = document.getElementById('impressum');
+let messageBox = document.getElementById('messageBox');
+let gameWinInputBox = document.getElementById('gameWinInputBox');
 
 function showGameOptions() {
     leaderBoard.classList.add('d-none');
@@ -42,4 +44,14 @@ function hideGameImpressum() {
 
 function hideStartMenu() {
     startMenu.classList.add('d-none');
+}
+
+function cancelGame() {
+    messageBox.classList.add('d-none');
+    startMenu.classList.remove('d-none');
+}
+
+function cancelSaveScore() {
+    gameWinInputBox.classList.add('d-none');
+    startMenu.classList.remove('d-none');
 }

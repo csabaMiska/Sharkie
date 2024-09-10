@@ -1,0 +1,133 @@
+.messageBox {
+    width: 890px;
+    height: 480px;
+    background-color: var(--message-box-bg-color);
+    position: absolute;
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.25);
+}
+
+.messageBoxContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.messageBoxHeadlineBox {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.messageBoxHeadline {
+    width: 500px;
+    height: 120px;
+}
+
+.messageBoxGameOverHeadline {
+    width: 528px;
+    height: 100px;
+    margin-top: 30px;
+    margin-bottom: 70px;
+}
+
+.messageBoxButtonsBox {
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.gameWin {
+    width: var(--game-window-width);
+    height: var(--game-window-height);
+    position: absolute;
+    margin-bottom: -55px;
+}
+
+.gameWinPicture {
+    width: var(--game-window-width);
+    height: var(--game-window-height);
+    border-radius: var(--border-radius);
+}
+
+.scale-in-center {
+    animation: scale-in-center 400ms ease-in-out forwards;
+}
+
+@keyframes scale-in-center {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.gameWinInputForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-top: -80px;
+}
+
+.gameWinInputBox {
+    font-family: var(--font-bowelby-one);
+    font-size: 48px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formInput {
+    height: 80px;
+    width: 156px;
+    font-family: var(--font-bowelby-one);
+    font-size: 48px;
+    color: var(--btn-bg-color);
+    border: none;
+    border-bottom: 3px white solid;
+    background-color: transparent;
+    text-align: center;
+}
+
+.formInput:focus {
+    background-color: transparent;
+    outline: none;
+}
+
+.gameWinFormButtonBox {
+    display: flex;
+    gap: 16px;
+}
+
+.messageBoxScore {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 80px;
+}
+
+.messageBoxCoin {
+    width: 80px;
+    height: 80px;
+}
+
+.messageBoxText {
+    font-family: var(--font-bowelby-one);
+    font-size: 48px;
+    color: white;
+}

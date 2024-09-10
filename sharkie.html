@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sharkie</title>
 
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/menu_style.css">
+    <link rel="stylesheet" href="style/message_box_style.css">
     <link rel="stylesheet" href="style/fonts.css">
     <link rel="icon" href="img/4. Marcadores/1. Coins/1.png">
 
@@ -171,6 +172,53 @@
                         </div>
                         <button class="options_btn btn_style" onclick="hideGameImpressum()">BACK</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="messageBox" class="messageBox scale-in-center d-none">
+            <div class="messageBoxContent">
+                <div class="messageBoxHeadlineBox">
+                    <img src="/img/6.Botones/Tittles/Game Over/Recurso 13.png" alt="messageBoxGameOverHeadline"
+                        class="messageBoxGameOverHeadline">
+                </div>
+                <div class="messageBoxScore">
+                    <img src="img/4. Marcadores/1. Coins/1.png" class="messageBoxCoin">
+                    <div class="messageBoxText">X</div>
+                    <div class="messageBoxText">300</div>
+                </div>
+                <div class="messageBoxButtonsBox">
+                    <button class="menu_btn btn_style" onclick="startGame()">TRY AGAIN</button>
+                    <button class="menu_btn btn_style" onclick="cancelGame()">CANCEL</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameWin" class="gameWin scale-in-center d-none">
+            <img src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png" class="gameWinPicture scale-in-center">
+        </div>
+
+        <div id="gameWinInputBox" class="messageBox scale-in-center d-none">
+            <div class="messageBoxContent">
+                <div class="messageBoxHeadlineBox">
+                    <img src="img/6.Botones/Tittles/You win/Recurso 20.png" class="messageBoxHeadline">
+                </div>
+                <div class="messageBoxScore">
+                    <img src="img/4. Marcadores/1. Coins/1.png" class="messageBoxCoin">
+                    <div class="messageBoxText">X</div>
+                    <div class="messageBoxText">300</div>
+                </div>
+                <div class="messageBoxButtonsBox">
+                    <form class="gameWinInputForm" onsubmit="return false">
+                        <div class="gameWinInputBox">
+                            <div>Enter Your Initials:</div>
+                            <input type="text" maxlength="3" class="formInput" name="initialsInput" style="text-transform:uppercase">
+                        </div>
+                        <div class="gameWinFormButtonBox">
+                            <button class="menu_btn btn_style">SAVE</button>
+                            <button class="menu_btn btn_style" onclick="cancelSaveScore()">CANCEL</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

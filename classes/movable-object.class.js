@@ -29,6 +29,10 @@ class MovableObject extends DrawableObject {
         this.x -= speed;
     }
 
+    swimmRight(speed) {
+        this.x += speed;
+    }
+
     swimmUpLeft(speed, speedY) {
         this.y -= speed;
         this.x -= speedY;
@@ -37,6 +41,16 @@ class MovableObject extends DrawableObject {
     swimmDownLeft(speed, speedY) {
         this.y += speed;
         this.x -= speedY;
+    }
+
+    swimmUpRight(speed, speedY) {
+        this.y -= speed;
+        this.x += speedY;
+    }
+
+    swimmDownRight(speed, speedY) {
+        this.y += speed;
+        this.x += speedY;
     }
 
     applyGravity() {

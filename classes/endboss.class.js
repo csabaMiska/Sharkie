@@ -3,13 +3,16 @@ class EndBoss extends MovableObject {
     width = 640;
     x = 2880;
     y = 120;
-    speed = 14;
+    speed = 2;
+    speedY = 2;
     energy = 100;
     playInroduce = true;
     endBossIsDead = false;
+    swimmingUp = true;
+    swimmingLeft = true;
 
     offset = {
-        top: 310,
+        top: 330,
         bottom: 140,
         left: 48,
         right: 56
@@ -27,7 +30,7 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
         'img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
     ];
-    IMAGES_SWIMMING = [
+    IMAGES_FLOATING = [
         'img/2.Enemy/3 Final Enemy/2.floating/1.png',
         'img/2.Enemy/3 Final Enemy/2.floating/2.png',
         'img/2.Enemy/3 Final Enemy/2.floating/3.png',
@@ -40,7 +43,13 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/2.floating/10.png',
         'img/2.Enemy/3 Final Enemy/2.floating/11.png',
         'img/2.Enemy/3 Final Enemy/2.floating/12.png',
-        'img/2.Enemy/3 Final Enemy/2.floating/13.png'
+        'img/2.Enemy/3 Final Enemy/2.floating/13.png',
+        'img/2.Enemy/3 Final Enemy/Attack/1.png',
+        'img/2.Enemy/3 Final Enemy/Attack/2.png',
+        'img/2.Enemy/3 Final Enemy/Attack/3.png',
+        'img/2.Enemy/3 Final Enemy/Attack/4.png',
+        'img/2.Enemy/3 Final Enemy/Attack/5.png',
+        'img/2.Enemy/3 Final Enemy/Attack/6.png'
     ];
     IMAGES_DAMAGE = [
         'img/2.Enemy/3 Final Enemy/Hurt/1.png',
@@ -58,11 +67,14 @@ class EndBoss extends MovableObject {
 
     constructor() {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
+        this.speed = 3 + Math.random() * 5;
+        this.speedY = 3 + Math.random() * 5;
         this.loadImages(this.IMAGES_INTRODUCE);
-        this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_FLOATING);
         this.loadImages(this.IMAGES_DAMAGE);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
+        this.attack();
     }
 
     animate() {
@@ -78,14 +90,14 @@ class EndBoss extends MovableObject {
         if (this.playInroduce) {
             this.playAnimation(this.IMAGES_INTRODUCE);
             setTimeout(() => {
-                this.playInroduce = false;   
+                this.playInroduce = false;
             }, 1000);
         }
     }
 
     playSwimmAnimation() {
         if (!this.endBossIsDead && !this.playInroduce) {
-            this.playAnimation(this.IMAGES_SWIMMING);   
+            this.playAnimation(this.IMAGES_FLOATING);
         }
     }
 
@@ -104,7 +116,77 @@ class EndBoss extends MovableObject {
                 setInterval(() => {
                     this.y -= 1;
                 }, 1000 / 60)
-            }, 400)
+            }, 500)
         }
+    }
+
+    attack() {
+        setTimeout(() => {
+            setInterval(() => {
+                if (!this.endBossIsDead) {
+                    this.moves();
+                }
+            }, 1000 / 60);
+        }, 1000);
+    }
+
+    moves() {
+        if (this.swimmingLeft) {
+            this.swimmLeft(this.speed);
+            this.otherDirection = false;
+            if (this.x <= 1620) {
+                this.swimmingLeft = false;
+            }
+        } else {
+            this.swimmRight(this.speed);
+            this.otherDirection = true;
+            if (this.x >= 2900) {
+                this.swimmingLeft = true;
+            }
+        }
+
+
+        if (this.swimmingUp && this.swimmingLeft) {
+            this.swimmUpLeft(this.speed, this.speedY);
+            if (this.y <= -100) {
+                this.swimmingUp = false;
+            }
+            if (this.x <= 1620) {
+                this.swimmingLeft = false;
+            }
+        }
+
+
+        if (this.swimmingUp && !this.swimmingLeft) {
+            this.swimmUpRight(this.speed, this.speedY);
+            if (this.y <= -100) {
+                this.swimmingUp = false;
+            }
+            if (this.x >= 2900) {
+                this.swimmingLeft = true;
+            }
+        }
+
+
+        if (!this.swimmingUp && this.swimmingLeft) {
+            this.swimmDownLeft(this.speed, this.speedY);
+            if (this.y >= 600) {
+                this.swimmingUp = true;
+            }
+            if (this.x <= 1620) {
+                this.swimmingLeft = false;
+            }
+        }
+
+        if (!this.swimmingUp && !this.swimmingLeft) {
+            this.swimmDownRight(this.speed, this.speedY);
+            if (this.y >= 600) {
+                this.swimmingUp = true;
+            }
+            if (this.x >= 2900) {
+                this.swimmingLeft = true;
+            }
+        }
+
     }
 }

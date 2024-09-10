@@ -10,6 +10,7 @@
     --font-bowelby-one: 'Bowlby One';
     --font-satisfy: 'Satisfy';
     --headline-font-color: rgb(254, 222, 87);
+    --message-box-bg-color: rgb(74,68,174);
 }
 
 body {
