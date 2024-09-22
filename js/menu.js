@@ -3,8 +3,9 @@ let leaderBoard = document.getElementById('leaderBoard');
 let gameOptions = document.getElementById('gameOptions');
 let gameInstructions = document.getElementById('gameInstructions');
 let impressum = document.getElementById('impressum');
-let messageBox = document.getElementById('messageBox');
-let gameWinInputBox = document.getElementById('gameWinInputBox');
+let gameOverBox = document.getElementById('gameOverBox');
+let scoreInputBox = document.getElementById('scoreInputBox');
+let gameMenuBox = document.getElementById('gameMenuBox');
 
 function showGameOptions() {
     leaderBoard.classList.add('d-none');
@@ -47,11 +48,16 @@ function hideStartMenu() {
 }
 
 function cancelGame() {
-    messageBox.classList.add('d-none');
-    startMenu.classList.remove('d-none');
+    gameOverBox.classList.add('d-none');
+    scoreInputBox.classList.remove('d-none');
 }
 
 function cancelSaveScore() {
-    gameWinInputBox.classList.add('d-none');
+    scoreInputBox.classList.add('d-none');
+    startMenu.classList.remove('d-none');
+}
+
+function giveUpGame() {
+    gameMenuBox.classList.add('d-none');
     startMenu.classList.remove('d-none');
 }

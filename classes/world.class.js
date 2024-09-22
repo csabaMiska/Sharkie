@@ -135,12 +135,14 @@ class World {
 
     checkThrowableObjects() {
         if (this.keyboard.D && this.poisonCounter.poisonsNumber > 0) {
-            if (!this.shark.otherDirection) {
-                let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
-                this.createBubble(bubble);
-            } else {
-                let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y + 240, this.shark.otherDirection);
-                this.createBubble(bubble);
+            if (!this.shark.characterIsDead) {
+                if (!this.shark.otherDirection) {
+                    let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
+                    this.createBubble(bubble);
+                } else {
+                    let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y + 240, this.shark.otherDirection);
+                    this.createBubble(bubble);
+                }
             }
         }
     }

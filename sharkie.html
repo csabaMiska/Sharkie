@@ -37,6 +37,7 @@
     <main>
         <div class="headline headline_style">Sharkie</div>
         <canvas id="canvas" width="1920px" height="1080px"></canvas>
+
         <div id="startMenu" class="start_menu position_center">
             <div id="firstRow" class="first_row position_center">
                 <nav>
@@ -176,18 +177,17 @@
             </div>
         </div>
 
-        <div id="messageBox" class="messageBox scale-in-center d-none">
+        <div id="gameOverBox" class="messageBox scale-in-center d-none">
             <div class="messageBoxContent">
-                <div class="messageBoxHeadlineBox">
-                    <img src="/img/6.Botones/Tittles/Game Over/Recurso 13.png" alt="messageBoxGameOverHeadline"
-                        class="messageBoxGameOverHeadline">
+                <div class="messageBoxHeadlineContainer">
+                    <div class="messageBoxHeadline">Game Over</div>
                 </div>
-                <div class="messageBoxScore">
-                    <img src="img/4. Marcadores/1. Coins/1.png" class="messageBoxCoin">
-                    <div class="messageBoxText">X</div>
-                    <div class="messageBoxText">300</div>
+                <div class="messageBoxContentContainer">
+                    <div class="messageBoxPicureContainer">
+                        <img src="img/1.Sharkie/6.dead/1.Poisoned/12.png" class="gameOverPicture">
+                    </div>
                 </div>
-                <div class="messageBoxButtonsBox">
+                <div class="messageBoxButtonsContainer">
                     <button class="menu_btn btn_style" onclick="startGame()">TRY AGAIN</button>
                     <button class="menu_btn btn_style" onclick="cancelGame()">CANCEL</button>
                 </div>
@@ -198,27 +198,47 @@
             <img src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png" class="gameWinPicture scale-in-center">
         </div>
 
-        <div id="gameWinInputBox" class="messageBox scale-in-center d-none">
+        <div id="scoreInputBox" class="messageBox scale-in-center d-none">
             <div class="messageBoxContent">
-                <div class="messageBoxHeadlineBox">
-                    <img src="img/6.Botones/Tittles/You win/Recurso 20.png" class="messageBoxHeadline">
+                <div class="messageBoxHeadlineContainer">
+                    <div class="messageBoxHeadline">Score Save</div>
                 </div>
-                <div class="messageBoxScore">
-                    <img src="img/4. Marcadores/1. Coins/1.png" class="messageBoxCoin">
-                    <div class="messageBoxText">X</div>
-                    <div class="messageBoxText">300</div>
+                <div class="messageBoxContentContainer">
+                    <div class="messageBoxCoinContainer">
+                        <img src="img/4. Marcadores/1. Coins/1.png" class="messageBoxCoin">
+                        <div class="messageBoxText">X</div>
+                        <div class="messageBoxText">300</div>
+                    </div>
                 </div>
-                <div class="messageBoxButtonsBox">
-                    <form class="gameWinInputForm" onsubmit="return false">
-                        <div class="gameWinInputBox">
+                <div class="messageBoxFormContainer">
+                    <form class="scoreInputForm" onsubmit="return false">
+                        <div class="scoreInputBox">
                             <div>Enter Your Initials:</div>
-                            <input type="text" maxlength="3" class="formInput" name="initialsInput" style="text-transform:uppercase">
+                            <input type="text" maxlength="3" class="formInput" name="initialsInput"
+                                style="text-transform:uppercase">
                         </div>
-                        <div class="gameWinFormButtonBox">
+                        <div class="messageBoxButtonsContainer">
                             <button class="menu_btn btn_style">SAVE</button>
                             <button class="menu_btn btn_style" onclick="cancelSaveScore()">CANCEL</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="gameMenuBox" class="messageBox scale-in-center d-none">
+            <div class="messageBoxContent">
+                <div class="messageBoxHeadlineContainer">
+                    <div class="messageBoxHeadline">Resume Game</div>
+                </div>
+                <div class="messageBoxContentContainer">
+                    <div class="messageBoxPicureContainer">
+                        <img src="img/1.Sharkie/1.IDLE/Prewiew.gif" class="resumeGamePicture">
+                    </div>
+                </div>
+                <div class="messageBoxButtonsContainer">
+                    <button class="menu_btn btn_style" >RESUME</button>
+                    <button class="menu_btn btn_style" onclick="giveUpGame()">GIVE UP</button>
                 </div>
             </div>
         </div>
