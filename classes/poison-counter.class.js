@@ -1,5 +1,5 @@
 class PoisonCounter extends DrawableObject {
-    poisonsNumber = 100;
+    poisonsNumber = 0;
 
     constructor() {
         super();
@@ -7,5 +7,9 @@ class PoisonCounter extends DrawableObject {
 
     collectPoison() {
         this.poisonsNumber += 1;
+    }
+
+    reset() {
+        this.poisonsNumber = 0;
     }
 }

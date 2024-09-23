@@ -23,22 +23,6 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    drawFrame(ctx) {
-        if (this instanceof ThrowableObject || this instanceof Shark || this instanceof EndBoss) {
-            ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'white';
-      
-            const frameX = this.x + this.offset.left;
-            const frameY = this.y + this.offset.top;
-            const frameWidth = this.width - this.offset.left - this.offset.right;
-            const frameHeight = this.height - this.offset.top - this.offset.bottom;
-
-            ctx.rect(frameX, frameY, frameWidth, frameHeight);
-            ctx.stroke();
-        }
-    }
-
     deleteObject(ctx, object) {
         ctx.clearRect(object.x, object.y, object.width, object.height);
     }

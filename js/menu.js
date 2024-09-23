@@ -6,6 +6,7 @@ let impressum = document.getElementById('impressum');
 let gameOverBox = document.getElementById('gameOverBox');
 let scoreInputBox = document.getElementById('scoreInputBox');
 let gameMenuBox = document.getElementById('gameMenuBox');
+let gameWinScreen = document.getElementById('gameWinScreen');
 
 function showGameOptions() {
     leaderBoard.classList.add('d-none');
@@ -60,4 +61,22 @@ function cancelSaveScore() {
 function giveUpGame() {
     gameMenuBox.classList.add('d-none');
     startMenu.classList.remove('d-none');
+}
+
+let gameMenu = false;
+
+function showGameMenü() {
+    if (keyboard.ESC && !gameMenu) {
+        pauseGame();
+        keyboard.ESC = false;
+        gameMenu = true;
+        gameMenuBox.classList.remove('d-none');
+    } 
+
+    if (keyboard.ESC && gameMenu) {
+        resumeGame();
+        keyboard.ESC = false;
+        gameMenu = false;
+        gameMenuBox.classList.add('d-none');
+    }
 }

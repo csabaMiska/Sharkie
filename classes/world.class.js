@@ -13,15 +13,15 @@ class World {
     movableObject = new MovableObject();
     throwableObjects = [];
     finalBattleStarted = false;
+    state;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.draw();
         this.setWorld();
         this.swimming();
-        this.attack()
+        this.attack();
     }
 
     setWorld() {
@@ -134,7 +134,7 @@ class World {
 
 
     checkThrowableObjects() {
-        if (this.keyboard.D && this.poisonCounter.poisonsNumber > 0) {
+        if (this.keyboard.D && this.poisonCounter.poisonsNumber > 0 && this.state === 'RUNNING') {
             if (!this.shark.characterIsDead) {
                 if (!this.shark.otherDirection) {
                     let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
@@ -168,7 +168,6 @@ class World {
                 if (bubble.isColliding(endBoss) && !endBoss.endBossIsDead) {
                     bubbleIsCollided = true;
                     endBoss.hit();
-                    console.log("endboss getroffen" + endBoss.energy);
                 }
             });
 
@@ -206,6 +205,8 @@ class World {
     }
 
     draw() {
+        if (this.state !== 'RUNNING') return;
+    
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -251,7 +252,6 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

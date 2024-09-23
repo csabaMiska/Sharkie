@@ -188,13 +188,13 @@
                     </div>
                 </div>
                 <div class="messageBoxButtonsContainer">
-                    <button class="menu_btn btn_style" onclick="startGame()">TRY AGAIN</button>
+                    <button id="restartGameBtn" class="menu_btn btn_style">TRY AGAIN</button>
                     <button class="menu_btn btn_style" onclick="cancelGame()">CANCEL</button>
                 </div>
             </div>
         </div>
 
-        <div id="gameWin" class="gameWin scale-in-center d-none">
+        <div id="gameWinScreen" class="gameWin scale-in-center d-none">
             <img src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png" class="gameWinPicture scale-in-center">
         </div>
 
@@ -237,7 +237,7 @@
                     </div>
                 </div>
                 <div class="messageBoxButtonsContainer">
-                    <button class="menu_btn btn_style" >RESUME</button>
+                    <button id="resumeBtn" class="menu_btn btn_style">RESUME</button>
                     <button class="menu_btn btn_style" onclick="giveUpGame()">GIVE UP</button>
                 </div>
             </div>

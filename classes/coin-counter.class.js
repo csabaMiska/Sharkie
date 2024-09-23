@@ -8,4 +8,8 @@ class CoinCounter extends DrawableObject {
     collectCoins() {
         this.coinsNumber += 1;
     }
+
+    reset() {
+        this.coinsNumber = 0;
+    }
 }

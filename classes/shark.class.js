@@ -130,7 +130,6 @@ class Shark extends MovableObject {
         this.loadImages(this.IMAGES_POISONED);
         this.loadImages(this.IMAGES_ELEKTRO_SHOCK);
         this.animate();
-        this.checkGameEnd();
     }
 
     animate() {
@@ -157,34 +156,28 @@ class Shark extends MovableObject {
         }, 80)
     }
 
-    checkGameEnd() {
-        let id = setInterval(() => {
-            this.showGameOver(id);
-        }, 1000 / 60);
-    }
-
     moveRight() {
-        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x && !this.characterIsDead) {
+        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x && !this.characterIsDead && this.world.state === 'RUNNING') {
             this.x += this.speed;
             this.otherDirection = false;
         }
     }
 
     moveLeft() {
-        if (this.world.keyboard.LEFT && this.x > 0 && !this.characterIsDead) {
+        if (this.world.keyboard.LEFT && this.x > 0 && !this.characterIsDead && this.world.state === 'RUNNING') {
             this.x -= this.speed;
             this.otherDirection = true;
         }
     }
 
     moveUp() {
-        if (this.world.keyboard.UP && this.y > -100 && !this.characterIsDead) {
+        if (this.world.keyboard.UP && this.y > -100 && !this.characterIsDead && this.world.state === 'RUNNING') {
             this.y -= this.speed;
         }
     }
 
     moveDown() {
-        if (this.world.keyboard.DOWN && this.y < 720 && !this.characterIsDead) {
+        if (this.world.keyboard.DOWN && this.y < 720 && !this.characterIsDead && this.world.state === 'RUNNING') {
             this.y += this.speed;
         }
     }
@@ -256,13 +249,6 @@ class Shark extends MovableObject {
                 this.loadImage('img/1.Sharkie/6.dead/2.Electro_shock/10.png');
                 this.applyGravity();
             }, 380)
-        }
-    }
-
-    showGameOver(id) {
-        if (this.energy <= 0) {
-            this.gameOverBox.classList.remove('d-none');
-            clearInterval(id);
         }
     }
 }
