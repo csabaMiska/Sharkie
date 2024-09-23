@@ -95,8 +95,10 @@
 .gameWin {
     width: var(--game-window-width);
     height: var(--game-window-height);
+    border-radius: var(--border-radius);
     position: absolute;
     margin-bottom: -55px;
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .gameWinPicture {
