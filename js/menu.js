@@ -7,6 +7,7 @@ let gameOverBox = document.getElementById('gameOverBox');
 let scoreInputBox = document.getElementById('scoreInputBox');
 let gameMenuBox = document.getElementById('gameMenuBox');
 let gameWinScreen = document.getElementById('gameWinScreen');
+let playerScore = document.getElementById('playerScore');
 
 function showGameOptions() {
     leaderBoard.classList.add('d-none');
@@ -48,24 +49,45 @@ function hideStartMenu() {
     startMenu.classList.add('d-none');
 }
 
+function showGameOver() {
+    gameOverBox.classList.remove('d-none');
+}
+
 function cancelGame() {
     gameOverBox.classList.add('d-none');
+    showInputBox();
+}
+
+function showGameWin() {
+    gameWinScreen.classList.remove('d-none'); 
+    setTimeout(() => {
+        showInputBox();
+    }, 3000);
+}
+
+function hideGameWin() {
+    gameWinScreen.classList.add('d-none'); 
+}
+
+function showInputBox() {
+    showPlayerScore();
     scoreInputBox.classList.remove('d-none');
 }
 
 function cancelSaveScore() {
     scoreInputBox.classList.add('d-none');
     startMenu.classList.remove('d-none');
+    hideGameWin();
 }
 
-function giveUpGame() {
+function hideGameMenu() {
     gameMenuBox.classList.add('d-none');
     startMenu.classList.remove('d-none');
 }
 
 let gameMenu = false;
 
-function showGameMenü() {
+function showGameMenu() {
     if (keyboard.ESC && !gameMenu) {
         pauseGame();
         keyboard.ESC = false;

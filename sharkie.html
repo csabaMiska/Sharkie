@@ -7,7 +7,9 @@
     <title>Sharkie</title>
 
     <link rel="stylesheet" href="style/menu_style.css">
+    <link rel="stylesheet" href="style/menu_style_responsive.css">
     <link rel="stylesheet" href="style/message_box_style.css">
+    <link rel="stylesheet" href="style/message_box_style_responsive.css">
     <link rel="stylesheet" href="style/fonts.css">
     <link rel="icon" href="img/4. Marcadores/1. Coins/1.png">
 
@@ -34,14 +36,13 @@
 </head>
 
 <body onload="init()">
-    <main>
-        <div class="headline headline_style">Sharkie</div>
+    <main id="main">
         <canvas id="canvas" width="1920px" height="1080px"></canvas>
 
         <div id="startMenu" class="start_menu position_center">
             <div id="firstRow" class="first_row position_center">
                 <nav>
-                    <div class="row_headline headline_style">Menu</div>
+                    <div class="headline headline_style">Sharkie</div>
                     <button class="menu_btn btn_style" onclick="startGame()">START</button>
                     <button class="menu_btn btn_style" onclick="showGameOptions()">OPTIONS</button>
                     <button class="menu_btn btn_style" onclick="showGameInstructions()">INSTRUCTIONS</button>
@@ -65,8 +66,106 @@
                                         <div class="total_pt leader_board_place_text_style">pt.</div>
                                     </div>
                                 </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">2.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">3.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">4.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">5.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">6.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">7.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">8.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">9.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
+
+                                <div class="leader_board_place">
+                                    <div class="leader_board_place_player_row">
+                                        <div class="place_number leader_board_place_text_style">10.</div>
+                                        <div class="player_id leader_board_place_text_style">MCS</div>
+                                    </div>
+                                    <div class="leader_board_place_score_row">
+                                        <div class="score leader_board_place_text_style">1235</div>
+                                        <div class="total_pt leader_board_place_text_style">pt.</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="leader_board_row"></div>
                         </div>
                     </div>
 
@@ -95,7 +194,7 @@
                                     <input type="radio" name="screen" id="window" checked>
                                     <label for="window" class="total_pt leader_board_place_text_style">OFF</label>
                                 </div>
-                                <button class="options_btn btn_style">SAVE</button>
+                                <button class="options_btn btn_style" onclick="saveSettings()">SAVE</button>
                                 <button class="options_btn btn_style" onclick="hideGameOptions()">CANCEL</button>
                             </form>
                         </div>
@@ -156,68 +255,73 @@
                     <div id="impressum" class="board game_options d-none">
                         <div class="row_headline headline_style">Impressum</div>
                         <div class="impressum_content">
-                            <p>Angaben gemäß § 5 TMG</p>
-                            <p>Csaba Miska <br>
-                                Wieselweg 9C<br>
-                                55442 Stromberg <br>
-                            </p>
-                            <p>Vertreten durch:<br>
-                                Csaba Miska<br>
-                            </p>
-                            <p>Kontakt:<br>
-                                Telefon: +49-15204171284<br>
-                                E-Mail: <a href='mailto:miskacs90@gmail.com'>miskacs90@gmail.com</a></p>
-                            Impressum vom <a href="https://www.impressum-generator.de">Impressum Generator</a><br> der
-                            <a href="https://www.kanzlei-hasselbach.de/standorte/frankfurt/" rel="nofollow">Kanzlei
-                                Hasselbach, Frankfurt</a>
+                            <div class="impressum">
+                                <p>Angaben gemäß § 5 TMG</p>
+                                <p>Csaba Miska <br>
+                                    Wieselweg 9C<br>
+                                    55442 Stromberg <br>
+                                </p>
+                                <p>Vertreten durch:<br>
+                                    Csaba Miska<br>
+                                </p>
+                                <p>Kontakt:<br>
+                                    Telefon: +49-15204171284<br>
+                                    E-Mail: <a href='mailto:miskacs90@gmail.com'>miskacs90@gmail.com</a></p>
+                                Impressum vom <a href="https://www.impressum-generator.de">Impressum Generator</a><br>
+                                der
+                                <a href="https://www.kanzlei-hasselbach.de/standorte/frankfurt/" rel="nofollow">Kanzlei
+                                    Hasselbach, Frankfurt</a>
+                            </div>
+                            <div class="impressum_button">
+                                <button class="options_btn btn_style" onclick="hideGameImpressum()">BACK</button>
+                            </div>
                         </div>
-                        <button class="options_btn btn_style" onclick="hideGameImpressum()">BACK</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="gameOverBox" class="messageBox scale-in-center d-none">
-            <div class="messageBoxContent">
-                <div class="messageBoxHeadlineContainer">
-                    <div class="messageBoxHeadline">Game Over</div>
+        <div id="gameOverBox" class="message_Box scale-in-center d-none">
+            <div class="message_Box_Content">
+                <div class="message_Box_Headline_Container">
+                    <div class="message_Box_Headline">Game Over</div>
                 </div>
-                <div class="messageBoxContentContainer">
-                    <div class="messageBoxPicureContainer">
-                        <img src="img/1.Sharkie/6.dead/1.Poisoned/12.png" class="gameOverPicture">
+                <div class="message_Box_Content_Container">
+                    <div class="message_Box_Picure_Container">
+                        <img src="img/1.Sharkie/6.dead/1.Poisoned/12.png" class="game_Over_Picture">
                     </div>
                 </div>
-                <div class="messageBoxButtonsContainer">
+                <div class="message_Box_Buttons_Container">
                     <button id="restartGameBtn" class="menu_btn btn_style">TRY AGAIN</button>
                     <button class="menu_btn btn_style" onclick="cancelGame()">CANCEL</button>
                 </div>
             </div>
         </div>
 
-        <div id="gameWinScreen" class="gameWin scale-in-center">
-            <img src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png" class="gameWinPicture scale-in-center">
+        <div id="gameWinScreen" class="game_Win scale-in-center d-none">
+            <img src="img/6.Botones/Tittles/You win/Mesa de trabajo 1.png" class="game_Win_Picture scale-in-center">
         </div>
 
-        <div id="scoreInputBox" class="messageBox scale-in-center d-none">
-            <div class="messageBoxContent">
-                <div class="messageBoxHeadlineContainer">
-                    <div class="messageBoxHeadline">Score Save</div>
+        <div id="scoreInputBox" class="message_Box scale-in-center d-none">
+            <div class="message_Box_Content">
+                <div class="message_Box_Headline_Container">
+                    <div class="message_Box_Headline">Score Save</div>
                 </div>
-                <div class="messageBoxContentContainer">
-                    <div class="messageBoxCoinContainer">
-                        <img src="img/4. Marcadores/1. Coins/1.png" class="messageBoxCoin">
-                        <div class="messageBoxText">X</div>
-                        <div class="messageBoxText">300</div>
+                <div class="message_Box_Content_Container">
+                    <div class="message_Box_Coin_Container">
+                        <img src="img/4. Marcadores/1. Coins/1.png" class="message_Box_Coin">
+                        <div class="message_Box_Text">X</div>
+                        <div id="playerScore" class="message_Box_Text"></div>
                     </div>
                 </div>
-                <div class="messageBoxFormContainer">
-                    <form class="scoreInputForm" onsubmit="return false">
-                        <div class="scoreInputBox">
+                <div class="message_Box_Form_Container">
+                    <form class="score_Input_Form" onsubmit="return false">
+                        <div class="score_Input_Box">
                             <div>Enter Your Initials:</div>
-                            <input type="text" maxlength="3" class="formInput" name="initialsInput"
+                            <input type="text" maxlength="3" class="form_Input" name="initialsInput"
                                 style="text-transform:uppercase">
                         </div>
-                        <div class="messageBoxButtonsContainer">
+                        <div class="message_Box_Buttons_Container">
                             <button class="menu_btn btn_style">SAVE</button>
                             <button class="menu_btn btn_style" onclick="cancelSaveScore()">CANCEL</button>
                         </div>
@@ -226,17 +330,17 @@
             </div>
         </div>
 
-        <div id="gameMenuBox" class="messageBox scale-in-center d-none">
-            <div class="messageBoxContent">
-                <div class="messageBoxHeadlineContainer">
-                    <div class="messageBoxHeadline">Resume Game</div>
+        <div id="gameMenuBox" class="message_Box scale-in-center d-none">
+            <div class="message_Box_Content">
+                <div class="message_Box_Headline_Container">
+                    <div class="message_Box_Headline">Resume Game</div>
                 </div>
-                <div class="messageBoxContentContainer">
-                    <div class="messageBoxPicureContainer">
-                        <img src="img/1.Sharkie/1.IDLE/Prewiew.gif" class="resumeGamePicture">
+                <div class="message_Box_Content_Container">
+                    <div class="message_Box_Picure_Container">
+                        <img src="img/1.Sharkie/1.IDLE/Prewiew.gif" class="resume_Game_Picture">
                     </div>
                 </div>
-                <div class="messageBoxButtonsContainer">
+                <div class="message_Box_Buttons_Container">
                     <button id="resumeBtn" class="menu_btn btn_style">RESUME</button>
                     <button class="menu_btn btn_style" onclick="giveUpGame()">GIVE UP</button>
                 </div>

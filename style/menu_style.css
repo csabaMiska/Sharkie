@@ -10,7 +10,7 @@
     --font-bowelby-one: 'Bowlby One';
     --font-satisfy: 'Satisfy';
     --headline-font-color: rgb(254, 222, 87);
-    --message-box-bg-color: rgb(74,68,174);
+    --message-box-bg-color: rgb(74, 68, 174);
 }
 
 body {
@@ -44,11 +44,12 @@ main {
 .headline {
     font-size: 80px;
     font-weight: bold;
-    margin-bottom: -60px;
-    z-index: 3;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 
 canvas {
+    display: block;
     margin: 16px;
     background-color: black;
     border-radius: var(--border-radius);
@@ -59,10 +60,10 @@ canvas {
     width: var(--game-window-width);
     height: var(--game-window-height);
     position: absolute;
-    margin-bottom: -55px;
+    display: block;
     border-radius: var(--border-radius);
     background-image: url('../img/3. Background/Legacy/Dark/1.png');
-    background-size: contain;
+    background-size: cover;
 }
 
 .position_center {
@@ -147,17 +148,18 @@ nav {
 }
 
 .leader_board_row {
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
+    flex-wrap: wrap;
+    align-items: center;
     gap: 16px;
 }
 
 .leader_board_place {
-    width: 100%;
-    height: 20%;
+    width: 45%;
+    height: 17%;
     display: flex;
     justify-content: space-between;
     align-items: start;
@@ -169,7 +171,7 @@ nav {
 }
 
 .leader_board_place_score_row {
-    width: 60%;
+    width: 50%;
     display: flex;
     justify-content: end;
 }
@@ -210,19 +212,24 @@ nav {
 
 .game_options_content {
     width: 100%;
+    height: 100%;
+}
+
+form {
+    height: 100%;
 }
 
 .game_option {
     display: flex;
-    align-items: center;
-    margin-bottom: 170px;
+    align-items: start;
+    height: 30%;
 }
 
 .game_option_text {
     font-size: 40px;
     font-family: var(--font-bowelby-one);
-    margin-right: 120px;
-    width: 450px;
+    margin-right: 100px;
+    width: 470px;
 }
 
 input[type="radio"] {
@@ -230,7 +237,6 @@ input[type="radio"] {
     height: 30px;
     margin-right: 24px;
     margin-left: 24px;
-    
 }
 
 input[type="radio"]:hover {
@@ -318,8 +324,22 @@ input[type="radio"]:hover {
     color: white;
     font-size: 24px;
     font-family: var(--font-bowelby-one);
-    margin-bottom: 156px;
+    height: 100%;
+    width: 100%;
     letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.impressum {
+    height: 80%;
+}
+
+.impressum_button {
+    display: flex;
+    align-items: end;
+    height: 20%;
 }
 
 .impressum_content a {

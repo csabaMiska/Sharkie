@@ -1,0 +1,153 @@
+@media only screen and (max-height: 1080px) {
+    .game_Win {
+       height: 100vh;
+       border-radius: unset;
+   }
+
+   .game_Win_Picture {
+       border-radius: unset;
+   }
+}
+
+@media only screen and (max-width: 1920px) {
+   .game_Win {
+       width: 100%;
+       border-radius: unset;
+   }
+
+   .game_Win_Picture {
+       border-radius: unset;
+   }
+}
+
+@media (max-width: 1400px) {
+   .message_Box {
+       width: 750px;
+       height: 404.25px;
+   }
+
+   .message_Box_Headline_Container {
+       height: 124.25px;
+   }
+   
+   .message_Box_Headline {
+       font-size: 60px;
+   }
+
+   .message_Box_Coin {
+       width: 60px;
+       height: 60px;
+   }
+
+   .message_Box_Text {
+       font-size: 36px;
+   }
+
+   .score_Input_Box {
+       font-size: 36px;
+   }
+
+   .form_Input {
+       width: 132px;
+       font-size: 36px;
+   }
+
+   .resume_Game_Picture {
+       height: 280px;
+   }
+}
+
+@media (max-width: 1150px) {
+   .message_Box {
+       width: 600px;
+       height: 323px;
+   }
+
+   .message_Box_Headline_Container {
+       height: 93px;
+   }
+   
+   .message_Box_Headline {
+       font-size: 48px;
+   }
+
+   .message_Box_Coin_Container {
+       height: 60px;
+   }
+
+   .message_Box_Coin {
+       width: 48px;
+       height: 48px;
+   }
+
+   .message_Box_Text {
+       font-size: 32px;
+   }
+
+   .score_Input_Box {
+       font-size: 32px;
+   }
+
+   .form_Input {
+       height: 60px;
+       font-size: 32px;
+   }
+   
+   .message_Box_Picure_Container {
+       width: 100%;
+       height: 120px;
+   }
+
+   .resume_Game_Picture {
+       height: 220px;
+       margin-bottom: -48px;
+   }
+
+   .game_Over_Picture {
+       width: 380px;
+       height: 380px;
+   }
+}
+
+@media (max-width: 900px) {
+   .message_Box {
+       width: 520px;
+       height: 280px;
+   }
+
+   .message_Box_Headline_Container {
+       height: 80px;
+   }
+   
+   .message_Box_Headline {
+       font-size: 36px;
+   }
+
+   .message_Box_Text {
+       font-size: 28px;
+   }
+
+   .score_Input_Box {
+       font-size: 28px;
+   }
+
+   .form_Input {
+       height: 48px;
+       font-size: 28px;
+   }
+   
+   .message_Box_Picure_Container {
+       width: 100%;
+       height: 120px;
+   }
+
+   .resume_Game_Picture {
+       height: 200px;
+       margin-bottom: -48px;
+   }
+
+   .game_Over_Picture {
+       width: 320px;
+       height: 320px;
+   }
+}

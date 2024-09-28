@@ -1,4 +1,4 @@
-.messageBox {
+.message_Box {
     width: 890px;
     height: 480px;
     background-color: var(--message-box-bg-color);
@@ -7,7 +7,7 @@
     box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.25);
 }
 
-.messageBoxContent {
+.message_Box_Content {
     width: 100%;
     height: 100%;
     display: flex;
@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-.messageBoxHeadlineContainer{
+.message_Box_Headline_Container{
     width: 100%;
     height: 200px;
     display: flex;
@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-.messageBoxHeadline {
+.message_Box_Headline {
     font-size: 80px;
     font-family: var(--font-bowelby-one);
     color: white;
@@ -32,14 +32,14 @@
     margin-block-end: 0;
 }
 
-.messageBoxContentContainer {
+.message_Box_Content_Container {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: start;
 }
 
-.messageBoxCoinContainer {
+.message_Box_Coin_Container {
     width: 100%;
     height: 80px;
     display: flex;
@@ -48,7 +48,7 @@
     gap: 24px;
 }
 
-.messageBoxPicureContainer {
+.message_Box_Picure_Container {
     width: 100%;
     height: 180px;
     display: flex;
@@ -56,12 +56,12 @@
     align-items: center;
 }
 
-.messageBoxFormContainer {
+.message_Box_Form_Container {
     width: 100%;
     height: 200px;
 }
 
-.messageBoxButtonsContainer {
+.message_Box_Buttons_Container {
     width: 100%;
     height: 100px;
     gap: 16px;
@@ -70,52 +70,54 @@
     align-items: center;
 }
 
-.gameOverPicture {
+.game_Over_Picture {
     width: 500px;
     height: 500px;
 }
 
-.messageBoxCoin {
+.message_Box_Coin {
     width: 80px;
     height: 80px;
 }
 
-.resumeGamePicture {
+.resume_Game_Picture {
     margin-top: -80px;
    height: 300px;
 }
 
-.messageBoxText {
+.message_Box_Text {
     font-family: var(--font-bowelby-one);
     font-size: 48px;
     color: white;
 }
 
 
-.gameWin {
+.game_Win {
     width: var(--game-window-width);
     height: var(--game-window-height);
     border-radius: var(--border-radius);
     position: absolute;
-    margin-bottom: -55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: rgba(0, 0, 0, 0.6);
 }
 
-.gameWinPicture {
-    width: var(--game-window-width);
-    height: var(--game-window-height);
+.game_Win_Picture {
+    width: 100%;
+    height: 100%;
+    display: block;
     border-radius: var(--border-radius);
 }
 
-
-.scoreInputForm {
+.score_Input_Form {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
 }
 
-.scoreInputBox {
+.score_Input_Box {
     font-family: var(--font-bowelby-one);
     font-size: 48px;
     color: white;
@@ -124,7 +126,7 @@
     align-items: center;
 }
 
-.formInput {
+.form_Input {
     height: 80px;
     width: 156px;
     font-family: var(--font-bowelby-one);
@@ -136,7 +138,7 @@
     text-align: center;
 }
 
-.formInput:focus {
+.form_Input:focus {
     background-color: transparent;
     outline: none;
 }

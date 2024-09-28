@@ -51,21 +51,22 @@ window.addEventListener('keyup', (e) => {
     }
 });
 
-function checkGameState() {
-    let gameStateInterval = setInterval(() => {
-        gameOver(gameStateInterval);
-        gameWin(gameStateInterval);
-        showGameMenü();
-    }, 1000 / 60);
-}
-
 function startGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
     world.state = 'RUNNING';
+    resetGame();
     world.draw();
     hideStartMenu();
     checkGameState()
+}
+
+function checkGameState() {
+    let gameStateInterval = setInterval(() => {
+        gameOver(gameStateInterval);
+        gameWin(gameStateInterval);
+        showGameMenu();
+    }, 1000 / 60);
 }
 
 function gameOver(gameStateInterval) {
@@ -73,21 +74,18 @@ function gameOver(gameStateInterval) {
         clearInterval(gameStateInterval);
         setTimeout(() => {
             world.state = 'GAME_OVER';
-            console.log(world.state);
-            gameOverBox.classList.remove('d-none');
+            showGameOver();
         }, 2000);
     }
 }
 
 function gameWin(gameStateInterval) {
     let endBoss = world.level.endBoss[0];
-
     if (endBoss && endBoss.energy <= 0) {
         clearInterval(gameStateInterval);
         setTimeout(() => {
             world.state = 'GAME_WIN';
-            console.log(world.state);
-            gameWinScreen.classList.remove('d-none'); 
+            showGameWin();
         }, 2000);
     }
 }
@@ -117,6 +115,16 @@ function resumeGame() {
     }
 }
 
+function giveUpGame() {
+    world.state = 'GAME_OVER';
+    hideGameMenu();
+}
+
+function showPlayerScore() {
+    let score = world.coinCounter.coinsNumber;
+    playerScore.innerHTML = score;
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('resumeBtn').addEventListener('click', function () {
@@ -129,3 +137,40 @@ document.addEventListener('DOMContentLoaded', function () {
         restartGame();
     });
 });
+
+function saveSettings() {
+    fullScreen();
+    // Hier kommmt die mehrere Optionen rein.
+    hideGameOptions();
+}
+
+
+function fullScreen() {
+    let main = document.getElementById('main');
+    let fullScreen = document.getElementById('fullScreen');
+    let window = document.getElementById('window');
+
+    if (fullScreen.checked) {
+        enterFullscreen(main);
+    } else if (window.checked) {
+        exitFullscreen();
+    }
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+}
