@@ -10,6 +10,7 @@ class EndBoss extends MovableObject {
     endBossIsDead = false;
     swimmingUp = true;
     swimmingLeft = true;
+    playObjectAnimation = true;
 
     offset = {
         top: 330,
@@ -79,10 +80,12 @@ class EndBoss extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playIntroduceAnimation();
-            this.playSwimmAnimation();
-            this.playDamageAnimation();
-            this.playDeadAnimation();
+            if (this.playObjectAnimation) {
+                this.playIntroduceAnimation();
+                this.playSwimmAnimation();
+                this.playDamageAnimation();
+                this.playDeadAnimation();
+            }
         }, 140)
     }
 
@@ -123,30 +126,52 @@ class EndBoss extends MovableObject {
     attack() {
         setTimeout(() => {
             setInterval(() => {
-                if (!this.endBossIsDead) {
+                if (!this.endBossIsDead && this.playObjectAnimation) {
                     this.moves();
                 }
             }, 1000 / 60);
         }, 1000);
     }
 
+    setRandomSpeed() {
+        this.speed = 3 + Math.random() * 8;
+        this.speedY = 3 + Math.random() * 8;
+    }
+
     moves() {
+        this.setRandomSpeed();
+
         if (this.swimmingLeft) {
-            this.swimmLeft(this.speed);
-            this.otherDirection = false;
-            if (this.x <= 1620) {
-                this.swimmingLeft = false;
-            }
+            this.moveLeft();
         } else {
-            this.swimmRight(this.speed);
-            this.otherDirection = true;
-            if (this.x >= 2900) {
-                this.swimmingLeft = true;
-            }
+            this.moveRight();
         }
 
+        if (this.swimmingUp) {
+            this.moveUp();
+        } else {
+            this.moveDown();
+        }
+    }
 
-        if (this.swimmingUp && this.swimmingLeft) {
+    moveLeft() {
+        this.swimmLeft(this.speed);
+        this.otherDirection = false;
+        if (this.x <= 1620) {
+            this.swimmingLeft = false;
+        }
+    }
+
+    moveRight() {
+        this.swimmRight(this.speed);
+        this.otherDirection = true;
+        if (this.x >= 2900) {
+            this.swimmingLeft = true;
+        }
+    }
+
+    moveUp() {
+        if (this.swimmingLeft) {
             this.swimmUpLeft(this.speed, this.speedY);
             if (this.y <= -100) {
                 this.swimmingUp = false;
@@ -154,10 +179,7 @@ class EndBoss extends MovableObject {
             if (this.x <= 1620) {
                 this.swimmingLeft = false;
             }
-        }
-
-
-        if (this.swimmingUp && !this.swimmingLeft) {
+        } else {
             this.swimmUpRight(this.speed, this.speedY);
             if (this.y <= -100) {
                 this.swimmingUp = false;
@@ -166,9 +188,10 @@ class EndBoss extends MovableObject {
                 this.swimmingLeft = true;
             }
         }
+    }
 
-
-        if (!this.swimmingUp && this.swimmingLeft) {
+    moveDown() {
+        if (this.swimmingLeft) {
             this.swimmDownLeft(this.speed, this.speedY);
             if (this.y >= 600) {
                 this.swimmingUp = true;
@@ -176,9 +199,7 @@ class EndBoss extends MovableObject {
             if (this.x <= 1620) {
                 this.swimmingLeft = false;
             }
-        }
-
-        if (!this.swimmingUp && !this.swimmingLeft) {
+        } else {
             this.swimmDownRight(this.speed, this.speedY);
             if (this.y >= 600) {
                 this.swimmingUp = true;
@@ -187,6 +208,5 @@ class EndBoss extends MovableObject {
                 this.swimmingLeft = true;
             }
         }
-
     }
 }

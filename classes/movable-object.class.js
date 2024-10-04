@@ -18,6 +18,14 @@ class MovableObject extends DrawableObject {
         right: 0
     }
 
+    setPlayObjectAnimation() {
+        this.playObjectAnimation = true;
+    }
+
+    setStopObjectAnimation() {
+        this.playObjectAnimation = false;
+    }
+
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];

@@ -2,6 +2,7 @@ class PufferFish extends MovableObject {
     width = 180;
     height = 180;
     pufferFishIsDead = false;
+    playObjectAnimation = true;
 
     IMAGES_SWIMMING = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
@@ -51,14 +52,16 @@ class PufferFish extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playSwimmAnimation();
-            this.playDeadAnimation();
+            if (this.playObjectAnimation) {
+                this.playSwimmAnimation();
+                this.playDeadAnimation();
+            }
         }, 140)
     }
 
     swimm() {
         setInterval(() => {
-            if (!this.pufferFishIsDead) {
+            if (!this.pufferFishIsDead && this.playObjectAnimation) {
                 this.swimmLeft(this.speed);
             }
         }, 1000 / 60);

@@ -88,16 +88,16 @@ function hideGameMenu() {
 let gameMenu = false;
 
 function showGameMenu() {
-    if (keyboard.ESC && !gameMenu) {
+    if (keyboard.M && !gameMenu) {
         pauseGame();
-        keyboard.ESC = false;
+        keyboard.M = false;
         gameMenu = true;
         gameMenuBox.classList.remove('d-none');
     } 
 
-    if (keyboard.ESC && gameMenu) {
+    if (keyboard.M && gameMenu) {
         resumeGame();
-        keyboard.ESC = false;
+        keyboard.M = false;
         gameMenu = false;
         gameMenuBox.classList.add('d-none');
     }

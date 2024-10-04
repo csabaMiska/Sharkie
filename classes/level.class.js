@@ -25,13 +25,20 @@ class Level {
             new PufferFish(2000),
             new PufferFish(2000),
             new PufferFish(2000),
-            new PufferFish(2000)
+            new PufferFish(2000),
+            new PufferFish(2000),
+            new PufferFish(3000),
+            new PufferFish(3000),
+            new PufferFish(3000),
+            new PufferFish(3000),
+            new PufferFish(3000),
+            new PufferFish(3000)
         ];
         this.jellyFishes = [
             new JellyFish(),
             new JellyFish()
         ];
-        this.endBoss = []; 
+        this.endBoss = [];
         this.coins = [
             new Coin(650, 600),
             new Coin(750, 600),

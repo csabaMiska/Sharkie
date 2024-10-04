@@ -5,6 +5,7 @@ class JellyFish extends MovableObject {
     speedY = 1;
     jellyFishIsDead = false;
     swimmingUp = true;
+    playObjectAnimation = true;
 
     IMAGES_SWIMMING = [
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
@@ -40,15 +41,17 @@ class JellyFish extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.playSwimmAnimation();
-            this.playDeadAnimation()
+            if (this.playObjectAnimation) {
+                this.playSwimmAnimation();
+                this.playDeadAnimation();
+            }
         }, 140)
     }
 
     moves() {
         setInterval(() => {
-            if (!this.jellyFishIsDead) {
-                this.swimming()
+            if (!this.jellyFishIsDead && this.playObjectAnimation) {
+                this.swimming();
             }
         }, 1000 / 60);
     }

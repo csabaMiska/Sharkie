@@ -4,7 +4,14 @@ const level1 = new Level(
         new PufferFish(2000),
         new PufferFish(2000),
         new PufferFish(2000),
-        new PufferFish(2000)
+        new PufferFish(2000),
+        new PufferFish(2000),
+        new PufferFish(3000),
+        new PufferFish(3000),
+        new PufferFish(3000),
+        new PufferFish(3000),
+        new PufferFish(3000),
+        new PufferFish(3000)
     ],
     [
         new JellyFish(),

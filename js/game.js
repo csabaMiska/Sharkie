@@ -25,8 +25,8 @@ window.addEventListener('keydown', (e) => {
     if (e.code === 'KeyD') {
         keyboard.D = true;
     }
-    if (e.code === 'Escape') {
-        keyboard.ESC = true;
+    if (e.code === 'KeyM') {
+        keyboard.M = true;
     }
 });
 
@@ -54,77 +54,41 @@ window.addEventListener('keyup', (e) => {
 function startGame() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    world.resetGame();
     world.state = 'RUNNING';
-    resetGame();
     world.draw();
     hideStartMenu();
-    checkGameState()
-}
-
-function checkGameState() {
-    let gameStateInterval = setInterval(() => {
-        gameOver(gameStateInterval);
-        gameWin(gameStateInterval);
-        showGameMenu();
-    }, 1000 / 60);
-}
-
-function gameOver(gameStateInterval) {
-    if (world.shark.energy <= 0) {
-        clearInterval(gameStateInterval);
-        setTimeout(() => {
-            world.state = 'GAME_OVER';
-            showGameOver();
-        }, 2000);
-    }
-}
-
-function gameWin(gameStateInterval) {
-    let endBoss = world.level.endBoss[0];
-    if (endBoss && endBoss.energy <= 0) {
-        clearInterval(gameStateInterval);
-        setTimeout(() => {
-            world.state = 'GAME_WIN';
-            showGameWin();
-        }, 2000);
-    }
 }
 
 function pauseGame() {
     world.state = 'PAUSED';
-}
-
-function restartGame() {
-    state = 'RESTART_GAME';
-    gameOverBox.classList.add('d-none');
-    resetGame();
-    startGame();
-}
-
-function resetGame() {
-    world.level.reset();
-    world.coinCounter.reset();
-    world.poisonCounter.reset();
+    world.setGamePaused();
 }
 
 function resumeGame() {
     if (world.state === 'PAUSED') {
         world.state = 'RUNNING';
+        world.setGameResume();
         gameMenuBox.classList.add('d-none');
         requestAnimationFrame(() => world.draw());
     }
 }
 
-function giveUpGame() {
-    world.state = 'GAME_OVER';
-    hideGameMenu();
+function restartGame() {
+    gameOverBox.classList.add('d-none');
+    world.resetGame();
+    startGame();
 }
+
+function giveUpGame() {
+    world.state = 'GIVE_UP';
+}
+
 
 function showPlayerScore() {
     let score = world.coinCounter.coinsNumber;
     playerScore.innerHTML = score;
 }
-
 
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('resumeBtn').addEventListener('click', function () {

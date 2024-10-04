@@ -19,13 +19,112 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.setWorld();
+        this.shark.world = this;
+        this.setGameState();
         this.swimming();
         this.attack();
     }
 
-    setWorld() {
-        this.shark.world = this;
+    setGameState() {
+        let gameStateInterval = setInterval(() => {
+            this.setGameOver(gameStateInterval);
+            this.setGameWin(gameStateInterval);
+            this.setGameGiveUp(gameStateInterval);
+            showGameMenu();
+        }, 1000 / 60);
+    }
+
+    setGameOver(gameStateInterval) {
+        if (this.shark.energy <= 0) {
+            clearInterval(gameStateInterval);
+            setTimeout(() => {
+                this.state = 'GAME_OVER';
+                this.clearAllIntervals();
+                showGameOver();
+            }, 2000);
+        }
+    }
+
+    setGameWin(gameStateInterval) {
+        let endBoss = this.level.endBoss[0];
+        if (endBoss && endBoss.energy <= 0) {
+            clearInterval(gameStateInterval);
+            setTimeout(() => {
+                this.state = 'GAME_WIN';
+                this.clearAllIntervals();
+                showGameWin();
+            }, 2000);
+        }
+    }
+
+    setGameGiveUp(gameStateInterval) {
+        if (this.state === 'GIVE_UP') {
+            clearInterval(gameStateInterval);
+            this.state = 'GAME_OVER';
+            this.clearAllIntervals();
+            hideGameMenu();
+        }
+    }
+
+    resetGame() {
+        this.level.pufferFishes = [];
+        this.level.jellyFishes = [];
+        this.level.endBoss = [];
+        this.level.reset();
+        this.coinCounter.reset();
+        this.poisonCounter.reset();
+    }
+
+    clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    }
+
+    setGamePaused() {
+        this.stopPufferFishesAnimation();
+        this.stopJellyFishesAnimation();
+        this.stopEndBossAnimation();
+    }
+
+    setGameResume() {
+        this.playPufferFishesAnimation();
+        this.playJellyFishesAnimation();
+        this.playEndBossAnimation();
+    }
+
+    stopPufferFishesAnimation() {
+        this.level.pufferFishes.forEach((pufferFish) => {
+            pufferFish.setStopObjectAnimation();
+        });
+    }
+
+    playPufferFishesAnimation() {
+        this.level.pufferFishes.forEach((pufferFish) => {
+            pufferFish.setPlayObjectAnimation();
+        });
+    }
+
+    stopJellyFishesAnimation() {
+        this.level.jellyFishes.forEach((jellyFish) => {
+            jellyFish.setStopObjectAnimation();
+        });
+    }
+
+    playJellyFishesAnimation() {
+        this.level.jellyFishes.forEach((jellyFish) => {
+            jellyFish.setPlayObjectAnimation();
+        });
+    }
+
+    stopEndBossAnimation() {
+        this.level.endBoss.forEach((endBoss) => {
+            endBoss.setStopObjectAnimation();
+        });
+    }
+
+    playEndBossAnimation() {
+        this.level.endBoss.forEach((endBoss) => {
+            endBoss.setPlayObjectAnimation();
+        });
     }
 
     swimming() {
@@ -154,22 +253,7 @@ class World {
 
     checkBubbleAttack() {
         this.throwableObjects = this.throwableObjects.filter((bubble) => {
-            let bubbleIsCollided = false;
-
-            this.level.jellyFishes.forEach((jellyFish) => {
-                if (bubble.isColliding(jellyFish) && !jellyFish.jellyFishIsDead) {
-                    jellyFish.jellyFishIsDead = true;
-                    bubbleIsCollided = true;
-                    this.bubbleAttack(jellyFish);
-                }
-            });
-
-            this.level.endBoss.forEach((endBoss) => {
-                if (bubble.isColliding(endBoss) && !endBoss.endBossIsDead) {
-                    bubbleIsCollided = true;
-                    endBoss.hit();
-                }
-            });
+            let bubbleIsCollided = this.bubbleJellyFishCollision(bubble) || this.bubbleEndBossCollision(bubble);
 
             if (bubbleIsCollided) {
                 this.movableObject.deleteObject(this.ctx, bubble);
@@ -177,6 +261,33 @@ class World {
             }
             return true;
         });
+    }
+
+    bubbleJellyFishCollision(bubble) {
+        let bubbleIsCollided = false;
+
+        this.level.jellyFishes.forEach((jellyFish) => {
+            if (bubble.isColliding(jellyFish) && !jellyFish.jellyFishIsDead) {
+                jellyFish.jellyFishIsDead = true;
+                bubbleIsCollided = true;
+                this.bubbleAttack(jellyFish);
+            }
+        });
+
+        return bubbleIsCollided;
+    }
+
+    bubbleEndBossCollision(bubble) {
+        let bubbleIsCollided = false;
+
+        this.level.endBoss.forEach((endBoss) => {
+            if (bubble.isColliding(endBoss) && !endBoss.endBossIsDead) {
+                bubbleIsCollided = true;
+                endBoss.hit();
+            }
+        });
+
+        return bubbleIsCollided;
     }
 
     bubbleAttack(jellyFish) {
@@ -206,7 +317,7 @@ class World {
 
     draw() {
         if (this.state !== 'RUNNING') return;
-    
+
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
