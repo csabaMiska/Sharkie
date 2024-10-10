@@ -183,8 +183,8 @@ class Shark extends MovableObject {
     }
 
     cameraSettings() {
-        if (this.x >= 350 && this.x < this.world.level.final_battle_x) {
-            this.world.camera_x = -this.x + 350;
+        if (this.x >= 700 && this.x < this.world.level.final_battle_x) {
+            this.world.camera_x = -this.x + 700;
         }
     }
 
@@ -229,7 +229,7 @@ class Shark extends MovableObject {
     }
 
     sharkPoisoned() {
-        if (this.isDead() && !this.characterIsDead) {
+        if (this.isDead() && this.characterIsPoisoned && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_POISONED);
             setTimeout(() => {
                 this.characterIsDead = true;
@@ -242,7 +242,7 @@ class Shark extends MovableObject {
     }
 
     sharkElektroShocked() {
-        if (this.isElektroShocked() && !this.characterIsDead) {
+        if (this.isDead() && this.characterIsElektrShocked && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_ELEKTRO_SHOCK);
             setTimeout(() => {
                 this.characterIsDead = true;

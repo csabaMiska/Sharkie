@@ -2,8 +2,6 @@ class MovableObject extends DrawableObject {
     speed;
     currentImage = 0;
     otherDirection = false;
-    characterIsPoisoned = false;
-    characterIsElektrShocked = false;
     damage;
     energy;
     lastHit = 0;
@@ -116,11 +114,7 @@ class MovableObject extends DrawableObject {
     isDead() {
         if (this.energy == 0 && this.isPoisoned()) {
             return this.characterIsPoisoned = true;
-        }
-    }
-
-    isElektroShocked() {
-        if (this.energy == 0 && this.isShocked()) {
+        } else if (this.energy == 0 && this.isShocked()) {
             return this.characterIsElektrShocked = true;
         }
     }

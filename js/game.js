@@ -3,7 +3,8 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
-
+    toggleMusicIcon();
+    toggleSoundIcon();
 }
 
 window.addEventListener('keydown', (e) => {
@@ -76,7 +77,6 @@ function resumeGame() {
 
 function restartGame() {
     gameOverBox.classList.add('d-none');
-    world.resetGame();
     startGame();
 }
 
@@ -101,40 +101,3 @@ document.addEventListener('DOMContentLoaded', function () {
         restartGame();
     });
 });
-
-function saveSettings() {
-    fullScreen();
-    // Hier kommmt die mehrere Optionen rein.
-    hideGameOptions();
-}
-
-
-function fullScreen() {
-    let main = document.getElementById('main');
-    let fullScreen = document.getElementById('fullScreen');
-    let window = document.getElementById('window');
-
-    if (fullScreen.checked) {
-        enterFullscreen(main);
-    } else if (window.checked) {
-        exitFullscreen();
-    }
-}
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    }
-}
-
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    }
-}

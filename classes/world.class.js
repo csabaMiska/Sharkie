@@ -30,7 +30,7 @@ class World {
             this.setGameOver(gameStateInterval);
             this.setGameWin(gameStateInterval);
             this.setGameGiveUp(gameStateInterval);
-            showGameMenu();
+            checkGameMenu();
         }, 1000 / 60);
     }
 
@@ -331,7 +331,7 @@ class World {
         this.ctx.font = "40px Bowlby One";
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1700, 84);
+        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1580, 84);
         this.ctx.fillText("X " + this.poisonCounter.poisonsNumber, 1300, 84);
         this.ctx.translate(this.camera_x, 0);
 
