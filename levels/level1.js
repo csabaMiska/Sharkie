@@ -57,7 +57,7 @@ const level1 = new Level(
         new BackgroundObjects('img/3. Background/Layers/2. Floor/D2.png', 1920, 0)
     ],
     [
-        level_end_x = 3100,
+        level_end_x = 2750,
     ],
     [
         final_battle_x = 1920,

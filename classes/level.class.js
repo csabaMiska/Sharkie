@@ -21,22 +21,10 @@ class Level {
 
     reset() {
         this.pufferFishes = [
-            new PufferFish(2000),
-            new PufferFish(2000),
-            new PufferFish(2000),
-            new PufferFish(2000),
-            new PufferFish(2000),
-            new PufferFish(2000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000)
+            //pufferfish
         ];
         this.jellyFishes = [
-            new JellyFish(),
-            new JellyFish()
+            //jellyfish
         ];
         this.endBoss = [];
         this.coins = [

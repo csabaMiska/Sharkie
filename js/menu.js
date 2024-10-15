@@ -10,6 +10,7 @@ let gameMenuBox = document.getElementById('gameMenuBox');
 let gameWinScreen = document.getElementById('gameWinScreen');
 let playerScore = document.getElementById('playerScore');
 let landscapeWarning = document.getElementById('landscapeWarning');
+let mobileOverlay = document.getElementById('mobileOverlay');
 
 function showGameOptions() {
     leaderBoard.classList.add('d-none');
@@ -78,12 +79,14 @@ function showInputBox() {
 
 function cancelSaveScore() {
     scoreInputBox.classList.add('d-none');
+    mobileOverlay.classList.add('d-none');
     startMenu.classList.remove('d-none');
     hideGameWin();
 }
 
 function hideGameMenu() {
     gameMenuBox.classList.add('d-none');
+    mobileOverlay.classList.add('d-none');
     startMenu.classList.remove('d-none');
 }
 
@@ -197,5 +200,17 @@ function toggleSoundIcon() {
         soundIconContainer.innerHTML = '';
         soundIconContainer.innerHTML = soundIconOff;
         SOUND_ON = false;
+    }
+}
+
+window.addEventListener('resize', showMobilBtn);
+
+function showMobilBtn() {
+    if (world) {
+        if (window.screen.height < 1080 && window.screen.width < 1920) {
+            mobileOverlay.classList.remove('d-none');
+        } else {
+            mobileOverlay.classList.add('d-none');
+        }
     }
 }

@@ -31,6 +31,7 @@ class World {
             this.setGameWin(gameStateInterval);
             this.setGameGiveUp(gameStateInterval);
             checkGameMenu();
+            showMobilBtn();
         }, 1000 / 60);
     }
 

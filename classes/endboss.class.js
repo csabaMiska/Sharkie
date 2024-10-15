@@ -1,7 +1,7 @@
 class EndBoss extends MovableObject {
     height = 640;
     width = 640;
-    x = 2880;
+    x = 2600;
     y = 120;
     speed = 2;
     speedY = 2;
@@ -165,7 +165,7 @@ class EndBoss extends MovableObject {
     moveRight() {
         this.swimmRight(this.speed);
         this.otherDirection = true;
-        if (this.x >= 2900) {
+        if (this.x >= 2600) {
             this.swimmingLeft = true;
         }
     }
@@ -184,7 +184,7 @@ class EndBoss extends MovableObject {
             if (this.y <= -100) {
                 this.swimmingUp = false;
             }
-            if (this.x >= 2900) {
+            if (this.x >= 2600) {
                 this.swimmingLeft = true;
             }
         }
@@ -204,7 +204,7 @@ class EndBoss extends MovableObject {
             if (this.y >= 600) {
                 this.swimmingUp = true;
             }
-            if (this.x >= 2900) {
+            if (this.x >= 2600) {
                 this.swimmingLeft = true;
             }
         }
