@@ -15,6 +15,8 @@ class World {
     finalBattleStarted = false;
     state;
 
+    ///game_sound = new Audio('audio/game/game_sound.mp3');
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;

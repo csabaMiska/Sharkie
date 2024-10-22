@@ -92,7 +92,8 @@ function hideGameMenu() {
 
 function saveSettings() {
     fullScreen();
-    // Hier kommmt die mehrere Optionen rein.
+    // playGameMusic();
+    // playSounds();
     hideGameOptions();
 }
 
@@ -212,5 +213,46 @@ function showMobilBtn() {
         } else {
             mobileOverlay.classList.add('d-none');
         }
+    }
+}
+
+let leaderBoardRow = document.getElementById('leaderBoardRow');
+
+function renderLeaderBoard(leaderBoard) {
+    leaderBoard.sort(function (a, b) {
+        return parseInt(b.scoreofplayer) - parseInt(a.scoreofplayer);
+    });
+
+    leaderBoardRow.innerHTML = '';
+    showBestPlayers(leaderBoard);
+    deletePlayers(leaderBoard);
+}
+
+function showBestPlayers(leaderBoard) {
+    for (let i = 0; i < Math.min(10, leaderBoard.length); i++) {
+        const player = leaderBoard[i];
+        const place = i + 1;
+        leaderBoardRow.innerHTML += createLeaderBoard(place, player);
+    }
+}
+
+function createLeaderBoard(place, player) {
+    return `<div class="leader_board_place">
+                <div class="leader_board_place_player_row">
+                    <div class="place_number leader_board_place_text_style">${place + '.'}</div>
+                    <div class="player_id leader_board_place_text_style">${player.initialsofplayer.toUpperCase()}</div>
+                </div>
+                <div class="leader_board_place_score_row">
+                    <div class="score leader_board_place_text_style">${player.scoreofplayer}</div>
+                    <div class="total_pt leader_board_place_text_style">pt.</div>
+                </div>
+            </div>`;
+}
+
+function deletePlayers(leaderBoard) {
+    for (let i = 10; i < leaderBoard.length; i++) {
+        const playerToDelete = leaderBoard[i];
+        const playerID = playerToDelete.idofplayer;
+        deletePlayer(playerID);
     }
 }

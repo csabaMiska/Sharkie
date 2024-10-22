@@ -51,120 +51,15 @@
             </div>
             <div id="secondRow" class="second_row position_center">
                 <div id="start_content" class="start_content">
+                    <div id="loadingSpinner" class="loading_spinner_container" style="display: none;">
+                        <div  class="spinner">
+                        </div>
+                    </div>
 
                     <div id="leaderBoard" class="board">
                         <div class="row_headline headline_style">Leaderboard</div>
                         <div class="leader_board_content">
-                            <div class="leader_board_row">
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">1.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">2.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">3.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">4.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">5.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">6.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">7.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">8.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">9.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
-
-                                <div class="leader_board_place">
-                                    <div class="leader_board_place_player_row">
-                                        <div class="place_number leader_board_place_text_style">10.</div>
-                                        <div class="player_id leader_board_place_text_style">MCS</div>
-                                    </div>
-                                    <div class="leader_board_place_score_row">
-                                        <div class="score leader_board_place_text_style">1235</div>
-                                        <div class="total_pt leader_board_place_text_style">pt.</div>
-                                    </div>
-                                </div>
+                            <div id="leaderBoardRow" class="leader_board_row">
                             </div>
                         </div>
                     </div>
@@ -378,11 +273,11 @@
                     <form class="score_Input_Form" onsubmit="return false">
                         <div class="score_Input_Box">
                             <div>Enter Your Initials:</div>
-                            <input type="text" maxlength="3" class="form_Input" name="initialsInput"
+                            <input id="initialInput" type="text" maxlength="3" class="form_Input" name="initialsInput"
                                 style="text-transform:uppercase">
                         </div>
                         <div class="message_Box_Buttons_Container">
-                            <button class="menu_btn btn_style">SAVE</button>
+                            <button class="menu_btn btn_style" onclick="addPlayerScore()">SAVE</button>
                             <button class="menu_btn btn_style" onclick="cancelSaveScore()">CANCEL</button>
                         </div>
                     </form>
@@ -418,6 +313,6 @@
     <script src="js/game.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/joyStick.js"></script>
+    <script type="module" src="js/leaderBoard.js"></script>
 </body>
-
 </html>

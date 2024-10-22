@@ -3,8 +3,7 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
-    toggleMusicIcon();
-    toggleSoundIcon();
+    getBestPlayers();
 }
 
 window.addEventListener('keydown', (e) => {
@@ -59,6 +58,8 @@ function startGame() {
     world.state = 'RUNNING';
     world.draw();
     hideStartMenu();
+    toggleMusicIcon();
+    toggleSoundIcon();
 }
 
 function pauseGame() {
