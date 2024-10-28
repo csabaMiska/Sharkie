@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="style/mobile_overlay.css">
     <link rel="stylesheet" href="style/menu_style_responsive.css">
     <link rel="stylesheet" href="style/message_box_style_responsive.css">
+    <link rel="stylesheet" href="style/landcape_warning.css">
+    <link rel="stylesheet" href="style/loading_spinner.css">
     <link rel="stylesheet" href="style/fonts.css">
     <link rel="icon" href="img/4. Marcadores/1. Coins/1.png">
 
@@ -44,7 +46,7 @@
                 <nav>
                     <div class="headline headline_style">Sharkie</div>
                     <button class="menu_btn btn_style" onclick="startGame()">START</button>
-                    <button class="menu_btn btn_style" onclick="showGameOptions()">OPTIONS</button>
+                    <button class="menu_btn btn_style" onclick="showGameRanking()">RANKING</button>
                     <button class="menu_btn btn_style" onclick="showGameInstructions()">INSTRUCTIONS</button>
                     <button class="menu_btn btn_style" onclick="showGameImpressum()">IMPRESSUM</button>
                 </nav>
@@ -52,7 +54,7 @@
             <div id="secondRow" class="second_row position_center">
                 <div id="start_content" class="start_content">
                     <div id="loadingSpinner" class="loading_spinner_container" style="display: none;">
-                        <div  class="spinner">
+                        <div class="spinner">
                         </div>
                     </div>
 
@@ -64,43 +66,19 @@
                         </div>
                     </div>
 
-                    <div id="gameOptions" class="board game_options d-none">
-                        <div class="row_headline headline_style">Options</div>
-                        <div class="game_options_content">
-                            <form onsubmit="return false">
-                                <div class="game_option">
-                                    <div class="game_option_text leader_board_place_text_style">Music</div>
-                                    <input type="radio" name="music" id="musicOn" checked>
-                                    <label for="musicOn" class="total_pt leader_board_place_text_style">ON</label>
-                                    <input type="radio" name="music" id="musicOff">
-                                    <label for="musicOff" class="total_pt leader_board_place_text_style">OFF</label>
-                                </div>
-                                <div class="game_option">
-                                    <div class="game_option_text leader_board_place_text_style">Sound</div>
-                                    <input type="radio" name="sound" id="soundOn" checked>
-                                    <label for="soundOn" class="total_pt leader_board_place_text_style">ON</label>
-                                    <input type="radio" name="sound" id="soundOff">
-                                    <label for="soundOff" class="total_pt leader_board_place_text_style">OFF</label>
-                                </div>
-                                <div class="game_option">
-                                    <div class="game_option_text leader_board_place_text_style">Full Screen</div>
-                                    <input type="radio" name="screen" id="fullScreen">
-                                    <label for="fullScreen" class="total_pt leader_board_place_text_style">ON</label>
-                                    <input type="radio" name="screen" id="window" checked>
-                                    <label for="window" class="total_pt leader_board_place_text_style">OFF</label>
-                                </div>
-                                <button class="options_btn btn_style" onclick="saveSettings()">SAVE</button>
-                                <button class="options_btn btn_style" onclick="hideGameOptions()">CANCEL</button>
-                            </form>
+                    <div id="gameRanking" class="board game_ranking d-none">
+                        <div class="row_headline headline_style">Ranking</div>
+                        <div class="game_ranking_content">
+                            <button class="back_btn btn_style" onclick="hideGameRanking()">BACK</button>
                         </div>
                     </div>
 
-                    <div id="gameInstructions" class="board game_options d-none">
+                    <div id="gameInstructions" class="board game_ranking d-none">
                         <div class="row_headline headline_style">Instructions</div>
                         <div class="game_instructions_content">
                             <div class="game_instructions_row">
                                 <div class="instructions_headline_container">
-                                    <img src=".//img/6.Botones/Tittles/Move title.png" class="instructions_headline">
+                                    <div class="instructions_text">MOVE SHARK</div>
                                 </div>
                                 <div class="instructions_container">
                                     <div>
@@ -135,19 +113,26 @@
                             </div>
                             <div class="game_instructions_row">
                                 <div class="instructions_headline_container">
-                                    <img src="./img/6.Botones/Tittles/Attack tittle.png"
-                                        class="instructions_headline_2">
+                                    <div class="instructions_text">ATTACK</div>
                                 </div>
                                 <div class="instructions_container">
                                     <div class="arrows_container">D</div>
                                     <div class="space_container">SPACE</div>
                                 </div>
                             </div>
-                            <button class="options_btn btn_style" onclick="hideGameInstructions()">BACK</button>
+                            <div class="game_instructions_row">
+                                <div class="instructions_headline_container">
+                                    <div class="instructions_text">MENU</div>
+                                </div>
+                                <div class="instructions_container">
+                                    <div class="arrows_container">M</div>
+                                </div>
+                            </div>
+                            <button class="back_btn btn_style" onclick="hideGameInstructions()">BACK</button>
                         </div>
                     </div>
 
-                    <div id="impressum" class="board game_options d-none">
+                    <div id="impressum" class="board game_ranking d-none">
                         <div class="row_headline headline_style">Impressum</div>
                         <div class="impressum_content">
                             <div class="impressum">
@@ -168,7 +153,7 @@
                                     Hasselbach, Frankfurt</a>
                             </div>
                             <div class="impressum_button">
-                                <button class="options_btn btn_style" onclick="hideGameImpressum()">BACK</button>
+                                <button class="back_btn btn_style" onclick="hideGameImpressum()">BACK</button>
                             </div>
                         </div>
                     </div>
@@ -179,41 +164,22 @@
         <div id="mobileOverlay" class="mobile_overlay d-none">
             <div class="mobile_overlay_box">
                 <div class="mobile_overlay_above_box">
-                    <div class="mobile_overlay_above_left_box">
-                        <div class="mobile_menu_container" onclick="showGameMenu()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 80"
-                                class="icon">
-                                <rect width="100" height="15" rx="8"></rect>
-                                <rect y="30" width="100" height="15" rx="8"></rect>
-                                <rect y="60" width="100" height="15" rx="8"></rect>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="mobile_overlay_above_right_box">
-                        <div class="mobile_menu_container" onclick="toggleMusicIcon()">
-                            <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" height="24px"
-                                viewBox="0 -960 960 960" width="24px" class="icon">
-                            </svg>
-                        </div>
-                        <div class="mobile_menu_container" onclick="toggleSoundIcon()">
-                            <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" height="24px"
-                                viewBox="0 -960 960 960" width="24px" class="icon">
-                            </svg>
-                        </div>
+                    <div class="mobile_menu_container" onclick="showGameMenu()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 100 80"
+                            class="icon">
+                            <rect width="100" height="15" rx="8"></rect>
+                            <rect y="30" width="100" height="15" rx="8"></rect>
+                            <rect y="60" width="100" height="15" rx="8"></rect>
+                        </svg>
                     </div>
                 </div>
                 <div class="mobile_overlay_below_box">
                     <div class="mobile_overlay_below_left_box">
                         <div class="joystick">
                             <svg class="joystick_outline" viewbox="-7 -7 310 310">
-                                <path
-                                    d="M150,0 A150,150 0 1,1 150,300 A150,150 0 1,1 150,0"
-                                    fill="none"
-                                    stroke="rgba(255, 255, 255, 0.4)"
-                                    stroke-width="5"
-                                    stroke-dasharray="205 30"
-                                    stroke-dashoffset="221"
-                                />
+                                <path d="M150,0 A150,150 0 1,1 150,300 A150,150 0 1,1 150,0" fill="none"
+                                    stroke="rgba(255, 255, 255, 0.4)" stroke-width="5" stroke-dasharray="205 30"
+                                    stroke-dashoffset="221" />
                             </svg>
                             <div class="joystick_handle_container">
                                 <div class="joystick_handle"></div>
@@ -221,7 +187,7 @@
                         </div>
                     </div>
                     <div class="mobile_overlay_below_right_box">
-                        <div id="btnD"  class="bubble_shot_container">
+                        <div id="btnD" class="bubble_shot_container">
                             <div class="mobile_arrows_container attack_btn">
                                 <div class="mobile_btn_text">Shoot</div>
                             </div>
@@ -288,11 +254,26 @@
         <div id="gameMenuBox" class="message_Box scale-in-center d-none">
             <div class="message_Box_Content">
                 <div class="message_Box_Headline_Container">
-                    <div class="message_Box_Headline">Resume Game</div>
+                    <div class="message_Box_Headline">Game Paused</div>
                 </div>
                 <div class="message_Box_Content_Container">
                     <div class="message_Box_Picure_Container">
                         <img src="img/1.Sharkie/1.IDLE/Prewiew.gif" class="resume_Game_Picture">
+                    </div>
+                </div>
+                <div class="message_Box_Options_Container">
+                    <div class="message_Box_Options_Text">Options :</div>
+                    <div class="mobile_menu_container" onclick="toggleMusicIcon()">
+                        <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="icon">
+                        </svg>
+                    </div>
+                    <div class="mobile_menu_container" onclick="toggleSoundIcon()">
+                        <svg id="soundIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="icon">
+                        </svg>
+                    </div>
+                    <div class="mobile_menu_container" onclick="toggleScreenIcon()">
+                        <svg id="screenIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" class="icon">
+                        </svg>
                     </div>
                 </div>
                 <div class="message_Box_Buttons_Container">
@@ -310,9 +291,11 @@
         <div class="rotate_phone_text">Turn your device to landscape to play.</div>
     </div>
 
+    <script src="js/templates.js"></script>
     <script src="js/game.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/joyStick.js"></script>
     <script type="module" src="js/leaderBoard.js"></script>
 </body>
+
 </html>

@@ -65,7 +65,7 @@ class World {
             clearInterval(gameStateInterval);
             this.state = 'GAME_OVER';
             this.clearAllIntervals();
-            hideGameMenu();
+            this.resetGame();
         }
     }
 
@@ -334,8 +334,8 @@ class World {
         this.ctx.font = "40px Bowlby One";
         this.ctx.textBaseline = "middle";
         this.ctx.fillStyle = "white";
-        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1580, 84);
-        this.ctx.fillText("X " + this.poisonCounter.poisonsNumber, 1300, 84);
+        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1780, 84);
+        this.ctx.fillText("X " + this.poisonCounter.poisonsNumber, 1500, 84);
         this.ctx.translate(this.camera_x, 0);
 
         this.addToMap(this.shark);

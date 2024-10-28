@@ -1,7 +1,7 @@
 let main = document.getElementById('main');
 let startMenu = document.getElementById('startMenu');
 let leaderBoard = document.getElementById('leaderBoard');
-let gameOptions = document.getElementById('gameOptions');
+let gameRanking = document.getElementById('gameRanking');
 let gameInstructions = document.getElementById('gameInstructions');
 let impressum = document.getElementById('impressum');
 let gameOverBox = document.getElementById('gameOverBox');
@@ -12,21 +12,22 @@ let playerScore = document.getElementById('playerScore');
 let landscapeWarning = document.getElementById('landscapeWarning');
 let mobileOverlay = document.getElementById('mobileOverlay');
 
-function showGameOptions() {
+
+function showGameRanking() {
     leaderBoard.classList.add('d-none');
     gameInstructions.classList.add('d-none');
     impressum.classList.add('d-none');
-    gameOptions.classList.remove('d-none');
+    gameRanking.classList.remove('d-none');
 }
 
-function hideGameOptions() {
+function hideGameRanking() {
     leaderBoard.classList.remove('d-none');
-    gameOptions.classList.add('d-none');
+    gameRanking.classList.add('d-none');
 }
 
 function showGameInstructions() {
     leaderBoard.classList.add('d-none');
-    gameOptions.classList.add('d-none');
+    gameRanking.classList.add('d-none');
     impressum.classList.add('d-none');
     gameInstructions.classList.remove('d-none');
 }
@@ -38,7 +39,7 @@ function hideGameInstructions() {
 
 function showGameImpressum() {
     leaderBoard.classList.add('d-none');
-    gameOptions.classList.add('d-none');
+    gameRanking.classList.add('d-none');
     gameInstructions.classList.add('d-none');
     impressum.classList.remove('d-none');
 }
@@ -56,9 +57,8 @@ function showGameOver() {
     gameOverBox.classList.remove('d-none');
 }
 
-function cancelGame() {
+function hideGameOver() {
     gameOverBox.classList.add('d-none');
-    showInputBox();
 }
 
 function showGameWin() {
@@ -88,43 +88,6 @@ function hideGameMenu() {
     gameMenuBox.classList.add('d-none');
     mobileOverlay.classList.add('d-none');
     startMenu.classList.remove('d-none');
-}
-
-function saveSettings() {
-    fullScreen();
-    // playGameMusic();
-    // playSounds();
-    hideGameOptions();
-}
-
-
-function fullScreen() {
-    let fullScreen = document.getElementById('fullScreen');
-    let window = document.getElementById('window');
-
-    if (fullScreen.checked) {
-        enterFullscreen(main);
-    } else if (window.checked) {
-        exitFullscreen();
-    }
-}
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
-    }
-}
-
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    }
 }
 
 let gameMenu = false;
@@ -168,9 +131,8 @@ window.addEventListener('resize', function () {
 });
 
 let musicIconContainer = document.getElementById('musicIcon');
-let musicIconOff = `<path xmlns="http://www.w3.org/2000/svg" d="M792-56 56-792l56-56 736 736-56 56ZM560-514l-80-80v-246h240v160H560v166ZM400-120q-66 
-0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-62l80 80v120q0 66-47 113t-113 47Z"/>`;
-let musicIconOn = `<path d="M400-120q-66 0-113-47t-47-113q0-66 47-113t113-47q23 0 42.5 5.5T480-418v-422h240v160H560v400q0 66-47 113t-113 47Z" />`;
+let musicIconOff = returnMusicOffSvg();
+let musicIconOn = retunrMusicOnSvg();
 let MUSIC_ON = false;
 
 function toggleMusicIcon() {
@@ -186,10 +148,8 @@ function toggleMusicIcon() {
 }
 
 let soundIconContainer = document.getElementById('soundIcon');
-let soundIconOn = `<path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 
-127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 
-86H200v80h114l86 86v-252ZM300-480Z" />`;
-let soundIconOff = `<path xmlns="http://www.w3.org/2000/svg" d="M280-360v-240h160l200-200v640L440-360H280Zm80-80h114l86 86v-252l-86 86H360v80Zm100-40Z"/>`;
+let soundIconOn = returnSoundOnSvg();
+let soundIconOff = returnSoundOffSvg();
 let SOUND_ON = false;
 
 function toggleSoundIcon() {
@@ -204,10 +164,53 @@ function toggleSoundIcon() {
     }
 }
 
-window.addEventListener('resize', showMobilBtn);
+let screenIconContainer = document.getElementById('screenIcon');
+let fullScreenIcon = returnFullScreenSvg();
+let windowScreeIcon = returnWindowsScreenSvg();
+let FULL_SCREEN = false;
+
+function toggleScreenIcon() {
+    if (!FULL_SCREEN) {
+        screenIconContainer.innerHTML = '';
+        screenIconContainer.innerHTML = fullScreenIcon;
+        FULL_SCREEN = true;
+        if (document.fullscreenElement) {
+            exitFullscreen();
+        }
+    } else {
+        screenIconContainer.innerHTML = '';
+        screenIconContainer.innerHTML = windowScreeIcon;
+        FULL_SCREEN = false;
+        enterFullscreen(main);
+    }
+}
+
+function enterFullscreen(element) {
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+    } else if (document.mozRequestFullScreen) {
+        document.mozRequestFullScreen();
+    }
+}
+
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    }
+}
 
 function showMobilBtn() {
-    if (world) {
+    if (world && world.state === 'RUNNING') {
         if (window.screen.height < 1080 && window.screen.width < 1920) {
             mobileOverlay.classList.remove('d-none');
         } else {
@@ -225,7 +228,7 @@ function renderLeaderBoard(leaderBoard) {
 
     leaderBoardRow.innerHTML = '';
     showBestPlayers(leaderBoard);
-    deletePlayers(leaderBoard);
+    //deletePlayers(leaderBoard);
 }
 
 function showBestPlayers(leaderBoard) {
@@ -234,19 +237,6 @@ function showBestPlayers(leaderBoard) {
         const place = i + 1;
         leaderBoardRow.innerHTML += createLeaderBoard(place, player);
     }
-}
-
-function createLeaderBoard(place, player) {
-    return `<div class="leader_board_place">
-                <div class="leader_board_place_player_row">
-                    <div class="place_number leader_board_place_text_style">${place + '.'}</div>
-                    <div class="player_id leader_board_place_text_style">${player.initialsofplayer.toUpperCase()}</div>
-                </div>
-                <div class="leader_board_place_score_row">
-                    <div class="score leader_board_place_text_style">${player.scoreofplayer}</div>
-                    <div class="total_pt leader_board_place_text_style">pt.</div>
-                </div>
-            </div>`;
 }
 
 function deletePlayers(leaderBoard) {

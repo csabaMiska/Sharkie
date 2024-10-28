@@ -27,6 +27,7 @@ body {
 main {
     width: 100%;
     height: 100vh;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -204,46 +205,18 @@ nav {
     font-family: var(--font-satisfy);
 }
 
-.game_options {
+.game_ranking {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.game_options_content {
+.game_ranking_content {
     width: 100%;
     height: 100%;
 }
 
-form {
-    height: 100%;
-}
-
-.game_option {
-    display: flex;
-    align-items: start;
-    height: 30%;
-}
-
-.game_option_text {
-    font-size: 40px;
-    font-family: var(--font-bowelby-one);
-    margin-right: 100px;
-    width: 470px;
-}
-
-input[type="radio"] {
-    width: 30px;
-    height: 30px;
-    margin-right: 24px;
-    margin-left: 24px;
-}
-
-input[type="radio"]:hover {
-    cursor: pointer;
-}
-
-.options_btn {
+.back_btn {
     width: 200px;
     height: 80px;
     margin-right: 8px;
@@ -255,7 +228,7 @@ input[type="radio"]:hover {
 }
 
 .game_instructions_row {
-    height: 45%;
+    height: 30%;
     display: flex;
     align-items: center;
 }
@@ -264,12 +237,10 @@ input[type="radio"]:hover {
     width: 50%;
 }
 
-.instructions_headline {
-    width: 300px;
-}
-
-.instructions_headline_2 {
-    width: 180px;
+.instructions_text {
+    font-family: var(--font-bowelby-one);
+    color: white;
+    font-size: 40px;
 }
 
 .instructions_container {
@@ -349,30 +320,4 @@ input[type="radio"]:hover {
 
 .impressum_content a:hover {
     border-bottom: 1px solid var(--headline-font-color);
-}
-
-.landscape_warning {
-    display: none;
-}
-
-.loading_spinner_container {
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.spinner {
-    border: 8px solid rgba(211, 211, 211, 0.445);
-    border-left-color: rgb(61,173,205);
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    animation: spin 1s linear infinite;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
 }

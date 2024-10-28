@@ -60,6 +60,7 @@ function startGame() {
     hideStartMenu();
     toggleMusicIcon();
     toggleSoundIcon();
+    toggleScreenIcon();
 }
 
 function pauseGame() {
@@ -76,6 +77,11 @@ function resumeGame() {
     }
 }
 
+function cancelGame() {
+    hideGameOver();
+    showInputBox();
+}
+
 function restartGame() {
     gameOverBox.classList.add('d-none');
     startGame();
@@ -83,22 +89,23 @@ function restartGame() {
 
 function giveUpGame() {
     world.state = 'GIVE_UP';
+    FULL_SCREEN = false;
+    hideGameMenu();
 }
-
 
 function showPlayerScore() {
     let score = world.coinCounter.coinsNumber;
     playerScore.innerHTML = score;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('resumeBtn').addEventListener('click', function () {
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('resumeBtn').addEventListener('click', function() {
         resumeGame();
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('restartGameBtn').addEventListener('click', function () {
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('restartGameBtn').addEventListener('click', function() {
         restartGame();
     });
 });

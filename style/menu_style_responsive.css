@@ -10,7 +10,7 @@
     }
 
     .mobile_overlay {
-        height: 100vh;
+        height: 100%;
         border-radius: unset;
     }
 }
@@ -101,11 +101,7 @@
         font-size: 28px;
     }
 
-    .game_option_text {
-        font-size: 28px;
-    }
-
-    .options_btn {
+    .back_btn {
         width: 180px;
         height: 72px;
     }
@@ -173,7 +169,7 @@
         height: 59px;
     }
 
-    .options_btn {
+    .back_btn {
         width: 160px;
         height: 54px;
     }
@@ -200,18 +196,6 @@
     }
 
     .total_pt {
-        font-size: 22px;
-    }
-
-    form {
-        padding-left: 16px;
-    }
-
-    .game_option {
-        height: 28%;
-    }
-
-    .game_option_text {
         font-size: 22px;
     }
 
@@ -276,10 +260,6 @@
         font-size: 16px;
     }
 
-    .game_option_text {
-        font-size: 16px;
-    }
-
     .impressum_content {
         font-size: 16px;
     }
@@ -296,14 +276,6 @@
     .game_instructions_row {
         height: 39%;
         gap: 8px;
-    }
-
-    .instructions_headline {
-        width: 100px;
-    }
-
-    .instructions_headline_2 {
-        width: 60px;
     }
 
     .arrows_container {
@@ -325,42 +297,6 @@
 
         .landscape_warning {
             display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-image: url('../img/3. Background/Layers/5. Water/D2.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .rotate_phone_box {
-            width: 240px;
-            height: 240px;
-            border-radius: 120px;
-            border: 6px solid white;
-            background-color: var(--btn-bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .rotate_phone_picture {
-            width: 160px;
-        }
-
-        .rotate_phone_text {
-            font-family: var(--font-bowelby-one);
-            color: white;
-            font-size: 24px;
-            letter-spacing: 1px;
         }
 
         main {
@@ -369,21 +305,6 @@
 
         canvas {
             display: none;
-        }
-    }
-
-    .rotate-90-ccw {
-        animation: rotate-90-ccw 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    }
-
-    @keyframes rotate-90-ccw {
-        0% {
-            transform: rotate(45deg);
-        }
-
-        100% {
-
-            transform: rotate(-45deg);
         }
     }
 
