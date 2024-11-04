@@ -14,8 +14,7 @@ class World {
     throwableObjects = [];
     finalBattleStarted = false;
     state;
-
-    ///game_sound = new Audio('audio/game/game_sound.mp3');
+    animatedEndBoss = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -23,8 +22,30 @@ class World {
         this.keyboard = keyboard;
         this.shark.world = this;
         this.setGameState();
+        this.playGameSounds();
         this.swimming();
         this.attack();
+    }
+
+    getSoundObjects() {
+        return [
+            this.shark,
+            this.poisonCounter,
+            this.coinCounter,
+            ...this.level.pufferFishes,
+            ...this.level.jellyFishes,
+            ...this.level.endBoss
+        ];
+    }
+
+    muteGameSounds() {
+        this.animatedEndBoss = false;
+        this.getSoundObjects().forEach((obj) => obj.setStopAnimationSounds());
+    }
+    
+    playGameSounds() {
+        this.animatedEndBoss = true;
+        this.getSoundObjects().forEach((obj) => obj.setPlayAnimationSounds());
     }
 
     setGameState() {
@@ -83,51 +104,11 @@ class World {
     }
 
     setGamePaused() {
-        this.stopPufferFishesAnimation();
-        this.stopJellyFishesAnimation();
-        this.stopEndBossAnimation();
+        this.getSoundObjects().forEach((obj) => obj.setStopObjectAnimation());
     }
 
     setGameResume() {
-        this.playPufferFishesAnimation();
-        this.playJellyFishesAnimation();
-        this.playEndBossAnimation();
-    }
-
-    stopPufferFishesAnimation() {
-        this.level.pufferFishes.forEach((pufferFish) => {
-            pufferFish.setStopObjectAnimation();
-        });
-    }
-
-    playPufferFishesAnimation() {
-        this.level.pufferFishes.forEach((pufferFish) => {
-            pufferFish.setPlayObjectAnimation();
-        });
-    }
-
-    stopJellyFishesAnimation() {
-        this.level.jellyFishes.forEach((jellyFish) => {
-            jellyFish.setStopObjectAnimation();
-        });
-    }
-
-    playJellyFishesAnimation() {
-        this.level.jellyFishes.forEach((jellyFish) => {
-            jellyFish.setPlayObjectAnimation();
-        });
-    }
-
-    stopEndBossAnimation() {
-        this.level.endBoss.forEach((endBoss) => {
-            endBoss.setStopObjectAnimation();
-        });
-    }
-
-    playEndBossAnimation() {
-        this.level.endBoss.forEach((endBoss) => {
-            endBoss.setPlayObjectAnimation();
-        });
+        this.getSoundObjects().forEach((obj) => obj.setPlayObjectAnimation());
     }
 
     swimming() {
@@ -315,7 +296,20 @@ class World {
             let finalEnemy = new EndBoss();
             this.level.endBoss.push(finalEnemy);
             this.finalBattleStarted = true;
+            this.animateEndBoss();
         }
+    }
+
+    animateEndBoss() {
+        if (this.animatedEndBoss) {
+            this.level.endBoss.forEach((endBoss) => {
+                endBoss.setPlayAnimationSounds();
+            });
+        } else {
+            this.level.endBoss.forEach((endBoss) => {
+                endBoss.setStopAnimationSounds();
+            });
+        } 
     }
 
     draw() {

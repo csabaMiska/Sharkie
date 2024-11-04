@@ -6,7 +6,13 @@ class Shark extends MovableObject {
     speed = 12;
     energy = 100;
     world;
-    gameOverBox = document.getElementById('gameOverBox');
+    
+    playAnimationSounds = true;
+    slapSound = new Audio('audio/game/slap_sound.mp3');
+    bubbleSound = new Audio('audio/game/bubble_sound.mp3');
+    poisonedSound = new Audio('audio/game/poisoned_sound.mp3');
+    electricSound = new Audio('audio/game/electric_sound.mp3');
+    gameOverSound = new Audio('audio/game/game_over.mp3');
 
     offset = {
         top: 240,
@@ -205,6 +211,9 @@ class Shark extends MovableObject {
     playFinSlap() {
         if (this.world.keyboard.SPACE && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_SLAP);
+            if (this.playAnimationSounds) {
+                this.slapSound.play();
+            }
         }
     }
 
@@ -212,6 +221,9 @@ class Shark extends MovableObject {
         if (!this.characterIsDead) {
             if (this.world.keyboard.D && this.world.poisonCounter.poisonsNumber > 0) {
                 this.playAnimation(this.IMAGES_BUBBLE_TRAP);
+                if (this.playAnimationSounds) {
+                this.bubbleSound.play();
+                }
             }
         }
     }
@@ -219,18 +231,25 @@ class Shark extends MovableObject {
     sharkHurt() {
         if (this.isPoisoned() && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_HURT);
+            if (this.playAnimationSounds) {
+                this.poisonedSound.play();
+            }
         }
     }
 
     sharkShock() {
         if (this.isShocked() && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_SHOCK);
+            if (this.playAnimationSounds) {
+                this.electricSound.play();
+            }
         }
     }
 
     sharkPoisoned() {
         if (this.isDead() && this.characterIsPoisoned && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_POISONED);
+            this.playGameOverSound();
             setTimeout(() => {
                 this.characterIsDead = true;
                 this.loadImage('img/1.Sharkie/6.dead/1.Poisoned/12.png');
@@ -244,11 +263,18 @@ class Shark extends MovableObject {
     sharkElektroShocked() {
         if (this.isDead() && this.characterIsElektrShocked && !this.characterIsDead) {
             this.playAnimation(this.IMAGES_ELEKTRO_SHOCK);
+            this.playGameOverSound();
             setTimeout(() => {
                 this.characterIsDead = true;
                 this.loadImage('img/1.Sharkie/6.dead/2.Electro_shock/10.png');
                 this.applyGravity();
             }, 380)
+        }
+    }
+
+    playGameOverSound() {
+        if (this.playAnimationSounds) {
+            this.gameOverSound.play();
         }
     }
 }

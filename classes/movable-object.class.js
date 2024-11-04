@@ -16,6 +16,14 @@ class MovableObject extends DrawableObject {
         right: 0
     }
 
+    setPlayAnimationSounds() {
+        this.playAnimationSounds = true;
+    }
+
+    setStopAnimationSounds() {
+        this.playAnimationSounds = false;
+    }
+
     setPlayObjectAnimation() {
         this.playObjectAnimation = true;
     }

@@ -3,7 +3,9 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
+    MUSIC_ON = false;
     getBestPlayers();
+    toggleMusicIcon();
 }
 
 window.addEventListener('keydown', (e) => {
@@ -56,6 +58,7 @@ function startGame() {
     world = new World(canvas, keyboard);
     world.resetGame();
     world.state = 'RUNNING';
+    MUSIC_ON = true;
     world.draw();
     hideStartMenu();
     toggleMusicIcon();
@@ -90,6 +93,8 @@ function restartGame() {
 function giveUpGame() {
     world.state = 'GIVE_UP';
     FULL_SCREEN = false;
+    MUSIC_ON = false;
+    toggleMusicIcon();
     hideGameMenu();
 }
 

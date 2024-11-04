@@ -6,6 +6,8 @@ class JellyFish extends MovableObject {
     jellyFishIsDead = false;
     swimmingUp = true;
     playObjectAnimation = true;
+    playAnimationSounds = true;
+    soundPlayed = false;
 
     IMAGES_SWIMMING = [
         'img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
@@ -26,6 +28,8 @@ class JellyFish extends MovableObject {
         left: 32,
         right: 32
     }
+
+    deadSound = new Audio('audio/game/jelly_fish_dead_sound.mp3');
 
     constructor() {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
@@ -79,6 +83,14 @@ class JellyFish extends MovableObject {
     playDeadAnimation() {
         if (this.jellyFishIsDead) {
             this.playAnimation(this.IMAGES_DEAD);
+            this.playDeadSound();
+        }
+    }
+
+    playDeadSound() {
+        if (this.playAnimationSounds && !this.soundPlayed) { 
+            this.deadSound.play();
+            this.soundPlayed = true;
         }
     }
 }

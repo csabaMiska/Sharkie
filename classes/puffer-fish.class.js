@@ -3,6 +3,8 @@ class PufferFish extends MovableObject {
     height = 180;
     pufferFishIsDead = false;
     playObjectAnimation = true;
+    playAnimationSounds = true;
+    soundPlayed = false;
 
     IMAGES_SWIMMING = [
         'img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
@@ -38,6 +40,8 @@ class PufferFish extends MovableObject {
         left: 10,
         right: 24
     }
+
+    deadSound = new Audio('audio/game/puffer_fish_dead_sound.mp3');
 
     constructor(x) {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
@@ -77,7 +81,15 @@ class PufferFish extends MovableObject {
         if (this.pufferFishIsDead) {
             this.playAnimation(this.IMAGES_DEAD);
             this.applyGravity();
+            this.playDeadSound();
             this.loadImage('img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 3 (can animate by going down to the floor after the Fin Slap attack).png');
+        }
+    }
+
+    playDeadSound() {
+        if (this.playAnimationSounds && !this.soundPlayed) { 
+            this.deadSound.play();
+            this.soundPlayed = true;
         }
     }
 }

@@ -81,6 +81,9 @@ function cancelSaveScore() {
     scoreInputBox.classList.add('d-none');
     mobileOverlay.classList.add('d-none');
     startMenu.classList.remove('d-none');
+    MUSIC_ON = false;
+    FULL_SCREEN = false;
+    toggleMusicIcon();
     hideGameWin();
 }
 
@@ -130,37 +133,53 @@ window.addEventListener('resize', function () {
     }
 });
 
-let musicIconContainer = document.getElementById('musicIcon');
+let musicIconContainer = document.getElementById('musicIconContainer');
+let musicIcon = document.getElementById('musicIcon');
 let musicIconOff = returnMusicOffSvg();
 let musicIconOn = retunrMusicOnSvg();
-let MUSIC_ON = false;
+let MUSIC_ON = true;
+let gameMusic = new Audio('audio/game/game_sound.mp3');
+gameMusic.loop = true; 
 
 function toggleMusicIcon() {
-    if (!MUSIC_ON) {
-        musicIconContainer.innerHTML = '';
-        musicIconContainer.innerHTML = musicIconOn;
-        MUSIC_ON = true;
-    } else {
-        musicIconContainer.innerHTML = '';
-        musicIconContainer.innerHTML = musicIconOff;
+    if (MUSIC_ON) {
+        musicIcon.innerHTML = '';
+        musicIcon.innerHTML = musicIconOn;
+        musicIcon.style.fill = 'rgb(27, 20, 100)';
+        musicIconContainer.style.backgroundColor = 'rgb(252, 238, 33)';
         MUSIC_ON = false;
+        gameMusic.play();
+    } else {
+        musicIcon.innerHTML = '';
+        musicIcon.innerHTML = musicIconOff;
+        musicIcon.style.fill = 'white';
+        musicIconContainer.style.backgroundColor = 'red';
+        MUSIC_ON = true;
+        gameMusic.pause();
     }
 }
 
-let soundIconContainer = document.getElementById('soundIcon');
+let soundIconContainer = document.getElementById('soundIconContainer');
+let soundIcon = document.getElementById('soundIcon');
 let soundIconOn = returnSoundOnSvg();
 let soundIconOff = returnSoundOffSvg();
 let SOUND_ON = false;
 
 function toggleSoundIcon() {
     if (!SOUND_ON) {
-        soundIconContainer.innerHTML = '';
-        soundIconContainer.innerHTML = soundIconOn;
+        soundIcon.innerHTML = '';
+        soundIcon.innerHTML = soundIconOn;
+        soundIcon.style.fill = 'rgb(27, 20, 100)';
+        soundIconContainer.style.backgroundColor = 'rgb(252, 238, 33)';
         SOUND_ON = true;
+        world.playGameSounds();
     } else {
-        soundIconContainer.innerHTML = '';
-        soundIconContainer.innerHTML = soundIconOff;
+        soundIcon.innerHTML = '';
+        soundIcon.innerHTML = soundIconOff;
+        soundIcon.style.fill = 'white';
+        soundIconContainer.style.backgroundColor = 'red';
         SOUND_ON = false;
+        world.muteGameSounds();
     }
 }
 

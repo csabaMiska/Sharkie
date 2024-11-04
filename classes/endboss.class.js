@@ -11,6 +11,8 @@ class EndBoss extends MovableObject {
     swimmingUp = true;
     swimmingLeft = true;
     playObjectAnimation = true;
+    playAnimationSounds = true;
+    soundPlayed = false;
 
     offset = {
         top: 330,
@@ -18,6 +20,9 @@ class EndBoss extends MovableObject {
         left: 48,
         right: 56
     }
+
+    damageSound = new Audio('audio/game/end_boss_damage_sound.mp3');
+    deadSound = new Audio('audio/game/end_boss_dead_sound.mp3');
 
     IMAGES_INTRODUCE = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
@@ -107,6 +112,9 @@ class EndBoss extends MovableObject {
     playDamageAnimation() {
         if (this.isPoisoned() && !this.endBossIsDead) {
             this.playAnimation(this.IMAGES_DAMAGE);
+            if (this.playAnimationSounds) {
+                this.damageSound.play();
+            }
         }
     }
 
@@ -114,12 +122,20 @@ class EndBoss extends MovableObject {
         if (this.isDead() && !this.endBossIsDead) {
             this.playAnimation(this.IMAGES_DEAD);
             setTimeout(() => {
+                this.playDeadSound();
                 this.endBossIsDead = true;
                 this.loadImage('img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png');
                 setInterval(() => {
                     this.y -= 1;
                 }, 1000 / 60)
             }, 500)
+        }
+    }
+
+    playDeadSound() {
+        if (this.playAnimationSounds && !this.soundPlayed) { 
+            this.deadSound.play();
+            this.soundPlayed = true;
         }
     }
 
