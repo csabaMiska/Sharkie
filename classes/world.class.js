@@ -48,6 +48,14 @@ class World {
         this.getSoundObjects().forEach((obj) => obj.setPlayAnimationSounds());
     }
 
+    setGamePaused() {
+        this.getSoundObjects().forEach((obj) => obj.setStopObjectAnimation());
+    }
+
+    setGameResume() {
+        this.getSoundObjects().forEach((obj) => obj.setPlayObjectAnimation());
+    }
+
     setGameState() {
         let gameStateInterval = setInterval(() => {
             this.setGameOver(gameStateInterval);
@@ -84,7 +92,7 @@ class World {
     setGameGiveUp(gameStateInterval) {
         if (this.state === 'GIVE_UP') {
             clearInterval(gameStateInterval);
-            this.state = 'GAME_OVER';
+            this.state = 'GIVE_UP';
             this.clearAllIntervals();
             this.resetGame();
         }
@@ -101,14 +109,6 @@ class World {
 
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
-    }
-
-    setGamePaused() {
-        this.getSoundObjects().forEach((obj) => obj.setStopObjectAnimation());
-    }
-
-    setGameResume() {
-        this.getSoundObjects().forEach((obj) => obj.setPlayObjectAnimation());
     }
 
     swimming() {

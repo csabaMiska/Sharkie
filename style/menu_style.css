@@ -172,7 +172,7 @@ nav {
 }
 
 .leader_board_place_score_row {
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: end;
 }
@@ -214,6 +214,36 @@ nav {
 .game_ranking_content {
     width: 100%;
     height: 100%;
+    padding-right: 16px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: silver; 
+    border-radius: 4px; 
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.25); 
+    border-radius: 4px; 
+}
+
+::-webkit-scrollbar-button {
+    display: none; 
+}
+
+.ranking_place {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
 }
 
 .back_btn {

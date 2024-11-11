@@ -24,10 +24,6 @@
         height: 74%;
         overflow-y: scroll;
     }
-
-    .impressum_button {
-        padding-left: 16px;
-    }
 }
 
 @media only screen and (max-width: 1920px) {
@@ -203,22 +199,37 @@
         font-size: 22px;
     }
 
-    .game_instructions_content {
-        padding-left: 16px;
+    .game_instructions_row {
+        height: 28%;
+    }
+
+    .instructions_text {
+        font-size: 24px;
     }
 
     .arrows_container {
-        width: 60px;
-        height: 60px;
-        font-size: 22px;
-        border: 3px solid white;
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+        border: 2px solid white;
+        border-radius: 8px;
     }
 
     .space_container {
-        width: 260px;
-        height: 60px;
-        font-size: 22px;
-        border: 3px solid white;
+        width: 160px;
+        height: 28px;
+        font-size: 16px;
+        border: 2px solid white;
+        border-radius: 8px;
+    }
+
+    .second_arrow_row {
+        gap: 4px;
+        margin-top: 4px;
+    }
+    
+    .game_ranking_content {
+        padding-right: 0;
     }
 }
 
@@ -261,7 +272,7 @@
     }
 
     .impressum_content {
-        font-size: 16px;
+        font-size: 12px;
     }
 
     .impressum {
@@ -269,25 +280,28 @@
         height: 74%;
     }
 
-    .impressum_button {
-        padding-left: 16px;
+    .game_instructions_row {
+        height: 28%;
     }
 
-    .game_instructions_row {
-        height: 39%;
-        gap: 8px;
+    .instructions_text {
+        font-size: 18px;
     }
 
     .arrows_container {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        border: 2px solid white;
+        border-radius: 8px;
     }
 
     .space_container {
-        width: 180px;
-        height: 34px;
-        border-radius: 10px;
+        width: 140px;
+        height: 24px;
+        font-size: 12px;
+        border: 2px solid white;
+        border-radius: 8px;
     }
 
     @media only screen and (orientation: portrait) {

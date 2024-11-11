@@ -18,6 +18,7 @@ const db = getFirestore(app);
 
 let initialInput = document.getElementById('initialInput');
 let playerScore = document.getElementById('playerScore');
+let playerPoisons = document.getElementById('playerPoisons');
 
 async function addPlayerScore() {
     try {
@@ -27,6 +28,7 @@ async function addPlayerScore() {
        const playerData = {
         initialsofplayer: initialInput.value,
         scoreofplayer: playerScore.innerText,
+        poisonsofplayer: playerPoisons.innerText,
         idofplayer: docID
        };
        await setDoc(newDocRef, playerData);
@@ -60,6 +62,28 @@ async function getBestPlayers() {
     }
 }
 
+async function getAllSavedPlayers() {
+    let loadingSpinner = document.getElementById('loadingSpinner');
+    try {
+        loadingSpinner.style.display = 'flex';
+        const initialRef = collection(db, 'LeaderBord');
+        const querySnapshot = await getDocs(initialRef);
+        if (!querySnapshot.empty) {
+            let allSavedPlayer = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                allSavedPlayer.push(data);
+            });
+            renderAllSavedPlayer(allSavedPlayer);
+        } else {
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        loadingSpinner.style.display = 'none';
+    }
+}
+
 async function deletePlayer(playerID) {
     try {
         const docRef = doc(db, 'LeaderBord', playerID);
@@ -72,3 +96,4 @@ async function deletePlayer(playerID) {
 window.deletePlayer = deletePlayer;
 window.addPlayerScore = addPlayerScore;
 window.getBestPlayers = getBestPlayers;
+window.getAllSavedPlayers = getAllSavedPlayers;

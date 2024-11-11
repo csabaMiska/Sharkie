@@ -11,6 +11,23 @@ function createLeaderBoard(place, player) {
             </div>`;
 }
 
+function createRanking(place, player) {
+    return `<div class="ranking_place">
+                <div class="leader_board_place_player_row">
+                    <div class="place_number leader_board_place_text_style">${place + '.'}</div>
+                    <div class="player_id leader_board_place_text_style">${player.initialsofplayer.toUpperCase()}</div>
+                </div>
+                <div class="leader_board_place_score_row">
+                    <div class="score leader_board_place_text_style">${player.poisonsofplayer}</div>
+                    <div class="total_pt leader_board_place_text_style">poi.</div>
+                </div>
+                <div class="leader_board_place_score_row">
+                    <div class="score leader_board_place_text_style">${player.scoreofplayer}</div>
+                    <div class="total_pt leader_board_place_text_style">pt.</div>
+                </div>
+            </div>`;
+}
+
 function returnFullScreenSvg() {
     return `<path xmlns="http://www.w3.org/2000/svg" d="M120-120v-200h80v120h120v80H120Zm520 
     0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640

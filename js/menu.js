@@ -9,6 +9,7 @@ let scoreInputBox = document.getElementById('scoreInputBox');
 let gameMenuBox = document.getElementById('gameMenuBox');
 let gameWinScreen = document.getElementById('gameWinScreen');
 let playerScore = document.getElementById('playerScore');
+let playerPoisons = document.getElementById('playerPoisons');
 let landscapeWarning = document.getElementById('landscapeWarning');
 let mobileOverlay = document.getElementById('mobileOverlay');
 
@@ -18,6 +19,7 @@ function showGameRanking() {
     gameInstructions.classList.add('d-none');
     impressum.classList.add('d-none');
     gameRanking.classList.remove('d-none');
+    getAllSavedPlayers();
 }
 
 function hideGameRanking() {
@@ -74,16 +76,24 @@ function hideGameWin() {
 
 function showInputBox() {
     showPlayerScore();
+    showPlayerPoisons();
     scoreInputBox.classList.remove('d-none');
+}
+
+function showPlayerScore() {
+    let score = world.coinCounter.coinsNumber;
+    playerScore.innerHTML = score;
+}
+
+function showPlayerPoisons() {
+    let poisons = world.poisonCounter.poisonsNumber;
+    playerPoisons.innerHTML = poisons;
 }
 
 function cancelSaveScore() {
     scoreInputBox.classList.add('d-none');
     mobileOverlay.classList.add('d-none');
     startMenu.classList.remove('d-none');
-    MUSIC_ON = false;
-    FULL_SCREEN = false;
-    toggleMusicIcon();
     hideGameWin();
 }
 
@@ -137,70 +147,90 @@ let musicIconContainer = document.getElementById('musicIconContainer');
 let musicIcon = document.getElementById('musicIcon');
 let musicIconOff = returnMusicOffSvg();
 let musicIconOn = retunrMusicOnSvg();
-let MUSIC_ON = true;
+let MUSIC_ON = localStorage.getItem('musicStatus') === 'true';
 let gameMusic = new Audio('audio/game/game_sound.mp3');
 gameMusic.loop = true; 
 
-function toggleMusicIcon() {
+function updateMusicIcon() {
     if (MUSIC_ON) {
-        musicIcon.innerHTML = '';
         musicIcon.innerHTML = musicIconOn;
         musicIcon.style.fill = 'rgb(27, 20, 100)';
         musicIconContainer.style.backgroundColor = 'rgb(252, 238, 33)';
-        MUSIC_ON = false;
-        gameMusic.play();
     } else {
-        musicIcon.innerHTML = '';
         musicIcon.innerHTML = musicIconOff;
         musicIcon.style.fill = 'white';
         musicIconContainer.style.backgroundColor = 'red';
-        MUSIC_ON = true;
-        gameMusic.pause();
     }
+}
+
+function toggleMusicIcon() {
+    MUSIC_ON = !MUSIC_ON; 
+    localStorage.setItem('musicStatus', MUSIC_ON); 
+
+    updateMusicIcon();
+
+    if (MUSIC_ON) {
+        gameMusic.play();
+    } else {
+        gameMusic.pause();
+    } 
 }
 
 let soundIconContainer = document.getElementById('soundIconContainer');
 let soundIcon = document.getElementById('soundIcon');
 let soundIconOn = returnSoundOnSvg();
 let soundIconOff = returnSoundOffSvg();
-let SOUND_ON = false;
+let SOUND_ON = localStorage.getItem('soundStatus') === 'true';
 
-function toggleSoundIcon() {
-    if (!SOUND_ON) {
-        soundIcon.innerHTML = '';
+function updateSoundIcon() {
+    if (SOUND_ON) {
         soundIcon.innerHTML = soundIconOn;
         soundIcon.style.fill = 'rgb(27, 20, 100)';
         soundIconContainer.style.backgroundColor = 'rgb(252, 238, 33)';
-        SOUND_ON = true;
-        world.playGameSounds();
     } else {
-        soundIcon.innerHTML = '';
         soundIcon.innerHTML = soundIconOff;
         soundIcon.style.fill = 'white';
         soundIconContainer.style.backgroundColor = 'red';
-        SOUND_ON = false;
+    }
+}
+
+function toggleSoundIcon() {
+    SOUND_ON = !SOUND_ON; 
+    localStorage.setItem('soundStatus', SOUND_ON); 
+
+    updateSoundIcon(); 
+
+    if (SOUND_ON) {
+        world.playGameSounds();
+    } else {
         world.muteGameSounds();
     }
 }
 
 let screenIconContainer = document.getElementById('screenIcon');
 let fullScreenIcon = returnFullScreenSvg();
-let windowScreeIcon = returnWindowsScreenSvg();
+let windowScreenIcon = returnWindowsScreenSvg();
 let FULL_SCREEN = false;
+
+function updateScreenIcon() {
+    if (document.fullscreenElement) {
+        screenIconContainer.innerHTML = windowScreenIcon;
+        FULL_SCREEN = true;
+    } else {
+        screenIconContainer.innerHTML = fullScreenIcon;
+        FULL_SCREEN = false;
+    }
+}
 
 function toggleScreenIcon() {
     if (!FULL_SCREEN) {
-        screenIconContainer.innerHTML = '';
-        screenIconContainer.innerHTML = fullScreenIcon;
+        screenIconContainer.innerHTML = windowScreenIcon;
         FULL_SCREEN = true;
-        if (document.fullscreenElement) {
-            exitFullscreen();
-        }
-    } else {
-        screenIconContainer.innerHTML = '';
-        screenIconContainer.innerHTML = windowScreeIcon;
-        FULL_SCREEN = false;
         enterFullscreen(main);
+    } else {
+        screenIconContainer.innerHTML = fullScreenIcon;
+        FULL_SCREEN = false;
+        exitFullscreen();
     }
 }
 
@@ -242,7 +272,11 @@ let leaderBoardRow = document.getElementById('leaderBoardRow');
 
 function renderLeaderBoard(leaderBoard) {
     leaderBoard.sort(function (a, b) {
-        return parseInt(b.scoreofplayer) - parseInt(a.scoreofplayer);
+        let scoreComparison = parseInt(b.scoreofplayer) - parseInt(a.scoreofplayer);
+        if (scoreComparison === 0) {
+            return parseInt(b.poisonsofplayer) - parseInt(a.poisonsofplayer);
+        }
+        return scoreComparison;
     });
 
     leaderBoardRow.innerHTML = '';
@@ -263,5 +297,28 @@ function deletePlayers(leaderBoard) {
         const playerToDelete = leaderBoard[i];
         const playerID = playerToDelete.idofplayer;
         deletePlayer(playerID);
+    }
+}
+
+let gameRankingContent = document.getElementById('gameRankingContent');
+
+function renderAllSavedPlayer(allSavedPlayer) {
+    allSavedPlayer.sort(function (a, b) {
+        let scoreComparison = parseInt(b.scoreofplayer) - parseInt(a.scoreofplayer);
+        if (scoreComparison === 0) {
+            return parseInt(b.poisonsofplayer) - parseInt(a.poisonsofplayer);
+        }
+        return scoreComparison;
+    });
+
+    gameRankingContent.innerHTML = '';
+    showAllSavedPlayer(allSavedPlayer);
+}
+
+function showAllSavedPlayer(allSavedPlayer) {
+    for (let i = 0; i < allSavedPlayer.length; i++) {
+        const player = allSavedPlayer[i];
+        const place = i + 1;
+        gameRankingContent.innerHTML += createRanking(place, player);
     }
 }

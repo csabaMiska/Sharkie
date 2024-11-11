@@ -3,9 +3,7 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
-    MUSIC_ON = false;
     getBestPlayers();
-    toggleMusicIcon();
 }
 
 window.addEventListener('keydown', (e) => {
@@ -58,12 +56,25 @@ function startGame() {
     world = new World(canvas, keyboard);
     world.resetGame();
     world.state = 'RUNNING';
-    MUSIC_ON = true;
     world.draw();
     hideStartMenu();
-    toggleMusicIcon();
-    toggleSoundIcon();
-    toggleScreenIcon();
+    getMusicStatus();
+    updateMusicIcon();
+    updateSoundIcon();
+    updateScreenIcon();
+    if (MUSIC_ON) {
+        gameMusic.play();
+    }
+}
+
+function getMusicStatus() {
+    let storedStatus = localStorage.getItem('musicStatus');
+    if (storedStatus === null) {
+        localStorage.setItem('musicStatus', true);
+        localStorage.setItem('soundStatus', true);
+        toggleSoundIcon();
+        toggleMusicIcon();
+    }
 }
 
 function pauseGame() {
@@ -72,17 +83,16 @@ function pauseGame() {
 }
 
 function resumeGame() {
-    if (world.state === 'PAUSED') {
-        world.state = 'RUNNING';
-        world.setGameResume();
-        gameMenuBox.classList.add('d-none');
-        requestAnimationFrame(() => world.draw());
-    }
+    world.state = 'RUNNING';
+    world.setGameResume();
+    gameMenuBox.classList.add('d-none');
+    requestAnimationFrame(() => world.draw());
 }
 
 function cancelGame() {
     hideGameOver();
     showInputBox();
+    gameMusic.pause();
 }
 
 function restartGame() {
@@ -92,25 +102,28 @@ function restartGame() {
 
 function giveUpGame() {
     world.state = 'GIVE_UP';
-    FULL_SCREEN = false;
-    MUSIC_ON = false;
-    toggleMusicIcon();
+    gameMusic.pause();
     hideGameMenu();
 }
 
-function showPlayerScore() {
-    let score = world.coinCounter.coinsNumber;
-    playerScore.innerHTML = score;
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('resumeBtn').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('resumeBtn').addEventListener('click', function () {
         resumeGame();
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('restartGameBtn').addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('restartGameBtn').addEventListener('click', function () {
         restartGame();
     });
+});
+
+document.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement) {
+        if (world.state === 'PAUSED') {
+            pauseGame();
+        }
+    } else {
+        pauseGame();
+    }
 });

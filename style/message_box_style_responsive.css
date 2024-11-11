@@ -39,6 +39,11 @@
         height: 60px;
     }
 
+    .message_Box_Poison {
+        width: 70px;
+        height: 90px;
+    }
+
     .message_Box_Text {
         font-size: 36px;
     }
@@ -89,6 +94,11 @@
     .message_Box_Coin {
         width: 48px;
         height: 48px;
+    }
+
+    .message_Box_Poison {
+        width: 60px;
+        height: 80px;
     }
 
     .message_Box_Text {
