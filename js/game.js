@@ -53,10 +53,16 @@ window.addEventListener('keyup', (e) => {
 
 function startGame() {
     canvas = document.getElementById('canvas');
+    canvas.style.display = 'block';
     world = new World(canvas, keyboard);
-    world.resetGame();
     world.state = 'RUNNING';
+    world.resetGame();
     world.draw();
+    startCountdown(); 
+    updateGameOptions();
+}
+
+function updateGameOptions() {
     hideStartMenu();
     getMusicStatus();
     updateMusicIcon();
@@ -127,3 +133,27 @@ document.addEventListener('fullscreenchange', () => {
         pauseGame();
     }
 });
+
+let countdownNumbers = [3, 2, 1, "Let's Go!"]; 
+let countdownElement = document.getElementById('countdown');
+let countdownIndex = 0;
+
+function startCountdown() {
+    world.setGamePaused();
+    countdownElement.style.display = 'flex'; 
+    countdownElement.innerText = countdownNumbers[countdownIndex]; 
+
+    let countdownInterval = setInterval(() => {
+        countdownIndex++; 
+        if (countdownIndex < countdownNumbers.length) {
+            countdownElement.innerText = countdownNumbers[countdownIndex];
+        } else {
+            clearInterval(countdownInterval);
+            countdownElement.style.display = 'none'; 
+            countdownIndex = 0; 
+            if (world.state != 'PAUSED') {
+                world.setGameResume();
+            }
+        }
+    }, 1000);
+}

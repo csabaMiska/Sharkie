@@ -6,7 +6,7 @@ class Shark extends MovableObject {
     speed = 12;
     energy = 100;
     world;
-    
+    playObjectAnimation = true;
     playAnimationSounds = true;
     slapSound = new Audio('audio/game/slap_sound.mp3');
     bubbleSound = new Audio('audio/game/bubble_sound.mp3');
@@ -163,27 +163,27 @@ class Shark extends MovableObject {
     }
 
     moveRight() {
-        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x && !this.characterIsDead && this.world.state === 'RUNNING') {
+        if (this.world.keyboard.RIGHT && this.x <= this.world.level.level_end_x && !this.characterIsDead && this.playObjectAnimation) {
             this.x += this.speed;
             this.otherDirection = false;
         }
     }
 
     moveLeft() {
-        if (this.world.keyboard.LEFT && this.x > 0 && !this.characterIsDead && this.world.state === 'RUNNING') {
+        if (this.world.keyboard.LEFT && this.x > 0 && !this.characterIsDead && this.playObjectAnimation) {
             this.x -= this.speed;
             this.otherDirection = true;
         }
     }
 
     moveUp() {
-        if (this.world.keyboard.UP && this.y > -100 && !this.characterIsDead && this.world.state === 'RUNNING') {
+        if (this.world.keyboard.UP && this.y > -100 && !this.characterIsDead && this.playObjectAnimation) {
             this.y -= this.speed;
         }
     }
 
     moveDown() {
-        if (this.world.keyboard.DOWN && this.y < 720 && !this.characterIsDead && this.world.state === 'RUNNING') {
+        if (this.world.keyboard.DOWN && this.y < 720 && !this.characterIsDead && this.playObjectAnimation) {
             this.y += this.speed;
         }
     }
@@ -201,7 +201,7 @@ class Shark extends MovableObject {
     }
 
     playSwimm() {
-        if (!this.characterIsDead) {
+        if (!this.characterIsDead && this.playObjectAnimation) {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIMMING);
             }
@@ -209,7 +209,7 @@ class Shark extends MovableObject {
     }
 
     playFinSlap() {
-        if (this.world.keyboard.SPACE && !this.characterIsDead) {
+        if (this.world.keyboard.SPACE && !this.characterIsDead && this.playObjectAnimation) {
             this.playAnimation(this.IMAGES_SLAP);
             if (this.playAnimationSounds) {
                 this.slapSound.play();
@@ -218,7 +218,7 @@ class Shark extends MovableObject {
     }
 
     playBubbleAttack() {
-        if (!this.characterIsDead) {
+        if (!this.characterIsDead && this.playObjectAnimation) {
             if (this.world.keyboard.D && this.world.poisonCounter.poisonsNumber > 0) {
                 this.playAnimation(this.IMAGES_BUBBLE_TRAP);
                 if (this.playAnimationSounds) {

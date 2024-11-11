@@ -221,21 +221,21 @@ nav {
 
 ::-webkit-scrollbar {
     width: 8px;
-    height: 8px; 
+    height: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: silver; 
-    border-radius: 4px; 
+    background-color: silver;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0.25); 
-    border-radius: 4px; 
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-button {
-    display: none; 
+    display: none;
 }
 
 .ranking_place {
@@ -350,4 +350,18 @@ nav {
 
 .impressum_content a:hover {
     border-bottom: 1px solid var(--headline-font-color);
+}
+
+.count_down {
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    font-family: var(--font-bowelby-one);
+    font-size: 80px;
+    color: var(--btn-bg-color);
+    background-color: rgba(0, 0, 0, 0.5);
+    text-shadow: 0px 0px 7px rgba(255,255,255,0.77);
 }
