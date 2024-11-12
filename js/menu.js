@@ -163,7 +163,7 @@ function updateMusicIcon() {
     }
 }
 
-function toggleMusicIcon() {
+function toggleMusic() {
     MUSIC_ON = !MUSIC_ON; 
     localStorage.setItem('musicStatus', MUSIC_ON); 
 
@@ -191,10 +191,11 @@ function updateSoundIcon() {
         soundIcon.innerHTML = soundIconOff;
         soundIcon.style.fill = 'white';
         soundIconContainer.style.backgroundColor = 'red';
+        world.muteGameSounds();
     }
 }
 
-function toggleSoundIcon() {
+function toggleSound() {
     SOUND_ON = !SOUND_ON; 
     localStorage.setItem('soundStatus', SOUND_ON); 
 
@@ -222,7 +223,7 @@ function updateScreenIcon() {
     }
 }
 
-function toggleScreenIcon() {
+function toggleScreen() {
     if (!FULL_SCREEN) {
         screenIconContainer.innerHTML = windowScreenIcon;
         FULL_SCREEN = true;

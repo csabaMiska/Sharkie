@@ -204,7 +204,7 @@ class Shark extends MovableObject {
 
     checkIdleState() {
         let now = new Date().getTime();
-        let idleDuration = 3000;
+        let idleDuration = 8000;
 
         if (!this.characterIsDead) {
             if (now - this.lastActiveTime >= idleDuration) {

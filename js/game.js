@@ -58,7 +58,7 @@ function startGame() {
     world.state = 'RUNNING';
     world.resetGame();
     world.draw();
-    startCountdown(); 
+    startCountdown();
     updateGameOptions();
 }
 
@@ -78,8 +78,8 @@ function getMusicStatus() {
     if (storedStatus === null) {
         localStorage.setItem('musicStatus', true);
         localStorage.setItem('soundStatus', true);
-        toggleSoundIcon();
-        toggleMusicIcon();
+        toggleSound();
+        toggleMusic();
     }
 }
 
@@ -109,6 +109,8 @@ function restartGame() {
 function giveUpGame() {
     world.state = 'GIVE_UP';
     gameMusic.pause();
+    countdownElement.style.display = 'none';
+    countdownIndex = 0;
     hideGameMenu();
 }
 
@@ -134,7 +136,7 @@ document.addEventListener('fullscreenchange', () => {
     }
 });
 
-let countdownNumbers = [3, 2, 1, "Let's Go!"]; 
+let countdownNumbers = [3, 2, 1, "Let's Go!"];
 let countdownElement = document.getElementById('countdown');
 let countdownIndex = 0;
 let countdownActive = false;
@@ -142,18 +144,18 @@ let countdownActive = false;
 function startCountdown() {
     world.setGamePaused();
     countdownActive = true;
-    countdownElement.style.display = 'flex'; 
-    countdownElement.innerText = countdownNumbers[countdownIndex]; 
+    countdownElement.style.display = 'flex';
+    countdownElement.innerText = countdownNumbers[countdownIndex];
 
     let countdownInterval = setInterval(() => {
-        countdownIndex++; 
+        countdownIndex++;
         if (countdownIndex < countdownNumbers.length) {
             countdownElement.innerText = countdownNumbers[countdownIndex];
         } else {
             clearInterval(countdownInterval);
-            countdownElement.style.display = 'none'; 
-            countdownActive = false; 
-            countdownIndex = 0; 
+            countdownElement.style.display = 'none';
+            countdownActive = false;
+            countdownIndex = 0;
             if (world.state != 'PAUSED') {
                 world.setGameResume();
             }

@@ -353,15 +353,14 @@ nav {
 }
 
 .count_down {
-    width: var(--game-window-width);
-    height: var(--game-window-height);
-    border-radius: var(--border-radius);
+    width: 100%;
+    height: 100vh;
     display: none;
     align-items: center;
     justify-content: center;
     position: fixed;
     font-family: var(--font-bowelby-one);
-    font-size: 80px;
+    font-size: 160px;
     color: var(--btn-bg-color);
     background-color: rgba(0, 0, 0, 0.5);
     text-shadow: 2px 2px 2px rgba(255,255,255,0.77);
