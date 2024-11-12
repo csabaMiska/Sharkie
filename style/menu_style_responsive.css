@@ -227,9 +227,14 @@
         gap: 4px;
         margin-top: 4px;
     }
-    
+
     .game_ranking_content {
         padding-right: 0;
+        margin-bottom: 16px;
+    }
+
+    .count_down {
+        font-size: 70px;
     }
 }
 
@@ -244,6 +249,11 @@
 
     .menu_btn {
         width: 200px;
+        height: 54px;
+    }
+
+    .back_btn {
+        width: 100px;
         height: 54px;
     }
 
@@ -304,22 +314,25 @@
         border-radius: 8px;
     }
 
-    @media only screen and (orientation: portrait) {
-        body {
-            overflow: hidden;
-        }
+    .count_down {
+        font-size: 60px;
+    }
+}
 
-        .landscape_warning {
-            display: block;
-        }
-
-        main {
-            display: none;
-        }
-
-        canvas {
-            display: none;
-        }
+@media only screen and (orientation: portrait) {
+    body {
+        overflow: hidden;
     }
 
+    .landscape_warning {
+        display: block;
+    }
+
+    main {
+        display: none;
+    }
+
+    canvas {
+        display: none;
+    }
 }

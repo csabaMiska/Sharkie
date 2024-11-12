@@ -137,7 +137,7 @@ window.addEventListener('resize', function () {
     } else {
         landscapeWarning.style.display = 'none';
         main.style.display = 'flex';
-        if (world) {
+        if (world && !countdownActive) {
             world.setGameResume();
         }
     }
@@ -281,7 +281,6 @@ function renderLeaderBoard(leaderBoard) {
 
     leaderBoardRow.innerHTML = '';
     showBestPlayers(leaderBoard);
-    //deletePlayers(leaderBoard);
 }
 
 function showBestPlayers(leaderBoard) {
@@ -289,14 +288,6 @@ function showBestPlayers(leaderBoard) {
         const player = leaderBoard[i];
         const place = i + 1;
         leaderBoardRow.innerHTML += createLeaderBoard(place, player);
-    }
-}
-
-function deletePlayers(leaderBoard) {
-    for (let i = 10; i < leaderBoard.length; i++) {
-        const playerToDelete = leaderBoard[i];
-        const playerID = playerToDelete.idofplayer;
-        deletePlayer(playerID);
     }
 }
 
@@ -313,6 +304,7 @@ function renderAllSavedPlayer(allSavedPlayer) {
 
     gameRankingContent.innerHTML = '';
     showAllSavedPlayer(allSavedPlayer);
+    deletePlayers(leaderBoard);
 }
 
 function showAllSavedPlayer(allSavedPlayer) {
@@ -320,5 +312,13 @@ function showAllSavedPlayer(allSavedPlayer) {
         const player = allSavedPlayer[i];
         const place = i + 1;
         gameRankingContent.innerHTML += createRanking(place, player);
+    }
+}
+
+function deletePlayers(leaderBoard) {
+    for (let i = 500; i < leaderBoard.length; i++) {
+        const playerToDelete = leaderBoard[i];
+        const playerID = playerToDelete.idofplayer;
+        deletePlayer(playerID);
     }
 }

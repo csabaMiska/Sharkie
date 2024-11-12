@@ -137,9 +137,11 @@ document.addEventListener('fullscreenchange', () => {
 let countdownNumbers = [3, 2, 1, "Let's Go!"]; 
 let countdownElement = document.getElementById('countdown');
 let countdownIndex = 0;
+let countdownActive = false;
 
 function startCountdown() {
     world.setGamePaused();
+    countdownActive = true;
     countdownElement.style.display = 'flex'; 
     countdownElement.innerText = countdownNumbers[countdownIndex]; 
 
@@ -150,6 +152,7 @@ function startCountdown() {
         } else {
             clearInterval(countdownInterval);
             countdownElement.style.display = 'none'; 
+            countdownActive = false; 
             countdownIndex = 0; 
             if (world.state != 'PAUSED') {
                 world.setGameResume();
