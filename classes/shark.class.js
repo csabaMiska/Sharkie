@@ -6,6 +6,7 @@ class Shark extends MovableObject {
     speed = 12;
     energy = 100;
     world;
+    lastActiveTime = new Date().getTime();
     playObjectAnimation = true;
     playAnimationSounds = true;
     slapSound = new Audio('audio/game/slap_sound.mp3');
@@ -13,6 +14,7 @@ class Shark extends MovableObject {
     poisonedSound = new Audio('audio/game/poisoned_sound.mp3');
     electricSound = new Audio('audio/game/electric_sound.mp3');
     gameOverSound = new Audio('audio/game/game_over.mp3');
+    snoreSound = new Audio('audio/game/snore_sound.mp3')
 
     offset = {
         top: 240,
@@ -196,14 +198,35 @@ class Shark extends MovableObject {
 
     playIdle() {
         if (!this.characterIsDead) {
-            this.playAnimation(this.IMAGES_IDLE);
+            this.checkIdleState();
         }
+    }
+
+    checkIdleState() {
+        let now = new Date().getTime();
+        let idleDuration = 3000;
+
+        if (!this.characterIsDead) {
+            if (now - this.lastActiveTime >= idleDuration) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+                if (this.playAnimationSounds) {
+                    this.snoreSound.play();
+                }
+            } else {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+        }
+    }
+
+    resetIdleTimer() {
+        this.lastActiveTime = new Date().getTime();
     }
 
     playSwimm() {
         if (!this.characterIsDead && this.playObjectAnimation) {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN) {
                 this.playAnimation(this.IMAGES_SWIMMING);
+                this.resetIdleTimer();
             }
         }
     }
@@ -214,6 +237,7 @@ class Shark extends MovableObject {
             if (this.playAnimationSounds) {
                 this.slapSound.play();
             }
+            this.resetIdleTimer();
         }
     }
 
@@ -222,8 +246,9 @@ class Shark extends MovableObject {
             if (this.world.keyboard.D && this.world.poisonCounter.poisonsNumber > 0) {
                 this.playAnimation(this.IMAGES_BUBBLE_TRAP);
                 if (this.playAnimationSounds) {
-                this.bubbleSound.play();
+                    this.bubbleSound.play();
                 }
+                this.resetIdleTimer();
             }
         }
     }
