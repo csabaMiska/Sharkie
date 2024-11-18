@@ -15,6 +15,21 @@ class CoinCounter extends MovableObject {
         }
     }
 
+    collectPrize() {
+        this.coinsNumber += 50;
+        if (this.playAnimationSounds) {
+            this.coinSound.loop = true;
+            this.coinSound.play();
+            this.stopPlaySound();
+        }
+    }
+
+    stopPlaySound() {
+        setTimeout(() => {
+            this.coinSound.pause();
+        }, 2000);
+    }
+
     reset() {
         this.coinsNumber = 0;
     }

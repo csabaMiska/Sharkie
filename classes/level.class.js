@@ -20,57 +20,38 @@ class Level {
     }
 
     reset() {
-        this.pufferFishes = [
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000),
-            new PufferFish(3000)
-        ];
-        this.jellyFishes = [
-            new JellyFish(),
-            new JellyFish(),
-            new JellyFish(),
-            new JellyFish(),
-            new JellyFish(),
-            new JellyFish()
-        ];
-        this.endBoss = [];
-        this.coins = [
-            new Coin(650, 600),
-            new Coin(750, 600),
-            new Coin(850, 600),
-            new Coin(950, 600),
-            new Coin(1050, 600),
-            new Coin(1150, 600)
-        ];
-        this.poisons = [
-            new Poison(),
-            new Poison(),
-            new Poison(),
-            new Poison(),
-            new Poison(),
-            new Poison(),
-            new Poison()
-        ];
-        this.backgroundObjects = [
-            new BackgroundObjects('img/3. Background/Layers/5. Water/D2.png', -1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/4.Fondo 2/D2.png', -1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D2.png', -1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/1. Light/2.png', -1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/2. Floor/D2.png', -1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/5. Water/D1.png', 0, 0),
-            new BackgroundObjects('img/3. Background/Layers/4.Fondo 2/D1.png', 0, 0),
-            new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D1.png', 0, 0),
-            new BackgroundObjects('img/3. Background/Layers/1. Light/1.png', 0, 0),
-            new BackgroundObjects('img/3. Background/Layers/2. Floor/D1.png', 0, 0),
-            new BackgroundObjects('img/3. Background/Layers/5. Water/D2.png', 1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/4.Fondo 2/D2.png', 1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/3.Fondo 1/D2.png', 1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/1. Light/2.png', 1920, 0),
-            new BackgroundObjects('img/3. Background/Layers/2. Floor/D2.png', 1920, 0)
-        ];
+        this.resetPufferFishes();
+        this.resetJellyFishes();
+        this.resetCoins();
+        this.resetPoisons();
+    }
+
+    resetPufferFishes() {
+        this.pufferFishes = [];
+        for (let i = 0; i < 20; i++) {
+            this.pufferFishes.push(new PufferFish());
+        }
+    }
+
+    resetJellyFishes() {
+        this.jellyFishes = [];
+        for (let i = 0; i < 15; i++) {
+            this.jellyFishes.push(new JellyFish());
+        }
+    }
+
+    resetCoins() {
+        this.coins = [];
+        for (let i = 0; i < level1Coins.length; i++) {
+            const level1Coin = level1Coins[i];
+            this.coins.push(level1Coin);
+        }
+    }
+
+    resetPoisons() {
+        this.poisons = [];
+        for (let i = 0; i < 25; i++) {
+            this.poisons.push(new Poison());
+        }
     }
 }

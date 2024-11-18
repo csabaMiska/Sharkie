@@ -43,11 +43,11 @@ class PufferFish extends MovableObject {
 
     deadSound = new Audio('audio/game/puffer_fish_dead_sound.mp3');
 
-    constructor(x) {
+    constructor() {
         super().loadImage('img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = x;
+        this.x = 2500 + Math.random() * (7000 - 2500);
         this.y = 100 + Math.random() * 750;
         this.speed = 1 + Math.random() * 6;
         this.animate();

@@ -33,7 +33,7 @@ class JellyFish extends MovableObject {
 
     constructor() {
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
-        this.x = 900 + Math.random() * 3200;
+        this.x = 7000 + Math.random() * (10000 - 7000);
         this.y = 900;
         this.speed = 1 + Math.random() * 4;
         this.speedY = 1 + Math.random() * 3;

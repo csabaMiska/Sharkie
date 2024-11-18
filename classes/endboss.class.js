@@ -1,7 +1,7 @@
 class EndBoss extends MovableObject {
     height = 640;
     width = 640;
-    x = 2600;
+    x = 8356;
     y = 120;
     speed = 2;
     speedY = 2;
@@ -13,6 +13,8 @@ class EndBoss extends MovableObject {
     playObjectAnimation = true;
     playAnimationSounds = true;
     soundPlayed = false;
+    prizeCollected = false;
+    coinCounter;
 
     offset = {
         top: 330,
@@ -71,10 +73,11 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
     ];
 
-    constructor() {
+    constructor(coinCounter) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.speed = 3 + Math.random() * 5;
         this.speedY = 3 + Math.random() * 5;
+        this.coinCounter = coinCounter;
         this.loadImages(this.IMAGES_INTRODUCE);
         this.loadImages(this.IMAGES_FLOATING);
         this.loadImages(this.IMAGES_DAMAGE);
@@ -90,6 +93,7 @@ class EndBoss extends MovableObject {
                 this.playSwimmAnimation();
                 this.playDamageAnimation();
                 this.playDeadAnimation();
+                this.collectCoins();
             }
         }, 140)
     }
@@ -127,13 +131,20 @@ class EndBoss extends MovableObject {
                 this.loadImage('img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png');
                 setInterval(() => {
                     this.y -= 1;
-                }, 1000 / 60)
+                }, 100)
             }, 500)
         }
     }
 
+    collectCoins() {
+        if (this.endBossIsDead && !this.prizeCollected) {
+            this.coinCounter.collectPrize();
+            this.prizeCollected = true;
+        }
+    }
+
     playDeadSound() {
-        if (this.playAnimationSounds && !this.soundPlayed) { 
+        if (this.playAnimationSounds && !this.soundPlayed) {
             this.deadSound.play();
             this.soundPlayed = true;
         }
@@ -173,7 +184,7 @@ class EndBoss extends MovableObject {
     moveLeft() {
         this.swimmLeft(this.speed);
         this.otherDirection = false;
-        if (this.x <= 1620) {
+        if (this.x <= 6800) {
             this.swimmingLeft = false;
         }
     }
@@ -181,7 +192,7 @@ class EndBoss extends MovableObject {
     moveRight() {
         this.swimmRight(this.speed);
         this.otherDirection = true;
-        if (this.x >= 2600) {
+        if (this.x >= 8350) {
             this.swimmingLeft = true;
         }
     }
@@ -192,7 +203,7 @@ class EndBoss extends MovableObject {
             if (this.y <= -100) {
                 this.swimmingUp = false;
             }
-            if (this.x <= 1620) {
+            if (this.x <= 6800) {
                 this.swimmingLeft = false;
             }
         } else {
@@ -200,7 +211,7 @@ class EndBoss extends MovableObject {
             if (this.y <= -100) {
                 this.swimmingUp = false;
             }
-            if (this.x >= 2600) {
+            if (this.x >= 8350) {
                 this.swimmingLeft = true;
             }
         }
@@ -212,7 +223,7 @@ class EndBoss extends MovableObject {
             if (this.y >= 600) {
                 this.swimmingUp = true;
             }
-            if (this.x <= 1620) {
+            if (this.x <= 6800) {
                 this.swimmingLeft = false;
             }
         } else {
@@ -220,7 +231,7 @@ class EndBoss extends MovableObject {
             if (this.y >= 600) {
                 this.swimmingUp = true;
             }
-            if (this.x >= 2600) {
+            if (this.x >= 8350) {
                 this.swimmingLeft = true;
             }
         }

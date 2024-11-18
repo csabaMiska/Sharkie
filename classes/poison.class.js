@@ -37,7 +37,7 @@ class Poison extends MovableObject {
         if(pufferFish_x > 0) {
             return pufferFish_x;
         } else {
-            return 700 + Math.random() * 1920
+            return 800 + Math.random() * 7680;
         }
     }
 

@@ -6,6 +6,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    endBossStatusBar = new EndBossBar();
     poisonBar = new PoisonBar();
     poisonCounter = new PoisonCounter();
     coinBar = new CoinBar();
@@ -63,7 +64,7 @@ class World {
             this.setGameGiveUp(gameStateInterval);
             checkGameMenu();
             showMobilBtn();
-        }, 1000 / 60);
+        }, 50);
     }
 
     setGameOver(gameStateInterval) {
@@ -99,8 +100,6 @@ class World {
     }
 
     resetGame() {
-        this.level.pufferFishes = [];
-        this.level.jellyFishes = [];
         this.level.endBoss = [];
         this.level.reset();
         this.coinCounter.reset();
@@ -205,8 +204,8 @@ class World {
         }, 1100);
     }
 
-    createNewPoison(pufferFish) {
-        let poison = new Poison(pufferFish.x, pufferFish.y);
+    createNewPoison(enemy) {
+        let poison = new Poison(enemy.x, enemy.y);
         this.level.poisons.push(poison);
     }
 
@@ -268,6 +267,9 @@ class World {
             if (bubble.isColliding(endBoss) && !endBoss.endBossIsDead) {
                 bubbleIsCollided = true;
                 endBoss.hit();
+                if (endBoss) {
+                    this.endBossStatusBar.setPercentage(endBoss.energy);
+                }
             }
         });
 
@@ -278,6 +280,7 @@ class World {
         setTimeout(() => {
             this.removeJellyFish(jellyFish);
             this.createNewCoin(jellyFish);
+            this.createNewPoison(jellyFish);
         }, 600);
     }
 
@@ -293,7 +296,7 @@ class World {
 
     createFinalBattle() {
         if (!this.finalBattleStarted && this.shark.x >= this.level.final_battle_x) {
-            let finalEnemy = new EndBoss();
+            let finalEnemy = new EndBoss(this.coinCounter);
             this.level.endBoss.push(finalEnemy);
             this.finalBattleStarted = true;
             this.animateEndBoss();
@@ -323,6 +326,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
+        this.createEndBossStatusBar();
         this.addToMap(this.poisonBar);
         this.addToMap(this.coinBar);
         this.ctx.font = "40px Bowlby One";
@@ -346,6 +350,12 @@ class World {
         requestAnimationFrame(function () {
             self.draw();
         });
+    }
+
+    createEndBossStatusBar() {
+        if (this.level.endBoss[0]) {
+            this.addToMap(this.endBossStatusBar);
+        }
     }
 
     addObjectsToMap(objects) {

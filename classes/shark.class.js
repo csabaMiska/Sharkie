@@ -280,7 +280,7 @@ class Shark extends MovableObject {
                 this.loadImage('img/1.Sharkie/6.dead/1.Poisoned/12.png');
                 setInterval(() => {
                     this.y -= 1;
-                }, 1000 / 60)
+                }, 140)
             }, 400)
         }
     }
