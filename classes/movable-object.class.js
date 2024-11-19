@@ -1,71 +1,14 @@
-/**
- * Represents a movable object in the game that can be drawn and animated. The object has properties such as speed,
- * energy, damage, gravity, and methods for performing various actions such as movement, collision detection, and animation.
- * It can also be affected by poison, shock, and gravity.
- */
 class MovableObject extends DrawableObject {
-    /**
-     * The speed of the object.
-     * @type {number}
-     */
     speed;
-
-    /**
-     * The current image index for animation.
-     * @type {number}
-     */
     currentImage = 0;
-
-    /**
-     * A boolean indicating if the object is moving in the opposite direction.
-     * @type {boolean}
-     */
     otherDirection = false;
-
-    /**
-     * The damage the object can inflict.
-     * @type {number}
-     */
     damage;
-
-    /**
-     * The energy level of the object.
-     * @type {number}
-     */
     energy;
-
-    /**
-     * The timestamp of the last hit.
-     * @type {number}
-     */
     lastHit = 0;
-
-    /**
-     * The timestamp of the last shock.
-     * @type {number}
-     */
     lastShock = 0;
-
-    /**
-     * The vertical speed (used for gravity).
-     * @type {number}
-     */
     speedY = 0;
-
-    /**
-     * The acceleration applied to the object's vertical movement.
-     * @type {number}
-     */
     acceleration = 1;
-
-    /**
-     * The offset for the object's collision boundaries (top, bottom, left, right).
-     * @type {Object}
-     * @property {number} top - The top offset.
-     * @property {number} bottom - The bottom offset.
-     * @property {number} left - The left offset.
-     * @property {number} right - The right offset.
-     */
+    
     offset = {
         top: 0,
         bottom: 0,

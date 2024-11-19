@@ -1,57 +1,22 @@
-/**
- * Represents the Shark character in the game.
- * @extends MovableObject
- */
 class Shark extends MovableObject {
-    /** @type {number} The x position of the Shark */
     x = 50;
-
-    /** @type {number} The y position of the Shark */
     y = 240;
-
-    /** @type {number} The width of the Shark */
     width = 450;
-
-    /** @type {number} The height of the Shark */
     height = 450;
-
-    /** @type {number} The speed of the Shark */
     speed = 12;
-
-    /** @type {number} The energy of the Shark */
     energy = 100;
-
-    /** @type {Object} The world object that contains the game world */
     world;
-
-    /** @type {number} Timestamp of the last active time */
     lastActiveTime = new Date().getTime();
-
-    /** @type {boolean} Flag to control whether to play the object animation */
     playObjectAnimation = true;
-
-    /** @type {boolean} Flag to control whether to play animation sounds */
     playAnimationSounds = true;
 
-    /** @type {HTMLAudioElement} Sound played for Fin slap attack */
     slapSound = new Audio('audio/game/slap_sound.mp3');
-
-    /** @type {HTMLAudioElement} Sound played for bubble trap attack */
     bubbleSound = new Audio('audio/game/bubble_sound.mp3');
-
-    /** @type {HTMLAudioElement} Sound played when Shark is poisoned */
     poisonedSound = new Audio('audio/game/poisoned_sound.mp3');
-
-    /** @type {HTMLAudioElement} Sound played when Shark gets shocked */
     electricSound = new Audio('audio/game/electric_sound.mp3');
-
-    /** @type {HTMLAudioElement} Sound played when game is over */
     gameOverSound = new Audio('audio/game/game_over.mp3');
-
-    /** @type {HTMLAudioElement} Sound played when Shark snores */
     snoreSound = new Audio('audio/game/snore_sound.mp3')
 
-    /** @type {Object} The offset values for the Shark's position */
     offset = {
         top: 240,
         bottom: 100,
@@ -59,7 +24,6 @@ class Shark extends MovableObject {
         right: 100
     };
 
-    /** @type {Array<string>} Array of image file paths for idle animation */
     IMAGES_IDLE = [
         'img/1.Sharkie/1.IDLE/1.png',
         'img/1.Sharkie/1.IDLE/2.png',
@@ -80,8 +44,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/1.IDLE/17.png',
         'img/1.Sharkie/1.IDLE/18.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for long idle animation */
     IMAGES_LONG_IDLE = [
         'img/1.Sharkie/2.Long_IDLE/i1.png',
         'img/1.Sharkie/2.Long_IDLE/I2.png',
@@ -98,8 +60,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/2.Long_IDLE/I13.png',
         'img/1.Sharkie/2.Long_IDLE/I14.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for swimming animation */
     IMAGES_SWIMMING = [
         'img/1.Sharkie/3.Swim/1.png',
         'img/1.Sharkie/3.Swim/2.png',
@@ -108,8 +68,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/3.Swim/5.png',
         'img/1.Sharkie/3.Swim/6.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for slap attack animation */
     IMAGES_SLAP = [
         'img/1.Sharkie/4.Attack/Fin slap/1.png',
         'img/1.Sharkie/4.Attack/Fin slap/2.png',
@@ -120,8 +78,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/4.Attack/Fin slap/7.png',
         'img/1.Sharkie/4.Attack/Fin slap/8.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for bubble trap attack animation */
     IMAGES_BUBBLE_TRAP = [
         'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/1.png',
         'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/2.png',
@@ -131,8 +87,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/6.png',
         'img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/7.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for hurt animation (poisoned) */
     IMAGES_HURT = [
         'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
@@ -140,15 +94,11 @@ class Shark extends MovableObject {
         'img/1.Sharkie/5.Hurt/1.Poisoned/4.png',
         'img/1.Sharkie/5.Hurt/1.Poisoned/5.png',
     ];
-
-    /** @type {Array<string>} Array of image file paths for shock animation (electric shock) */
     IMAGES_SHOCK = [
         'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
         'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
         'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for poisoned death animation */
     IMAGES_POISONED = [
         'img/1.Sharkie/6.dead/1.Poisoned/1.png',
         'img/1.Sharkie/6.dead/1.Poisoned/2.png',
@@ -163,8 +113,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/6.dead/1.Poisoned/11.png',
         'img/1.Sharkie/6.dead/1.Poisoned/12.png'
     ];
-
-    /** @type {Array<string>} Array of image file paths for electro shocked death animation */
     IMAGES_ELEKTRO_SHOCK = [
         'img/1.Sharkie/6.dead/2.Electro_shock/1.png',
         'img/1.Sharkie/6.dead/2.Electro_shock/2.png',
@@ -178,9 +126,6 @@ class Shark extends MovableObject {
         'img/1.Sharkie/6.dead/2.Electro_shock/10.png'
     ];
 
-    /**
-     * Creates a new Shark character and initializes all image animations and sounds.
-     */
     constructor() {
         super().loadImage('img/1.Sharkie/3.Swim/1.png');
         this.characterIsDead = false;

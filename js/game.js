@@ -1,30 +1,5 @@
-/**
- * @typedef {Object} Keyboard
- * @property {boolean} LEFT - Represents whether the left arrow key is pressed.
- * @property {boolean} UP - Represents whether the up arrow key is pressed.
- * @property {boolean} RIGHT - Represents whether the right arrow key is pressed.
- * @property {boolean} DOWN - Represents whether the down arrow key is pressed.
- * @property {boolean} SPACE - Represents whether the space bar is pressed.
- * @property {boolean} D - Represents whether the 'D' key is pressed.
- * @property {boolean} M - Represents whether the 'M' key is pressed.
- */
-
-/**
- * The canvas element used for rendering the game.
- * @type {HTMLCanvasElement}
- */
 let canvas;
-
-/**
- * The world object representing the game world.
- * @type {World}
- */
 let world;
-
-/**
- * The keyboard state object to track key presses.
- * @type {Keyboard}
- */
 let keyboard = new Keyboard();
 
 /**

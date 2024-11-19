@@ -1,12 +1,4 @@
-/**
- * Represents a status bar that displays a percentage value visually using images.
- * The status bar changes its appearance based on the percentage value.
- */
 class StatusBar extends DrawableObject {
-    /**
-     * Array of image paths representing different stages of the status bar (percentage from 0 to 100).
-     * These images are used to visually represent the percentage.
-     */
     IMAGES = [
         'img/4. Marcadores/Purple/0_ .png',
         'img/4. Marcadores/Purple/20__1.png',
@@ -16,16 +8,8 @@ class StatusBar extends DrawableObject {
         'img/4. Marcadores/Purple/100_ .png'
     ];
 
-    /**
-     * Current percentage of the status bar (default is 100%).
-     * Represents the value that determines which image should be displayed.
-     */
     percentage = 100;
 
-    /**
-     * Creates an instance of the StatusBar object, sets the initial position and size, 
-     * and initializes the image to reflect the 100% value.
-     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);

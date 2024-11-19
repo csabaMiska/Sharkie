@@ -1,13 +1,4 @@
-/**
- * Represents a poison object in the game that is animated and positioned relative to a PufferFish.
- * The poison object plays an animation and moves across the screen.
- */
 class Poison extends MovableObject {
-
-    /**
-     * Array of image paths for the animated poison.
-     * @type {string[]}
-     */
     IMAGES = [
         'img/4. Marcadores/Posión/Animada/1.png',
         'img/4. Marcadores/Posión/Animada/2.png',
@@ -19,14 +10,6 @@ class Poison extends MovableObject {
         'img/4. Marcadores/Posión/Animada/8.png'
     ];
 
-    /**
-     * The offset used for collision detection and positioning of the poison object.
-     * @type {Object}
-     * @property {number} top - The top offset.
-     * @property {number} bottom - The bottom offset.
-     * @property {number} left - The left offset.
-     * @property {number} right - The right offset.
-     */
     offset = {
         top: 56,
         bottom: 8,
@@ -34,11 +17,6 @@ class Poison extends MovableObject {
         right: 24
     }
 
-    /**
-     * Creates a new instance of the Poison object.
-     * @param {number} pufferFish_x - The x position of the PufferFish.
-     * @param {number} pufferFish_y - The y position of the PufferFish.
-     */
     constructor(pufferFish_x, pufferFish_y) {
         super().loadImage('img/4. Marcadores/Posión/Animada/1.png');
         this.x = this.returnX(pufferFish_x);

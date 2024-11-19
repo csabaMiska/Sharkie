@@ -1,116 +1,22 @@
-/**
- * Represents the game world, including the shark, level, status bars, and all objects within the world.
- * Handles game state, collisions, attacks, and rendering of all game elements.
- */
 class World {
-    /**
-     * The shark character.
-     * @type {Shark}
-     */
     shark = new Shark();
-
-    /**
-     * The current level of the game.
-     * @type {Object}
-     */
     level = level1;
-
-    /**
-     * The canvas element where the game is drawn.
-     * @type {HTMLCanvasElement}
-     */
     canvas;
-
-    /**
-     * The 2D drawing context of the canvas.
-     * @type {CanvasRenderingContext2D}
-     */
     ctx;
-
-    /**
-     * The keyboard input handler for the game.
-     * @type {Keyboard}
-     */
     keyboard;
-
-    /**
-     * The x-coordinate of the camera (for camera movement).
-     * @type {number}
-     */
     camera_x = 0;
-
-    /**
-     * The status bar for tracking the shark's energy.
-     * @type {StatusBar}
-     */
     statusBar = new StatusBar();
-
-    /**
-     * The status bar for tracking the end boss's energy.
-     * @type {EndBossBar}
-     */
     endBossStatusBar = new EndBossBar();
-
-    /**
-     * The poison bar for tracking poison status.
-     * @type {PoisonBar}
-     */
     poisonBar = new PoisonBar();
-
-    /**
-     * The poison counter for tracking poison items.
-     * @type {PoisonCounter}
-     */
     poisonCounter = new PoisonCounter();
-
-    /**
-     * The coin bar for tracking the player's coin count.
-     * @type {CoinBar}
-     */
     coinBar = new CoinBar();
-
-    /**
-     * The coin counter for tracking the collected coins.
-     * @type {CoinCounter}
-     */
     coinCounter = new CoinCounter();
-
-    /**
-     * A movable object for generic movement.
-     * @type {MovableObject}
-     */
     movableObject = new MovableObject();
-
-    /**
-     * Array of throwable objects (e.g., bubbles).
-     * @type {Array<ThrowableObject>}
-     */
     throwableObjects = [];
-
-    /**
-     * Flag indicating whether the final battle has started.
-     * @type {boolean}
-     */
     finalBattleStarted = false;
-
-    /**
-     * The current state of the game (e.g., running, paused, game over).
-     * @type {string}
-     */
     state;
-
-    /**
-     * Flag for whether the end boss animations are enabled.
-     * @type {boolean}
-     */
     animatedEndBoss = false;
 
-    /**
-     * Creates a new game world instance with the provided canvas and keyboard input handler.
-     * Initializes the game environment, including sounds, state, and initial actions.
-     * @param {HTMLCanvasElement} canvas - The canvas element for drawing the game.
-     * @param {Keyboard} keyboard - The keyboard input handler for the game.
-     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -518,33 +424,15 @@ class World {
      */
     draw() {
         if (this.state !== 'RUNNING') return;
-
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusBar);
-        this.createEndBossStatusBar();
-        this.addToMap(this.poisonBar);
-        this.addToMap(this.coinBar);
-        this.ctx.font = "40px Bowlby One";
-        this.ctx.textBaseline = "middle";
-        this.ctx.fillStyle = "white";
-        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1780, 84);
-        this.ctx.fillText("X " + this.poisonCounter.poisonsNumber, 1500, 84);
+        this.drawStatusBars();
         this.ctx.translate(this.camera_x, 0);
-
         this.addToMap(this.shark);
-        this.addObjectsToMap(this.level.pufferFishes);
-        this.addObjectsToMap(this.level.jellyFishes);
-        this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.poisons);
-        this.addObjectsToMap(this.level.endBoss);
-        this.addObjectsToMap(this.throwableObjects);
-
+        this.drawEnemies()
+        this.drawGameElements();
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
@@ -554,12 +442,39 @@ class World {
     }
 
     /**
-     * Creates and renders the end boss status bar if the end boss is present in the level.
-     */
-    createEndBossStatusBar() {
+    * Draws the status bars (coin bar, poison bar, and optionally the end boss status bar) 
+    * and updates the displayed counts for coins and poison bottles.
+    */
+    drawStatusBars() {
+        this.addToMap(this.statusBar);
+        this.addToMap(this.poisonBar);
+        this.addToMap(this.coinBar);
+        this.ctx.font = "40px Bowlby One";
+        this.ctx.textBaseline = "middle";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText("X " + this.coinCounter.coinsNumber, 1780, 84);
+        this.ctx.fillText("X " + this.poisonCounter.poisonsNumber, 1500, 84);
         if (this.level.endBoss[0]) {
             this.addToMap(this.endBossStatusBar);
         }
+    }
+
+    /**
+    * Draws all enemies in the level, including pufferfishes, jellyfishes, and the end boss.
+    */
+    drawEnemies() {
+        this.addObjectsToMap(this.level.pufferFishes);
+        this.addObjectsToMap(this.level.jellyFishes);
+        this.addObjectsToMap(this.level.endBoss);
+    }
+
+    /**
+    * Draws collectible game elements (coins and poison bottles) and throwable objects.
+    */
+    drawGameElements() {
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.poisons);
+        this.addObjectsToMap(this.throwableObjects);
     }
 
     /**

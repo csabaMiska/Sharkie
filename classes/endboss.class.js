@@ -1,112 +1,21 @@
-/**
- * Represents the End Boss in the game, with various states including introduction, swimming, damage, and death.
- * Handles animations, movement, damage, and prize collection logic for the final enemy in the game.
- */
 class EndBoss extends MovableObject {
-    /**
-     * The height of the EndBoss.
-     * @type {number}
-     */
     height = 640;
-
-    /**
-     * The width of the EndBoss.
-     * @type {number}
-     */
     width = 640;
-
-    /**
-     * The x position of the EndBoss on the game canvas.
-     * @type {number}
-     */
     x = 8356;
-
-    /**
-     * The y position of the EndBoss on the game canvas.
-     * @type {number}
-     */
     y = 120;
-
-    /**
-     * The speed of the EndBoss in the horizontal direction.
-     * @type {number}
-     */
     speed = 2;
-
-    /**
-     * The speed of the EndBoss in the vertical direction.
-     * @type {number}
-     */
     speedY = 2;
-
-    /**
-     * The energy of the EndBoss, used to track its health.
-     * @type {number}
-     */
     energy = 100;
-
-    /**
-     * Whether the EndBoss is in the introduction animation state.
-     * @type {boolean}
-     */
     playInroduce = true;
-
-    /**
-     * Whether the EndBoss is dead.
-     * @type {boolean}
-     */
     endBossIsDead = false;
-
-    /**
-     * Whether the EndBoss is swimming upwards.
-     * @type {boolean}
-     */
     swimmingUp = true;
-
-    /**
-     * Whether the EndBoss is swimming left.
-     * @type {boolean}
-     */
     swimmingLeft = true;
-
-    /**
-     * Whether the object should play animations.
-     * @type {boolean}
-     */
     playObjectAnimation = true;
-
-    /**
-     * Whether the object should play animation sounds.
-     * @type {boolean}
-     */
     playAnimationSounds = true;
-
-    /**
-     * Whether a sound has been played for the EndBoss.
-     * @type {boolean}
-     */
     soundPlayed = false;
-
-    /**
-     * Whether the prize has been collected from the EndBoss.
-     * @type {boolean}
-     */
     prizeCollected = false;
-
-    /**
-     * The coin counter instance, used to manage the player's collected coins.
-     * @type {CoinCounter}
-     */
     coinCounter;
 
-    /**
-     * The offset values for collision detection.
-     * @type {Object}
-     * @property {number} top - Top offset.
-     * @property {number} bottom - Bottom offset.
-     * @property {number} left - Left offset.
-     * @property {number} right - Right offset.
-     */
     offset = {
         top: 330,
         bottom: 140,
@@ -114,23 +23,10 @@ class EndBoss extends MovableObject {
         right: 56
     };
 
-    /**
-     * The sound effect played when the EndBoss is damaged.
-     * @type {HTMLAudioElement}
-     */
     damageSound = new Audio('audio/game/end_boss_damage_sound.mp3');
-
-    /**
-     * The sound effect played when the EndBoss is dead.
-     * @type {HTMLAudioElement}
-     */
     deadSound = new Audio('audio/game/end_boss_dead_sound.mp3');
     gameWinSound = new Audio('audio/game/game_win.mp3');
 
-    /**
-     * The images for the introduction animation of the EndBoss.
-     * @type {string[]}
-     */
     IMAGES_INTRODUCE = [
         'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
         'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
@@ -144,10 +40,6 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
     ];
 
-    /**
-     * The images for the floating (active) animation of the EndBoss.
-     * @type {string[]}
-     */
     IMAGES_FLOATING = [
         'img/2.Enemy/3 Final Enemy/2.floating/1.png',
         'img/2.Enemy/3 Final Enemy/2.floating/2.png',
@@ -170,10 +62,6 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/Attack/6.png'
     ];
 
-    /**
-     * The images for the damage (hurt) animation of the EndBoss.
-     * @type {string[]}
-     */
     IMAGES_DAMAGE = [
         'img/2.Enemy/3 Final Enemy/Hurt/1.png',
         'img/2.Enemy/3 Final Enemy/Hurt/2.png',
@@ -181,10 +69,6 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/Hurt/4.png'
     ];
 
-    /**
-     * The images for the death animation of the EndBoss.
-     * @type {string[]}
-     */
     IMAGES_DEAD = [
         'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
         'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
@@ -193,10 +77,6 @@ class EndBoss extends MovableObject {
         'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
     ];
 
-    /**
-     * Creates a new EndBoss instance.
-     * @param {CoinCounter} coinCounter - The coin counter instance used to manage the coins.
-     */
     constructor(coinCounter) {
         super().loadImage('img/2.Enemy/3 Final Enemy/1.Introduce/1.png');
         this.speed = 3 + Math.random() * 5;
@@ -211,8 +91,8 @@ class EndBoss extends MovableObject {
     }
 
     /**
- * Handles the animation logic for the EndBoss, including introduction, swimming, damage, death, and coin collection.
- */
+    * Handles the animation logic for the EndBoss, including introduction, swimming, damage, death, and coin collection.
+    */
     animate() {
         setInterval(() => {
             if (this.playObjectAnimation) {

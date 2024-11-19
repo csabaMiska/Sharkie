@@ -1,42 +1,9 @@
-/**
- * Represents a drawable object in the game. Provides functionality for loading images, 
- * managing an image cache, and rendering the object on a canvas.
- */
 class DrawableObject {
-    /**
-     * The x-coordinate of the object.
-     * @type {number}
-     */
     x;
-
-    /**
-     * The y-coordinate of the object.
-     * @type {number}
-     */
     y;
-
-    /**
-     * The height of the object.
-     * @type {number}
-     */
     height;
-
-    /**
-     * The width of the object.
-     * @type {number}
-     */
     width;
-
-    /**
-     * The current image associated with the object.
-     * @type {HTMLImageElement}
-     */
     img;
-
-    /**
-     * A cache of preloaded images for the object.
-     * @type {Object.<string, HTMLImageElement>}
-     */
     imgCache = {};
 
     /**

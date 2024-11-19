@@ -1,53 +1,12 @@
-/**
- * Manages keyboard and touch inputs for controlling game actions.
- * Tracks the state of various keys and handles mobile button press events.
- */
 class Keyboard {
-    /**
-     * Indicates whether the left arrow key is pressed.
-     * @type {boolean}
-     */
     LEFT = false;
-
-    /**
-     * Indicates whether the right arrow key is pressed.
-     * @type {boolean}
-     */
     RIGHT = false;
-
-    /**
-     * Indicates whether the up arrow key is pressed.
-     * @type {boolean}
-     */
     UP = false;
-
-    /**
-     * Indicates whether the down arrow key is pressed.
-     * @type {boolean}
-     */
     DOWN = false;
-
-    /**
-     * Indicates whether the spacebar key is pressed.
-     * @type {boolean}
-     */
     SPACE = false;
-
-    /**
-     * Indicates whether the "D" key is pressed.
-     * @type {boolean}
-     */
     D = false;
-
-    /**
-     * Indicates whether the Escape key is pressed.
-     * @type {boolean}
-     */
     ESC = false;
 
-    /**
-     * Initializes a new instance of the `Keyboard` class and sets up event listeners for mobile button presses.
-     */
     constructor() {
         this.mobileBtnPressEvent();
     }
@@ -61,7 +20,6 @@ class Keyboard {
             let btnD = document.getElementById('btnD');
             let btnSpace = document.getElementById('btnSpace');
 
-            // Touch event for the "D" button
             btnD.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.D = true;
@@ -72,7 +30,6 @@ class Keyboard {
                 this.D = false;
             });
 
-            // Touch event for the "SPACE" button
             btnSpace.addEventListener('touchstart', (e) => {
                 e.preventDefault();
                 this.SPACE = true;
