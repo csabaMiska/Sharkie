@@ -62,6 +62,7 @@ let level1Coins = [
     new Coin(4860, 300),
     new Coin(4940, 300),
     new Coin(5020, 300),
+
     new Coin(5200, 450),
     new Coin(5280, 450),
     new Coin(5320, 530),
@@ -70,6 +71,18 @@ let level1Coins = [
     new Coin(5120, 610),
     new Coin(5080, 530),
     new Coin(5120, 450),
+
+    new Coin(5300, 740),
+    new Coin(5380, 740),
+    new Coin(5460, 740),
+    new Coin(5540, 740),
+    new Coin(5620, 740),
+    new Coin(5700, 740),
+    new Coin(5780, 740),
+    new Coin(5860, 740),
+    new Coin(5940, 740),
+    new Coin(6020, 740),
+
     new Coin(6300, 300),
     new Coin(6380, 300),
     new Coin(6420, 380),
