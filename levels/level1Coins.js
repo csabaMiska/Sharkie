@@ -1,3 +1,12 @@
+/**
+ * Array of coin objects placed at specific coordinates throughout the level.
+ * These coins are collectible items that the player can collect while progressing through the level.
+ * 
+ * @type {Array<Coin>}
+ * @example
+ * // Example of coin placement in the level:
+ * new Coin(1900, 300) // Coin at coordinates (1900, 300)
+ */
 let level1Coins = [
     new Coin(1900, 300),
     new Coin(1980, 300),
@@ -6,7 +15,7 @@ let level1Coins = [
     new Coin(1900, 500),
     new Coin(1820, 460),
     new Coin(1780, 380),
-    new Coin(1820, 300),  
+    new Coin(1820, 300),
     new Coin(2100, 780),
     new Coin(2180, 780),
     new Coin(2260, 780),
@@ -17,14 +26,14 @@ let level1Coins = [
     new Coin(2660, 780),
     new Coin(2740, 780),
     new Coin(2820, 780),
-    new Coin(3000, 450),  
+    new Coin(3000, 450),
     new Coin(3080, 450),
     new Coin(3120, 530),
     new Coin(3080, 610),
     new Coin(3000, 640),
     new Coin(2920, 610),
     new Coin(2880, 530),
-    new Coin(2920, 450), 
+    new Coin(2920, 450),
     new Coin(3200, 350),
     new Coin(3280, 330),
     new Coin(3360, 370),
@@ -35,14 +44,14 @@ let level1Coins = [
     new Coin(3760, 370),
     new Coin(3840, 410),
     new Coin(3920, 390),
-    new Coin(4100, 600), 
+    new Coin(4100, 600),
     new Coin(4180, 600),
     new Coin(4220, 680),
     new Coin(4180, 760),
     new Coin(4100, 800),
     new Coin(4020, 760),
     new Coin(3980, 680),
-    new Coin(4020, 600), 
+    new Coin(4020, 600),
     new Coin(4300, 300),
     new Coin(4380, 300),
     new Coin(4460, 300),
@@ -53,15 +62,15 @@ let level1Coins = [
     new Coin(4860, 300),
     new Coin(4940, 300),
     new Coin(5020, 300),
-    new Coin(5200, 450),  
+    new Coin(5200, 450),
     new Coin(5280, 450),
     new Coin(5320, 530),
     new Coin(5280, 610),
     new Coin(5200, 640),
     new Coin(5120, 610),
     new Coin(5080, 530),
-    new Coin(5120, 450), 
-    new Coin(6300, 300),  
+    new Coin(5120, 450),
+    new Coin(6300, 300),
     new Coin(6380, 300),
     new Coin(6420, 380),
     new Coin(6380, 460),

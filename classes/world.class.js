@@ -1,22 +1,116 @@
+/**
+ * Represents the game world, including the shark, level, status bars, and all objects within the world.
+ * Handles game state, collisions, attacks, and rendering of all game elements.
+ */
 class World {
+    /**
+     * The shark character.
+     * @type {Shark}
+     */
     shark = new Shark();
+
+    /**
+     * The current level of the game.
+     * @type {Object}
+     */
     level = level1;
+
+    /**
+     * The canvas element where the game is drawn.
+     * @type {HTMLCanvasElement}
+     */
     canvas;
+
+    /**
+     * The 2D drawing context of the canvas.
+     * @type {CanvasRenderingContext2D}
+     */
     ctx;
+
+    /**
+     * The keyboard input handler for the game.
+     * @type {Keyboard}
+     */
     keyboard;
+
+    /**
+     * The x-coordinate of the camera (for camera movement).
+     * @type {number}
+     */
     camera_x = 0;
+
+    /**
+     * The status bar for tracking the shark's energy.
+     * @type {StatusBar}
+     */
     statusBar = new StatusBar();
+
+    /**
+     * The status bar for tracking the end boss's energy.
+     * @type {EndBossBar}
+     */
     endBossStatusBar = new EndBossBar();
+
+    /**
+     * The poison bar for tracking poison status.
+     * @type {PoisonBar}
+     */
     poisonBar = new PoisonBar();
+
+    /**
+     * The poison counter for tracking poison items.
+     * @type {PoisonCounter}
+     */
     poisonCounter = new PoisonCounter();
+
+    /**
+     * The coin bar for tracking the player's coin count.
+     * @type {CoinBar}
+     */
     coinBar = new CoinBar();
+
+    /**
+     * The coin counter for tracking the collected coins.
+     * @type {CoinCounter}
+     */
     coinCounter = new CoinCounter();
+
+    /**
+     * A movable object for generic movement.
+     * @type {MovableObject}
+     */
     movableObject = new MovableObject();
+
+    /**
+     * Array of throwable objects (e.g., bubbles).
+     * @type {Array<ThrowableObject>}
+     */
     throwableObjects = [];
+
+    /**
+     * Flag indicating whether the final battle has started.
+     * @type {boolean}
+     */
     finalBattleStarted = false;
+
+    /**
+     * The current state of the game (e.g., running, paused, game over).
+     * @type {string}
+     */
     state;
+
+    /**
+     * Flag for whether the end boss animations are enabled.
+     * @type {boolean}
+     */
     animatedEndBoss = false;
 
+    /**
+     * Creates a new game world instance with the provided canvas and keyboard input handler.
+     * Initializes the game environment, including sounds, state, and initial actions.
+     * @param {HTMLCanvasElement} canvas - The canvas element for drawing the game.
+     * @param {Keyboard} keyboard - The keyboard input handler for the game.
+     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -28,6 +122,10 @@ class World {
         this.attack();
     }
 
+    /**
+     * Returns all objects that can make sound during gameplay.
+     * @returns {Array<Object>} An array of game objects that play sounds.
+     */
     getSoundObjects() {
         return [
             this.shark,
@@ -39,24 +137,39 @@ class World {
         ];
     }
 
+    /**
+     * Mutes all game sounds by stopping animations for sound objects.
+     */
     muteGameSounds() {
         this.animatedEndBoss = false;
         this.getSoundObjects().forEach((obj) => obj.setStopAnimationSounds());
     }
-    
+
+    /**
+     * Plays all game sounds by enabling animations for sound objects.
+     */
     playGameSounds() {
         this.animatedEndBoss = true;
         this.getSoundObjects().forEach((obj) => obj.setPlayAnimationSounds());
     }
 
+    /**
+     * Pauses the game by stopping all object animations.
+     */
     setGamePaused() {
         this.getSoundObjects().forEach((obj) => obj.setStopObjectAnimation());
     }
 
+    /**
+     * Resumes the game by starting animations for all objects.
+     */
     setGameResume() {
         this.getSoundObjects().forEach((obj) => obj.setPlayObjectAnimation());
     }
 
+    /**
+     * Sets the game state, periodically checking for game over, win, or give up conditions.
+     */
     setGameState() {
         let gameStateInterval = setInterval(() => {
             this.setGameOver(gameStateInterval);
@@ -67,6 +180,10 @@ class World {
         }, 50);
     }
 
+    /**
+     * Checks if the game should be set to 'GAME_OVER' based on the shark's energy.
+     * @param {number} gameStateInterval - The interval ID for checking game state.
+     */
     setGameOver(gameStateInterval) {
         if (this.shark.energy <= 0) {
             clearInterval(gameStateInterval);
@@ -78,6 +195,10 @@ class World {
         }
     }
 
+    /**
+     * Checks if the game should be set to 'GAME_WIN' based on the end boss's health.
+     * @param {number} gameStateInterval - The interval ID for checking game state.
+     */
     setGameWin(gameStateInterval) {
         let endBoss = this.level.endBoss[0];
         if (endBoss && endBoss.energy <= 0) {
@@ -90,6 +211,10 @@ class World {
         }
     }
 
+    /**
+     * Checks if the game should be set to 'GIVE_UP', triggering a reset of the game.
+     * @param {number} gameStateInterval - The interval ID for checking game state.
+     */
     setGameGiveUp(gameStateInterval) {
         if (this.state === 'GIVE_UP') {
             clearInterval(gameStateInterval);
@@ -99,6 +224,9 @@ class World {
         }
     }
 
+    /**
+     * Resets the game state, including clearing level objects, coins, and poisons.
+     */
     resetGame() {
         this.level.endBoss = [];
         this.level.reset();
@@ -106,10 +234,16 @@ class World {
         this.poisonCounter.reset();
     }
 
+    /**
+     * Clears all intervals, stopping any ongoing actions or updates.
+     */
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
 
+    /**
+     * Handles the swimming actions of the shark by periodically checking for collisions and throwable objects.
+     */
     swimming() {
         if (!this.shark.characterIsDead) {
             setInterval(() => {
@@ -119,6 +253,9 @@ class World {
         }
     }
 
+    /**
+     * Handles the attacking actions of the shark by periodically checking for bubble and fin slap attacks.
+     */
     attack() {
         if (!this.shark.characterIsDead) {
             setInterval(() => {
@@ -129,6 +266,9 @@ class World {
         }
     }
 
+    /**
+     * Checks for various types of collisions involving the shark.
+     */
     checkCollisions() {
         this.collosionWithPufferFish();
         this.collosionWithJellyFish();
@@ -137,6 +277,9 @@ class World {
         this.collosionWithPoisons();
     }
 
+    /**
+     * Checks for collisions between the shark and pufferfish. If a collision occurs, the shark takes damage.
+     */
     collosionWithPufferFish() {
         this.level.pufferFishes.forEach((pufferFish) => {
             if (this.shark.isColliding(pufferFish) && !pufferFish.pufferFishIsDead) {
@@ -146,6 +289,9 @@ class World {
         });
     }
 
+    /**
+     * Checks for collisions between the shark and jellyfish. If a collision occurs, the shark takes damage.
+     */
     collosionWithJellyFish() {
         this.level.jellyFishes.forEach((jellyFish) => {
             if (this.shark.isColliding(jellyFish) && !jellyFish.jellyFishIsDead) {
@@ -155,6 +301,9 @@ class World {
         });
     }
 
+    /**
+     * Checks for collisions between the shark and the end boss. If a collision occurs, the shark takes damage.
+     */
     collosionWithEndBoss() {
         this.level.endBoss.forEach((endBoss) => {
             if (this.shark.isColliding(endBoss) && !endBoss.endBossIsDead) {
@@ -164,6 +313,9 @@ class World {
         });
     }
 
+    /**
+     * Checks for collisions between the shark and coins. If a collision occurs, the shark collects the coin.
+     */
     collosionWithCoins() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.shark.isColliding(coin)) {
@@ -175,6 +327,9 @@ class World {
         });
     }
 
+    /**
+     * Checks for collisions between the shark and poisons. If a collision occurs, the shark collects the poison.
+     */
     collosionWithPoisons() {
         this.level.poisons = this.level.poisons.filter((poison) => {
             if (this.shark.isColliding(poison)) {
@@ -186,6 +341,9 @@ class World {
         });
     }
 
+    /**
+     * Checks if the player pressed the spacebar to perform a fin slap on a pufferfish.
+     */
     checkFinSlap() {
         if (this.keyboard.SPACE) {
             this.level.pufferFishes.forEach((pufferFish) => {
@@ -197,6 +355,10 @@ class World {
         }
     }
 
+    /**
+     * Performs a fin slap on a pufferfish and creates a new poison.
+     * @param {PufferFish} pufferFish - The pufferfish that was slapped.
+     */
     finSlap(pufferFish) {
         setTimeout(() => {
             this.removePufferFish(pufferFish);
@@ -204,40 +366,51 @@ class World {
         }, 1100);
     }
 
+    /**
+     * Creates a new poison item at the given location.
+     * @param {PufferFish} enemy - The enemy that was defeated to create the poison.
+     */
     createNewPoison(enemy) {
         let poison = new Poison(enemy.x, enemy.y);
         this.level.poisons.push(poison);
     }
 
+    /**
+     * Removes a pufferfish from the level and the game map.
+     * @param {PufferFish} pufferFish - The pufferfish to remove.
+     */
     removePufferFish(pufferFish) {
         this.level.pufferFishes = this.level.pufferFishes.filter(fish => fish !== pufferFish);
         this.movableObject.deleteObject(this.ctx, pufferFish);
     }
 
-
+    /**
+     * Checks if the player pressed the 'D' key to throw a bubble.
+     */
     checkThrowableObjects() {
         if (this.keyboard.D && this.poisonCounter.poisonsNumber > 0 && this.state === 'RUNNING') {
             if (!this.shark.characterIsDead) {
-                if (!this.shark.otherDirection) {
-                    let bubble = new ThrowableObject(this.shark.x + 340, this.shark.y + 240, this.shark.otherDirection);
-                    this.createBubble(bubble);
-                } else {
-                    let bubble = new ThrowableObject(this.shark.x + 20, this.shark.y + 240, this.shark.otherDirection);
-                    this.createBubble(bubble);
-                }
+                let bubble = new ThrowableObject(this.shark.x + (this.shark.otherDirection ? 20 : 340), this.shark.y + 240, this.shark.otherDirection);
+                this.createBubble(bubble);
             }
         }
     }
 
+    /**
+     * Creates a new throwable object (bubble) and reduces the poison counter.
+     * @param {ThrowableObject} bubble - The throwable object to create.
+     */
     createBubble(bubble) {
         this.throwableObjects.push(bubble);
         this.poisonCounter.poisonsNumber -= 1;
     }
 
+    /**
+     * Checks if any throwable objects (bubbles) have collided with jellyfish or the end boss.
+     */
     checkBubbleAttack() {
         this.throwableObjects = this.throwableObjects.filter((bubble) => {
             let bubbleIsCollided = this.bubbleJellyFishCollision(bubble) || this.bubbleEndBossCollision(bubble);
-
             if (bubbleIsCollided) {
                 this.movableObject.deleteObject(this.ctx, bubble);
                 return false;
@@ -246,9 +419,13 @@ class World {
         });
     }
 
+    /**
+     * Checks if a bubble has collided with a jellyfish.
+     * @param {ThrowableObject} bubble - The bubble object to check for collisions.
+     * @returns {boolean} True if the bubble has collided with a jellyfish.
+     */
     bubbleJellyFishCollision(bubble) {
         let bubbleIsCollided = false;
-
         this.level.jellyFishes.forEach((jellyFish) => {
             if (bubble.isColliding(jellyFish) && !jellyFish.jellyFishIsDead) {
                 jellyFish.jellyFishIsDead = true;
@@ -256,13 +433,16 @@ class World {
                 this.bubbleAttack(jellyFish);
             }
         });
-
         return bubbleIsCollided;
     }
 
+    /**
+     * Checks if a bubble has collided with the end boss.
+     * @param {ThrowableObject} bubble - The bubble object to check for collisions.
+     * @returns {boolean} True if the bubble has collided with the end boss.
+     */
     bubbleEndBossCollision(bubble) {
         let bubbleIsCollided = false;
-
         this.level.endBoss.forEach((endBoss) => {
             if (bubble.isColliding(endBoss) && !endBoss.endBossIsDead) {
                 bubbleIsCollided = true;
@@ -272,10 +452,13 @@ class World {
                 }
             }
         });
-
         return bubbleIsCollided;
     }
 
+    /**
+     * Handles the bubble attack on a jellyfish, removes the jellyfish and creates a coin and poison.
+     * @param {JellyFish} jellyFish - The jellyfish to attack.
+     */
     bubbleAttack(jellyFish) {
         setTimeout(() => {
             this.removeJellyFish(jellyFish);
@@ -284,16 +467,27 @@ class World {
         }, 600);
     }
 
+    /**
+     * Creates a new coin item at the given location.
+     * @param {JellyFish} jellyFish - The jellyfish to create a coin from.
+     */
     createNewCoin(jellyFish) {
         let coin = new Coin(jellyFish.x + 70, jellyFish.y + 100);
         this.level.coins.push(coin);
     }
 
+    /**
+     * Removes a jellyfish from the level and the game map.
+     * @param {JellyFish} jellyFish - The jellyfish to remove.
+     */
     removeJellyFish(jellyFish) {
         this.level.jellyFishes = this.level.jellyFishes.filter(fish => fish !== jellyFish);
         this.movableObject.deleteObject(this.ctx, jellyFish);
     }
 
+    /**
+     * Starts the final battle by adding the end boss to the level when the shark reaches a certain point.
+     */
     createFinalBattle() {
         if (!this.finalBattleStarted && this.shark.x >= this.level.final_battle_x) {
             let finalEnemy = new EndBoss(this.coinCounter);
@@ -303,6 +497,9 @@ class World {
         }
     }
 
+    /**
+     * Toggles the animation of the end boss.
+     */
     animateEndBoss() {
         if (this.animatedEndBoss) {
             this.level.endBoss.forEach((endBoss) => {
@@ -312,9 +509,13 @@ class World {
             this.level.endBoss.forEach((endBoss) => {
                 endBoss.setStopAnimationSounds();
             });
-        } 
+        }
     }
 
+    /**
+     * Main draw loop for rendering the game state to the canvas.
+     * Updates and renders all objects, including status bars, enemies, and the player.
+     */
     draw() {
         if (this.state !== 'RUNNING') return;
 
@@ -352,18 +553,29 @@ class World {
         });
     }
 
+    /**
+     * Creates and renders the end boss status bar if the end boss is present in the level.
+     */
     createEndBossStatusBar() {
         if (this.level.endBoss[0]) {
             this.addToMap(this.endBossStatusBar);
         }
     }
 
+    /**
+     * Adds a list of objects to the map by rendering them.
+     * @param {Array<Object>} objects - The objects to render.
+     */
     addObjectsToMap(objects) {
         objects.forEach(object => {
             this.addToMap(object);
         })
     }
 
+    /**
+     * Adds a single object to the map and handles direction flipping if necessary.
+     * @param {MovableObject} mo - The object to render.
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -376,13 +588,21 @@ class World {
         }
     }
 
+    /**
+     * Flips an image horizontally for objects facing the opposite direction.
+     * @param {MovableObject} mo - The object to flip.
+     */
     flipImage(mo) {
         this.ctx.save();
-        this.ctx.translate(mo.width, 0, 0);
+        this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1, 1);
         mo.x = mo.x * -1;
     }
 
+    /**
+     * Restores the original orientation of an object after it has been flipped.
+     * @param {MovableObject} mo - The object to flip back.
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

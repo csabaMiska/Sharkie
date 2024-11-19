@@ -16,10 +16,12 @@ import { doc, setDoc, getDocs, deleteDoc, updateDoc, collection } from "https://
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-let initialInput = document.getElementById('initialInput');
-let playerScore = document.getElementById('playerScore');
-let playerPoisons = document.getElementById('playerPoisons');
-
+/**
+ * Adds a player's score and poison information to the Firestore database.
+ * @async
+ * @function addPlayerScore
+ * @returns {Promise<void>} Resolves when the player data has been added to Firestore.
+ */
 async function addPlayerScore() {
     try {
        const initialRef = collection(db, 'LeaderBord');
@@ -36,10 +38,16 @@ async function addPlayerScore() {
        cancelSaveScore();
        await getBestPlayers();
     } catch (error) {
-       
+        console.error('Error adding player score:', error);
     }
 }
 
+/**
+ * Fetches the best players from the Firestore database and renders the leaderboard.
+ * @async
+ * @function getBestPlayers
+ * @returns {Promise<void>} Resolves when the leaderboard has been rendered.
+ */
 async function getBestPlayers() {
     let loadingSpinner = document.getElementById('loadingSpinner');
     try {
@@ -53,7 +61,6 @@ async function getBestPlayers() {
                 leaderBoard.push(data);
             });
             renderLeaderBoard(leaderBoard);
-        } else {
         }
     } catch (error) {
         console.log(error);
@@ -62,6 +69,12 @@ async function getBestPlayers() {
     }
 }
 
+/**
+ * Fetches all saved player data from the Firestore database and renders it.
+ * @async
+ * @function getAllSavedPlayers
+ * @returns {Promise<void>} Resolves when all saved players have been rendered.
+ */
 async function getAllSavedPlayers() {
     let loadingSpinner = document.getElementById('loadingSpinner');
     try {
@@ -75,7 +88,6 @@ async function getAllSavedPlayers() {
                 allSavedPlayer.push(data);
             });
             renderAllSavedPlayer(allSavedPlayer);
-        } else {
         }
     } catch (error) {
         console.log(error);
@@ -84,6 +96,13 @@ async function getAllSavedPlayers() {
     }
 }
 
+/**
+ * Deletes a player's data from the Firestore database based on their player ID.
+ * @async
+ * @function deletePlayer
+ * @param {string} playerID - The unique identifier of the player to delete.
+ * @returns {Promise<void>} Resolves when the player data has been deleted.
+ */
 async function deletePlayer(playerID) {
     try {
         const docRef = doc(db, 'LeaderBord', playerID);
@@ -93,6 +112,7 @@ async function deletePlayer(playerID) {
     }
 }
 
+// Expose the functions globally for use in the HTML interface.
 window.deletePlayer = deletePlayer;
 window.addPlayerScore = addPlayerScore;
 window.getBestPlayers = getBestPlayers;
