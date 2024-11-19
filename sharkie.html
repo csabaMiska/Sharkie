@@ -249,14 +249,14 @@
                     </div>
                 </div>
                 <div class="message_Box_Form_Container">
-                    <form class="score_Input_Form" onsubmit="return false">
+                    <form class="score_Input_Form" onsubmit="addPlayerScore(); return false">
                         <div class="score_Input_Box">
                             <div>Enter Your Initials:</div>
-                            <input id="initialInput" type="text" maxlength="3" class="form_Input" name="initialsInput"
+                            <input id="initialInput" type="text" maxlength="3" required class="form_Input" name="initialsInput"
                                 style="text-transform:uppercase">
                         </div>
                         <div class="message_Box_Buttons_Container">
-                            <button class="menu_btn btn_style" onclick="addPlayerScore()">SAVE</button>
+                            <button class="menu_btn btn_style" type="submit">SAVE</button>
                             <button class="menu_btn btn_style" onclick="cancelSaveScore()">CANCEL</button>
                         </div>
                     </form>

@@ -125,6 +125,7 @@ class EndBoss extends MovableObject {
      * @type {HTMLAudioElement}
      */
     deadSound = new Audio('audio/game/end_boss_dead_sound.mp3');
+    gameWinSound = new Audio('audio/game/game_win.mp3');
 
     /**
      * The images for the introduction animation of the EndBoss.
@@ -295,6 +296,7 @@ class EndBoss extends MovableObject {
     playDeadSound() {
         if (this.playAnimationSounds && !this.soundPlayed) {
             this.deadSound.play();
+            this.gameWinSound.play();
             this.soundPlayed = true;
         }
     }

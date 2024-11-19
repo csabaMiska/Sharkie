@@ -1,4 +1,3 @@
-// Get DOM elements
 let main = document.getElementById('main');
 let startMenu = document.getElementById('startMenu');
 let leaderBoard = document.getElementById('leaderBoard');
@@ -13,8 +12,6 @@ let playerScore = document.getElementById('playerScore');
 let playerPoisons = document.getElementById('playerPoisons');
 let landscapeWarning = document.getElementById('landscapeWarning');
 let mobileOverlay = document.getElementById('mobileOverlay');
-
-// Functions for showing and hiding different game sections
 
 /**
  * Displays the game ranking section and fetches all saved players.
@@ -169,8 +166,6 @@ function hideGameMenu() {
     startMenu.classList.remove('d-none');
 }
 
-// Game menu toggle functionality
-
 let gameMenu = false;
 
 /**
@@ -203,8 +198,6 @@ function showGameMenu() {
     gameMenuBox.classList.remove('d-none');
 }
 
-// Landscape warning on resize
-
 /**
  * Adjusts the UI when the window is resized. Displays a landscape warning on mobile.
  * @function
@@ -225,7 +218,13 @@ window.addEventListener('resize', function () {
     }
 });
 
-// Music and sound control
+let musicIconContainer = document.getElementById('musicIconContainer');
+let musicIcon = document.getElementById('musicIcon');
+let musicIconOff = returnMusicOffSvg();
+let musicIconOn = retunrMusicOnSvg();
+let MUSIC_ON = localStorage.getItem('musicStatus') === 'true';
+let gameMusic = new Audio('audio/game/game_sound.mp3');
+gameMusic.loop = true; 
 
 /**
  * Updates the music icon and background color based on the music status.
@@ -259,6 +258,12 @@ function toggleMusic() {
         gameMusic.pause();
     } 
 }
+
+let soundIconContainer = document.getElementById('soundIconContainer');
+let soundIcon = document.getElementById('soundIcon');
+let soundIconOn = returnSoundOnSvg();
+let soundIconOff = returnSoundOffSvg();
+let SOUND_ON = localStorage.getItem('soundStatus') === 'true';
 
 /**
  * Updates the sound icon and background color based on the sound status.
@@ -294,7 +299,10 @@ function toggleSound() {
     }
 }
 
-// Full-screen control
+let screenIconContainer = document.getElementById('screenIcon');
+let fullScreenIcon = returnFullScreenSvg();
+let windowScreenIcon = returnWindowsScreenSvg();
+let FULL_SCREEN = false;
 
 /**
  * Updates the screen icon based on the fullscreen status.
@@ -373,7 +381,7 @@ function showMobilBtn() {
     }
 }
 
-// Leaderboard rendering
+let leaderBoardRow = document.getElementById('leaderBoardRow');
 
 /**
  * Renders and displays the leader board by sorting and showing the top players.
@@ -405,6 +413,8 @@ function showBestPlayers(leaderBoard) {
         leaderBoardRow.innerHTML += createLeaderBoard(place, player);
     }
 }
+
+let gameRankingContent = document.getElementById('gameRankingContent');
 
 /**
  * Renders and displays all saved players in the ranking section.
