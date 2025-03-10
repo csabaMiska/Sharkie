@@ -202,7 +202,7 @@ function showGameMenu() {
  * Adjusts the UI when the window is resized. Displays a landscape warning on mobile.
  * @function
  */
-window.addEventListener('resize', function () {
+function checkOrientation() {
     if (window.innerHeight > window.innerWidth) {
         landscapeWarning.style.display = 'flex';
         main.style.display = 'none';
@@ -216,7 +216,10 @@ window.addEventListener('resize', function () {
             world.setGameResume();
         }
     }
-});
+}
+
+document.addEventListener("DOMContentLoaded", checkOrientation);
+window.addEventListener("resize", checkOrientation);
 
 let musicIconContainer = document.getElementById('musicIconContainer');
 let musicIcon = document.getElementById('musicIcon');

@@ -2,14 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBBNUzV1lkMJKJ1F2q3e3IBK9A9pxZFO4o",
-    authDomain: "sharkie-3d375.firebaseapp.com",
-    databaseURL: "https://sharkie-3d375-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "sharkie-3d375",
-    storageBucket: "sharkie-3d375.appspot.com",
-    messagingSenderId: "504815727673",
-    appId: "1:504815727673:web:8ce1792c3adfe3c07789e8"
-};
+    apiKey: "AIzaSyCSYcpphKNd2Q9Y52PHpnueu7tHjhP42KE",
+    authDomain: "sharkie-e0f04.firebaseapp.com",
+    projectId: "sharkie-e0f04",
+    storageBucket: "sharkie-e0f04.firebasestorage.app",
+    messagingSenderId: "950145075073",
+    appId: "1:950145075073:web:f31460a6881b4072410a80"
+  };
 
 import { doc, setDoc, getDocs, deleteDoc, updateDoc, collection } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
